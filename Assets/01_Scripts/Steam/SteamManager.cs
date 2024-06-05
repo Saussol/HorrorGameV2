@@ -5,6 +5,8 @@ using UnityEngine;
 using TMPro;
 using Steamworks.Data;
 using System;
+using Unity.Netcode;
+using Netcode.Transports.Facepunch;
 
 public class SteamManager : MonoBehaviour
 {
@@ -48,6 +50,9 @@ public class SteamManager : MonoBehaviour
         InLobbyMenu.SetActive(true);
 
         Debug.Log("We entered");
+        if (NetworkManager.Singleton.IsHost) return;
+        NetworkManager.Singleton.gameObject.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
+        NetworkManager.Singleton.StartClient();
     }
 
     private void LobbyCreated(Result result, Lobby lobby)
@@ -56,6 +61,7 @@ public class SteamManager : MonoBehaviour
         {
             lobby.SetPublic();
             lobby.SetJoinable(true);
+            NetworkManager.Singleton.StartHost();
         }
     }
 
@@ -80,5 +86,13 @@ public class SteamManager : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void LeaveLobby()
+    {
+       // LobbySaver.instance.currentLobby?.Leave();
+       // LobbySaver.instance.currentLobby = null;
+       // NetworkManager.Singleton.Shutdown();
+
     }
 }
