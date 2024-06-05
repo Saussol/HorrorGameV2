@@ -7,6 +7,7 @@ using Steamworks.Data;
 using System;
 using Unity.Netcode;
 using Netcode.Transports.Facepunch;
+using UnityEngine.SceneManagement;
 
 public class SteamManager : MonoBehaviour
 {
@@ -88,11 +89,27 @@ public class SteamManager : MonoBehaviour
         }
     }
 
+    public void CopyID()
+    {
+        TextEditor textEditor = new TextEditor();
+        textEditor.text = LobbyID.text;
+        textEditor.SelectAll();
+        textEditor.Copy();
+    }
+
     public void LeaveLobby()
     {
        // LobbySaver.instance.currentLobby?.Leave();
        // LobbySaver.instance.currentLobby = null;
-       // NetworkManager.Singleton.Shutdown();
+       //  NetworkManager.Singleton.Shutdown();
 
+    }
+
+    public void StartGameServer()
+    {
+        if (NetworkManager.Singleton.IsHost)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        }
     }
 }
