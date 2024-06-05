@@ -109,7 +109,7 @@ public class SteamManager : MonoBehaviour
     {
         if (NetworkManager.Singleton.IsHost)
         {
-            NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("GameScene  ", LoadSceneMode.Single);
         }
     }
 }
