@@ -8,12 +8,17 @@ public class Interact : MonoBehaviour
 
     private bool isPlayerInRange = false;
     private bool isFilling = false;
+    private bool questEnded = false;
 
     void Update()
     {
-        if (isPlayerInRange && Input.GetKey(KeyCode.E))
+        if (isPlayerInRange && Input.GetKey(KeyCode.E) && !questEnded)
         {
             isFilling = true;
+        }
+        else if (questEnded)
+        {
+            progressBar.value = progressBar.maxValue;
         }
         else
         {
@@ -25,6 +30,7 @@ public class Interact : MonoBehaviour
             progressBar.value += fillSpeed * Time.deltaTime;
             if (progressBar.value >= progressBar.maxValue)
             {
+                questEnded = true;
                 Debug.Log("Quest completed !");
             }
         }
