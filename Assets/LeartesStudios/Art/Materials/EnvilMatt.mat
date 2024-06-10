@@ -24,15 +24,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnvilMatt
-  m_Shader: {fileID: -6465566751694194690, guid: a593087705ff05f458d095b8c7f24752,
-    type: 3}
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 2100000, guid: a834b43f5407f734e8d1f7240d1d4d68, type: 2}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ALPHATEST_ON
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
-  m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +38,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
-    RenderType: TransparentCutout
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
