@@ -5,6 +5,7 @@ using UnityEngine;
 public class QuestInteractable : MonoBehaviour
 {
 	[HideInInspector] public bool canInteract;
+	public bool needToHold;
 	public string interactText;
 
     public virtual void Interact()
@@ -12,5 +13,10 @@ public class QuestInteractable : MonoBehaviour
 		if (!canInteract) return;
 
 		Debug.Log($"Interacted with {gameObject.name}");
+	}
+
+	public virtual void StopInteract()
+	{
+		Debug.Log($"Stopped interacting with {gameObject.name}");
 	}
 }

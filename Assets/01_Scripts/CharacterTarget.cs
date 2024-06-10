@@ -12,6 +12,8 @@ public class CharacterTarget : MonoBehaviour
 	private CharacterMovement characterMovement;
 	[SerializeField] private int playerReach;
 
+	private QuestInteractable currentQuestInteraction;
+
 	private void Start()
 	{
 		playerCamera = GetComponentInChildren<Camera>().transform;
@@ -43,17 +45,30 @@ public class CharacterTarget : MonoBehaviour
 			}
 			else if (hit.transform.GetComponent<QuestInteractable>() && hit.transform.GetComponent<QuestInteractable>().canInteract)
 			{
-				HUDManager.Instance.DiplayIndication(hit.transform.GetComponent<QuestInteractable>().interactText);
+				currentQuestInteraction = hit.transform.GetComponent<QuestInteractable>();
+				HUDManager.Instance.DiplayIndication(currentQuestInteraction.interactText);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
-					hit.transform.GetComponent<QuestInteractable>().Interact();
+					currentQuestInteraction.Interact();
+				}
+				if (currentQuestInteraction.needToHold && Input.GetKeyUp(KeyCode.E))
+				{
+					currentQuestInteraction.StopInteract();
 				}
 			}
 			else
 				HUDManager.Instance.HideIndication();
 		}
 		else
+		{
 			HUDManager.Instance.HideIndication();
+
+			if (currentQuestInteraction != null && currentQuestInteraction.needToHold)
+			{
+				currentQuestInteraction.StopInteract();
+				currentQuestInteraction = null;
+			}
+		}
 	}
 
 
