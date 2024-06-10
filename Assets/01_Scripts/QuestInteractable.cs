@@ -8,7 +8,9 @@ public class QuestInteractable : MonoBehaviour
 	public bool needToHold;
 	public string interactText;
 
-    public virtual void Interact()
+	public Quest linkedQuest;
+
+	public virtual void Interact()
 	{
 		if (!canInteract) return;
 

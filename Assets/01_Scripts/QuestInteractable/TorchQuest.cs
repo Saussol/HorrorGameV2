@@ -21,6 +21,8 @@ public class TorchQuest : QuestInteractable
 
         Instantiate(fireVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
 
+		linkedQuest.CheckQuest();
+
 		canInteract = false;
     }
 }
