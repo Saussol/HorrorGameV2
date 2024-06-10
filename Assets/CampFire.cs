@@ -5,13 +5,13 @@ using UnityEngine;
 public class CampFire : MonoBehaviour
 {
     private bool isPlayerNearby = false;
-    public bool hasFire = false;
+    //public bool hasFire = false;
 
     void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            hasFire = true;
+            QuestSpawner.Instance.hasFire = true;
         }
     }
 

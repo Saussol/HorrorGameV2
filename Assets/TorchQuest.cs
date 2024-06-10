@@ -7,21 +7,20 @@ public class TorchQuest : MonoBehaviour
     private bool isPlayerNearby = false;
     public GameObject fireVFX;
     public Transform vfxSpawnPoint;
-    private CampFire campFire;
+    //private CampFire campFire;
 
     void Start()
     {
-        campFire = FindObjectOfType<CampFire>();
 
-        if (campFire == null)
-        {
-            Debug.LogError("No CampFire component found in the scene!");
-        }
+        //if (campFire == null)
+        //{
+        //    Debug.LogError("No CampFire component found in the scene!");
+        //}
     }
 
     void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && campFire.hasFire == true)
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && QuestSpawner.Instance.hasFire == true)
         {
             Interact();
         }

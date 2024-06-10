@@ -10,6 +10,23 @@ public class QuestSpawner : MonoBehaviour
     public GameObject bottlePrefab;
     public int bottleQuantity;
 
+    public bool hasFire;
+
+    //Singleton
+    public static QuestSpawner Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         SpawnQuests();
