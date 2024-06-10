@@ -206,12 +206,17 @@ public class CharacterMovement : MonoBehaviour
         isStun = true;
         float baseFOV = playerCamera.fieldOfView;
 
+        Camera childCam = playerCamera.transform.GetChild(0).GetComponent<Camera>();
+        Debug.Log(childCam.gameObject.name);
+
         while(playerCamera.fieldOfView > 30)
 		{
             playerCamera.fieldOfView -= .3f;
+            childCam.fieldOfView = playerCamera.fieldOfView;
             yield return null;
 		}
         playerCamera.fieldOfView = 30;
+        childCam.fieldOfView = playerCamera.fieldOfView;
 
         yield return new WaitForSeconds(5f);
 
@@ -220,10 +225,12 @@ public class CharacterMovement : MonoBehaviour
         while (playerCamera.fieldOfView < baseFOV)
         {
             playerCamera.fieldOfView += .3f;
+            childCam.fieldOfView = playerCamera.fieldOfView;
             yield return null;
         }
         playerCamera.fieldOfView = baseFOV;
-	}
+        childCam.fieldOfView = playerCamera.fieldOfView;
+    }
 
     [ContextMenu("Rat Transformation")]
     public void RatTransformation()
