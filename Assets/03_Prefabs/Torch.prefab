@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c22e7f135f6c0a4b8ec01f65fc4c1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
+  interactText: light up the torch
   fireVFX: {fileID: 2402205197334122708, guid: 4ed962569066a49409dd8aad1ca3f519, type: 3}
   vfxSpawnPoint: {fileID: 2459816782643800049}
-  campFire: {fileID: 0}

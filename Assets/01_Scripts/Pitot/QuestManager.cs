@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class QuestSpawner : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class QuestSpawner : MonoBehaviour
     public GameObject bottlePrefab;
     public int bottleQuantity;
 
-    public bool hasFire;
+    [HideInInspector] public UnityEvent _pickUpFire;
 
     //Singleton
     public static QuestSpawner Instance { get; private set; }
@@ -25,6 +26,8 @@ public class QuestSpawner : MonoBehaviour
         {
             Instance = this;
         }
+
+        if (_pickUpFire == null) _pickUpFire = new UnityEvent();
     }
 
     void Start()

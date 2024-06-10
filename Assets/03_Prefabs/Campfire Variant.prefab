@@ -84,7 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0135c9d6f59a674583eac423c219c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasFire: 0
+  canInteract: 0
+  interactText: pick up fire
 --- !u!135 &5003629252454218504
 SphereCollider:
   m_ObjectHideFlags: 0

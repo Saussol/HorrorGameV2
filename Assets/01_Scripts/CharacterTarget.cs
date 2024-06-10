@@ -32,21 +32,21 @@ public class CharacterTarget : MonoBehaviour
 				HUDManager.Instance.DiplayIndication($"pick up {hit.transform.GetComponent<ItemObject>().itemDescription.itemName}");
 				if (Input.GetKeyDown(KeyCode.E))
 				{
-					//if (hit.transform.GetComponent<QuestAction>())
-					//{
-					//	hit.transform.GetComponent<QuestAction>().QuestComplet();
-
-     //                   Destroy(hit.transform.gameObject);
-     //                   CmdDestoy(hit.transform.gameObject);
-
-     //               }
-					/*else */if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
+					if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
 					{
                         Destroy(hit.transform.gameObject);
 
 						//CmdDestoy(hit.transform.gameObject);
                     }
 
+				}
+			}
+			else if (hit.transform.GetComponent<QuestInteractable>() && hit.transform.GetComponent<QuestInteractable>().canInteract)
+			{
+				HUDManager.Instance.DiplayIndication(hit.transform.GetComponent<QuestInteractable>().interactText);
+				if (Input.GetKeyDown(KeyCode.E))
+				{
+					hit.transform.GetComponent<QuestInteractable>().Interact();
 				}
 			}
 			else

@@ -2,31 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampFire : MonoBehaviour
+public class CampFire : QuestInteractable
 {
-    private bool isPlayerNearby = false;
-    //public bool hasFire = false;
+	//public bool hasFire = false;
 
-    void Update()
-    {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
-        {
-            QuestSpawner.Instance.hasFire = true;
-        }
-    }
+	private void Awake()
+	{
+		canInteract = true;
+	}
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNearby = true;
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNearby = false;
-        }
+	public override void Interact()
+	{
+		base.Interact();
+
+        QuestSpawner.Instance._pickUpFire.Invoke();
+
+        canInteract = false;
     }
 }
