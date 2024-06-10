@@ -1413,7 +1413,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 180314886}
-    PlayerPrefab: {fileID: 4482069128986586664, guid: 59dfd5961539cfa449e4621cf81edcb9, type: 3}
+    PlayerPrefab: {fileID: 8342106431650556681, guid: eababb2dbed315f4a871ea30c1785a9b, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: f6e7f4f42971a0a4d948342a539aec5b, type: 2}
@@ -11235,6 +11235,7 @@ GameObject:
   - component: {fileID: 1541770325}
   - component: {fileID: 1541770324}
   - component: {fileID: 1541770328}
+  - component: {fileID: 1541770329}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -11341,6 +11342,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915af7e05fe70be4eab56943bac082fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1541770329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541770323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 208612880
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &1548822993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11619,6 +11641,18 @@ MonoBehaviour:
       - m_Target: {fileID: 700384909}
         m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
         m_MethodName: HostLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 700384909}
+        m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
+        m_MethodName: StartGameServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15195,6 +15229,18 @@ MonoBehaviour:
       - m_Target: {fileID: 700384909}
         m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
         m_MethodName: JoinLobbyWithID
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 700384909}
+        m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
+        m_MethodName: StartGameServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
