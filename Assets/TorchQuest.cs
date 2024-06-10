@@ -11,6 +11,7 @@ public class TorchQuest : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(isPlayerNearby);
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && campFire.hasFire == true)
         {
             Interact();
@@ -34,6 +35,7 @@ public class TorchQuest : MonoBehaviour
 
     void Interact()
     {
+        Debug.Log("interact");
         Instantiate(fireVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
     }
 }

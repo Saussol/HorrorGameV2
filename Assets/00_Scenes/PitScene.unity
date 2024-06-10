@@ -724,15 +724,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260040300}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.12, y: 0.47, z: -2.5403614}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -3.521, y: 0.61, z: -3.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 749208610}
   - {fileID: 391277315}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &260040306
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireVFX: {fileID: 2402205197334122708, guid: 4ed962569066a49409dd8aad1ca3f519, type: 3}
   vfxSpawnPoint: {fileID: 851450854}
-  campFire: {fileID: 0}
+  campFire: {fileID: 2017139551}
 --- !u!1 &391277311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireVFX: {fileID: 2402205197334122708, guid: 4ed962569066a49409dd8aad1ca3f519, type: 3}
   vfxSpawnPoint: {fileID: 821929091}
-  campFire: {fileID: 0}
+  campFire: {fileID: 2017139551}
 --- !u!1 &749208608
 GameObject:
   m_ObjectHideFlags: 0
