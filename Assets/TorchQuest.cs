@@ -7,10 +7,11 @@ public class TorchQuest : MonoBehaviour
     private bool isPlayerNearby = false;
     public GameObject fireVFX;
     public Transform vfxSpawnPoint;
+    public CampFire campFire;
 
     void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && campFire.hasFire == true)
         {
             Interact();
         }
