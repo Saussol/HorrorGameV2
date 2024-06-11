@@ -85,7 +85,7 @@ public class AIMovement : MonoBehaviour
 					Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius);
 					foreach (Collider hit in hitColliders)
 					{
-						if (hit.GetComponent<CharacterController>())
+						if (hit.GetComponent<CharacterMovement>() && hit.GetComponent<CharacterMovement>().CheckPlayerState() != PlayerState.RAT)
 						{
 							StopAllCoroutines();
 							_monsterState = MonsterState.CHASE;
@@ -102,7 +102,7 @@ public class AIMovement : MonoBehaviour
 
 				break;
 			case MonsterState.CHASE:
-				if (Vector3.Distance(transform.position, chasingPlayer.transform.position) <= chaseDetectionRange)
+				if (Vector3.Distance(transform.position, chasingPlayer.transform.position) <= 3)
 				{
 					if (!chaseEnd)
 					{
@@ -172,6 +172,8 @@ public class AIMovement : MonoBehaviour
 
 	private IEnumerator KillPlayer()
 	{
+		Debug.Log("KILL PLAYER");
+
 		//TO DO change to killing animation instead of just waiting
 		yield return new WaitForSeconds(2f);
 
