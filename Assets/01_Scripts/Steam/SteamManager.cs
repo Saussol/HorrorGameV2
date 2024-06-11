@@ -90,22 +90,33 @@ public class SteamManager : MonoBehaviour
         await SteamMatchmaking.CreateLobbyAsync(4);
     }
 
+    [ContextMenu("JoinLobbyWithID")]
     public async void JoinLobbyWithID()
     {
-        ulong ID;
-        if (!ulong.TryParse(LobbyIDInputField.text, out ID))
-            return;
-
-        Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
-
-        foreach (Lobby lobby in lobbies)
-        {
-            if (lobby.Id == ID)
-            {
-                await lobby.Join();
+        Debug.Log("try joining lobby");
+		try
+		{
+            ulong ID;
+            if (!ulong.TryParse(LobbyIDInputField.text, out ID))
                 return;
+
+            Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
+
+            foreach (Lobby lobby in lobbies)
+            {
+                if (lobby.Id == ID)
+                {
+                    await lobby.Join();
+                    return;
+                }
             }
         }
+		catch (Exception err)
+		{
+            Debug.Log(err.Message);
+			throw;
+		}
+
     }
 
     public void CopyID()
@@ -128,7 +139,7 @@ public class SteamManager : MonoBehaviour
     {
         if (NetworkManager.Singleton.IsHost)
         {
-            
+
 
             NetworkManager.Singleton.SceneManager.LoadScene("MultiScene", LoadSceneMode.Single);
         }
