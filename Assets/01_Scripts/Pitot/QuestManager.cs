@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
+using UnityEngine.UI;
 
 public class QuestSpawner : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class QuestSpawner : MonoBehaviour
     public List <Transform> botlleSpawnPoints;
     public GameObject bottlePrefab;
     public int bottleQuantity;
+
+    [SerializeField] private GameObject questUIPrefab;
+    [SerializeField] private Transform questUIParent;
+    public Color questDoneColor;
 
     private int questDone = 0;
 
@@ -52,10 +58,18 @@ public class QuestSpawner : MonoBehaviour
             int spawnIndex = availableSpawnIndices[randomIndex];
 
             GameObject questObject = Instantiate(quest.questPrefab, questsSpawnPoints[spawnIndex].position, questsSpawnPoints[spawnIndex].rotation);
+            GameObject questUI = Instantiate(questUIPrefab, questUIParent);
 
             questObject.GetComponent<QuestInteractable>().linkedQuest = quest;
+            quest.questUI = questUI;
 
-            if(quest.questObjects.Count > 0)
+            questUI.transform.GetChild(0).GetComponent<TMP_Text>().text = quest.questName;
+            if(quest.questLength > 1)
+                questUI.transform.GetChild(1).gameObject.SetActive(true);
+			else
+                questUI.transform.GetChild(1).gameObject.SetActive(false);
+
+            if (quest.questObjects.Count > 0)
 			{
 				foreach (QuestInteractable obj in quest.questObjects)
 				{
@@ -128,14 +142,23 @@ public class Quest
     public GameObject questPrefab;
     public bool questValidated;
     public List<QuestInteractable> questObjects = new List<QuestInteractable>();
+    public GameObject questUI;
 
     public void CheckQuest()
 	{
         if (questValidated) return;
 
         questCurrentStatus++;
+
+        if(questLength > 1)
+		{
+            questUI.transform.GetChild(1).GetComponent<Slider>().value = (float)questCurrentStatus / (float)questLength;
+		}
+
         if(questCurrentStatus >= questLength)
 		{
+            questUI.transform.GetChild(0).GetComponent<TMP_Text>().color = QuestSpawner.Instance.questDoneColor;
+            questUI.transform.GetChild(1).GetComponent<Slider>().value = 1;
             questValidated = true;
             QuestSpawner.Instance.CheckQuest();
 		}
