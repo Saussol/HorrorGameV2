@@ -10,9 +10,12 @@ public class QuestSpawner : MonoBehaviour
     //public List<GameObject> questPrefabs;
     public List<Quest> quests;
 
-    public List <Transform> botlleSpawnPoints;
-    public GameObject bottlePrefab;
-    public int bottleQuantity;
+    public List<Transform> bottleSpawnPoints;
+
+    [SerializeField] private int bottleNumber;
+    [SerializeField] private GameObject[] bottlePrefabs;
+    [SerializeField] private int materialNumber;
+    [SerializeField] private GameObject materialPrefab;
 
     [SerializeField] private GameObject questUIPrefab;
     [SerializeField] private Transform questUIParent;
@@ -42,6 +45,7 @@ public class QuestSpawner : MonoBehaviour
     void Start()
     {
         SpawnQuests();
+        SpawnQuestObjects();
     }
 
     void SpawnQuests()
@@ -81,9 +85,28 @@ public class QuestSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnBottles()
+    private void SpawnQuestObjects()
     {
+        if(materialNumber + bottleNumber > bottleSpawnPoints.Count)
+		{
+            bottleNumber = bottleSpawnPoints.Count - materialNumber;
+		}
 
+        List<Transform> availableSpawnPoints = new List<Transform>(bottleSpawnPoints);
+
+
+        for (int i = 0; i < materialNumber; i++)
+		{
+            Transform spawnPos = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
+            GameObject material = Instantiate(materialPrefab, spawnPos.position, Quaternion.identity);
+            availableSpawnPoints.Remove(spawnPos);
+		}
+		for (int i = 0; i < bottleNumber; i++)
+		{
+            Transform spawnPos = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
+            GameObject bottle = Instantiate(bottlePrefabs[Random.Range(0, bottlePrefabs.Length)], spawnPos.position, Quaternion.identity);
+            availableSpawnPoints.Remove(spawnPos);
+        }
     }
 
     public void ValidateQuest()
