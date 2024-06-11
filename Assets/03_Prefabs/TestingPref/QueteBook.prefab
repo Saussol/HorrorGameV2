@@ -283,7 +283,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 1, z: 3.5}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &3926030048994565747
 MonoBehaviour:
@@ -297,6 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcb5559ca40036418fe6022a629515e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
+  needToHold: 1
+  interactText: read book
   progressBar: {fileID: 5247551405725466179}
   fillSpeed: 0.075
 --- !u!1 &2719431542931236345

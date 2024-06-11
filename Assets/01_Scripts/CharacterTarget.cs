@@ -12,6 +12,8 @@ public class CharacterTarget : MonoBehaviour
 	private CharacterMovement characterMovement;
 	[SerializeField] private int playerReach;
 
+	private QuestInteractable currentQuestInteraction;
+
 	private void Start()
 	{
 		playerCamera = GetComponentInChildren<Camera>().transform;
@@ -32,15 +34,7 @@ public class CharacterTarget : MonoBehaviour
 				HUDManager.Instance.DiplayIndication($"pick up {hit.transform.GetComponent<ItemObject>().itemDescription.itemName}");
 				if (Input.GetKeyDown(KeyCode.E))
 				{
-					//if (hit.transform.GetComponent<QuestAction>())
-					//{
-					//	hit.transform.GetComponent<QuestAction>().QuestComplet();
-
-     //                   Destroy(hit.transform.gameObject);
-     //                   CmdDestoy(hit.transform.gameObject);
-
-     //               }
-					/*else */if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
+					if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
 					{
                         Destroy(hit.transform.gameObject);
 
@@ -49,11 +43,32 @@ public class CharacterTarget : MonoBehaviour
 
 				}
 			}
+			else if (hit.transform.GetComponent<QuestInteractable>() && hit.transform.GetComponent<QuestInteractable>().canInteract)
+			{
+				currentQuestInteraction = hit.transform.GetComponent<QuestInteractable>();
+				HUDManager.Instance.DiplayIndication(currentQuestInteraction.interactText);
+				if (Input.GetKeyDown(KeyCode.E))
+				{
+					currentQuestInteraction.Interact();
+				}
+				if (currentQuestInteraction.needToHold && Input.GetKeyUp(KeyCode.E))
+				{
+					currentQuestInteraction.StopInteract();
+				}
+			}
 			else
 				HUDManager.Instance.HideIndication();
 		}
 		else
+		{
 			HUDManager.Instance.HideIndication();
+
+			if (currentQuestInteraction != null && currentQuestInteraction.needToHold)
+			{
+				currentQuestInteraction.StopInteract();
+				currentQuestInteraction = null;
+			}
+		}
 	}
 
 
