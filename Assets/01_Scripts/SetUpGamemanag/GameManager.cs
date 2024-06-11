@@ -15,7 +15,7 @@ public class GameManager : NetworkBehaviour
             Debug.Log("Player found: " + player.name);
             // Vous pouvez accéder aux autres composants ou données du joueur ici
 
-            player.GetComponent<PlayerSeter>().ReSetPlayerComponents();
+            //player.GetComponent<PlayerSeter>().ReSetPlayerComponents();
         }
     }
 }
