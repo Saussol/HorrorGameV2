@@ -60,7 +60,7 @@ public class CharacterMovement : NetworkBehaviour
 	}
     public override void OnNetworkSpawn()
     {
-        playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
+        //playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
         playerCamera.enabled = IsLocalPlayer;
     }
 
