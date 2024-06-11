@@ -63,13 +63,31 @@ public class SteamManager : MonoBehaviour
             SteamId steamId = member.Id;
             string playerName = member.Name;
             Debug.Log("Player " + playerName + " joined the lobby.");
+
+            // Afficher le pseudo du client pour le host
+            if (NetworkManager.Singleton.IsHost && steamId != SteamClient.SteamId)
+            {
+                Debug.Log("Client " + playerName + " joined the lobby.");
+            }
         }
 
-        if (NetworkManager.Singleton.IsHost) return;
-        NetworkManager.Singleton.gameObject.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
-        NetworkManager.Singleton.StartClient();
+        // Affichage pour le host
+        if (NetworkManager.Singleton.IsHost)
+        {
+            Debug.Log("Host joined the lobby.");
+        }
 
-
+        if (!NetworkManager.Singleton.IsHost)
+        {
+            NetworkManager.Singleton.gameObject.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
+            NetworkManager.Singleton.StartClient();
+        }
+        else
+        {
+            // Si c'est le host, il ne doit pas rejoindre en tant que client
+            // Vous pouvez éventuellement démarrer le serveur ici
+            // NetworkManager.Singleton.StartHost();
+        }
     }
 
     private void LobbyCreated(Result result, Lobby lobby)
