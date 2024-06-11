@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class SteamManager : MonoBehaviour
 {
-    
+
     [SerializeField]
     private TMP_InputField LobbyIDInputField;
 
@@ -31,15 +31,17 @@ public class SteamManager : MonoBehaviour
     {
         SteamMatchmaking.OnLobbyCreated += LobbyCreated;
         SteamMatchmaking.OnLobbyEntered += LobbyEntered;
+        SteamMatchmaking.OnLobbyMemberJoined += LobbyMemberJoined;
         SteamFriends.OnGameLobbyJoinRequested += GameLobbyJoinReques;
     }
 
-    
+
 
     private void OnDisable()
     {
         SteamMatchmaking.OnLobbyCreated -= LobbyCreated;
         SteamMatchmaking.OnLobbyEntered -= LobbyEntered;
+        SteamMatchmaking.OnLobbyMemberJoined -= LobbyMemberJoined;
         SteamFriends.OnGameLobbyJoinRequested -= GameLobbyJoinReques;
     }
 
@@ -57,37 +59,17 @@ public class SteamManager : MonoBehaviour
 
         Debug.Log("We entered");
 
-        // Attendre que les informations des joueurs soient récupérées
+        // Instancier les joueurs déjà présents dans le lobby
         foreach (var member in lobby.Members)
         {
-            SteamId steamId = member.Id;
-            string playerName = member.Name;
-            Debug.Log("Player " + playerName + " joined the lobby.");
-
-            // Afficher le pseudo du client pour le host
-            if (NetworkManager.Singleton.IsHost && steamId != SteamClient.SteamId)
-            {
-                Debug.Log("Client " + playerName + " joined the lobby.");
-            }
+            AddPlayerToLobby(member.Id);
         }
 
-        // Affichage pour le host
-        if (NetworkManager.Singleton.IsHost)
-        {
-            Debug.Log("Host joined the lobby.");
-        }
+        if (NetworkManager.Singleton.IsHost) return;
+        NetworkManager.Singleton.gameObject.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
+        NetworkManager.Singleton.StartClient();
 
-        if (!NetworkManager.Singleton.IsHost)
-        {
-            NetworkManager.Singleton.gameObject.GetComponent<FacepunchTransport>().targetSteamId = lobby.Owner.Id;
-            NetworkManager.Singleton.StartClient();
-        }
-        else
-        {
-            // Si c'est le host, il ne doit pas rejoindre en tant que client
-            // Vous pouvez éventuellement démarrer le serveur ici
-            // NetworkManager.Singleton.StartHost();
-        }
+
     }
 
     private void LobbyCreated(Result result, Lobby lobby)
@@ -97,6 +79,9 @@ public class SteamManager : MonoBehaviour
             lobby.SetPublic();
             lobby.SetJoinable(true);
             NetworkManager.Singleton.StartHost();
+
+            // Ajouter le créateur du lobby
+            AddPlayerToLobby(SteamClient.SteamId);
         }
     }
 
@@ -113,9 +98,9 @@ public class SteamManager : MonoBehaviour
 
         Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
 
-        foreach(Lobby lobby in lobbies)
+        foreach (Lobby lobby in lobbies)
         {
-            if(lobby.Id == ID)
+            if (lobby.Id == ID)
             {
                 await lobby.Join();
                 return;
@@ -133,9 +118,9 @@ public class SteamManager : MonoBehaviour
 
     public void LeaveLobby()
     {
-       // LobbySaver.instance.currentLobby?.Leave();
-       // LobbySaver.instance.currentLobby = null;
-       //  NetworkManager.Singleton.Shutdown();
+        // LobbySaver.instance.currentLobby?.Leave();
+        // LobbySaver.instance.currentLobby = null;
+        //  NetworkManager.Singleton.Shutdown();
 
     }
 
@@ -143,11 +128,30 @@ public class SteamManager : MonoBehaviour
     {
         if (NetworkManager.Singleton.IsHost)
         {
-            NetworkManager.Singleton.SceneManager.LoadScene("MultiLobby", LoadSceneMode.Single);
+            
+
+            NetworkManager.Singleton.SceneManager.LoadScene("MultiScene", LoadSceneMode.Single);
         }
     }
 
-    
-   
+    private void LobbyMemberJoined(Lobby lobby, Friend friend)
+    {
+        AddPlayerToLobby(friend.Id);
+    }
+
+    private void AddPlayerToLobby(SteamId steamId)
+    {
+        Debug.Log("Un de plus ");
+        /*//var playerInstance = Instantiate(playerPrefab);
+        playerprefTag[0].SetActive(true); // Activer le prefab
+
+        var playerController = playerprefTag[0].GetComponent<LobbyPlayer>();
+        if (playerController != null)
+        {
+            playerController.Initialize(SteamFriends.GetName(steamId));
+        }
+
+        playerInstances.Add(playerInstance);*/
+    }
 
 }

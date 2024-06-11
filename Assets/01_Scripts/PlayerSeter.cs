@@ -11,6 +11,7 @@ public class PlayerSeter : MonoBehaviour
     public void Start()
     {
         DisablePlayerComponents();
+        //Debug.Log("tesssssssst");
     }
 
     public void DisablePlayerComponents()
@@ -30,4 +31,23 @@ public class PlayerSeter : MonoBehaviour
             playerControls.enabled = false;
         }
     }
+
+    public void ReSetPlayerComponents()
+    {
+        if (playerCamera != null)
+        {
+            playerCamera.SetActive(true);
+        }
+
+        if (playerCanvas != null)
+        {
+            playerCanvas.SetActive(true);
+        }
+
+        if (playerControls != null)
+        {
+            playerControls.enabled = true;
+        }
+    }
+
 }

@@ -1670,7 +1670,7 @@ GameObject:
   - component: {fileID: 346306972092444803}
   - component: {fileID: 787324119947676909}
   - component: {fileID: 648950109570231482}
-  - component: {fileID: 6192420057026253047}
+  - component: {fileID: 6156504901935551989}
   m_Layer: 0
   m_Name: FPSPlayer MultyV3
   m_TagString: Player
@@ -1913,7 +1913,7 @@ MonoBehaviour:
   playerCamera: {fileID: 4031425931974334913}
   playerCanvas: {fileID: 1370578779740369732}
   playerControls: {fileID: 1360847812824135549}
---- !u!114 &6192420057026253047
+--- !u!114 &6156504901935551989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1922,10 +1922,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8342106431650556681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1300d2f33958449afa3993b5bbbb69, type: 3}
+  m_Script: {fileID: 11500000, guid: 95b720c6db8f06449affaf8b6a6b5405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNameText: {fileID: 3040084328381408018}
 --- !u!1 &8690847106272721590
 GameObject:
   m_ObjectHideFlags: 0

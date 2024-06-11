@@ -1,20 +1,21 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public void StartServer()
+    void Start()
     {
-        NetworkManager.Singleton.StartServer();
-    }
+        // Récupère tous les joueurs dans la scène
+        List<Player> players = Player.GetAllPlayers();
 
-    public void StartClient()
-    {
-        NetworkManager.Singleton.StartClient();
-    }
+        // Maintenant, vous pouvez faire ce que vous voulez avec cette liste de joueurs
+        foreach (Player player in players)
+        {
+            Debug.Log("Player found: " + player.name);
+            // Vous pouvez accéder aux autres composants ou données du joueur ici
 
-    public void StartHost()
-    {
-        NetworkManager.Singleton.StartHost();
+            player.GetComponent<PlayerSeter>().ReSetPlayerComponents();
+        }
     }
 }
