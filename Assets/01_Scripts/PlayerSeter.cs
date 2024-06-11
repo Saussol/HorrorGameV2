@@ -11,7 +11,7 @@ public class PlayerSeter : NetworkBehaviour
 
     public void Start()
     {
-        DisablePlayerComponents();
+        //DisablePlayerComponents();
         //Debug.Log("tesssssssst");
     }
 
