@@ -1663,11 +1663,11 @@ GameObject:
   - component: {fileID: 808836582575698651}
   - component: {fileID: 762020633208238037}
   - component: {fileID: 5052935840006980973}
+  - component: {fileID: 346306972092444803}
   - component: {fileID: 1360847812824135549}
   - component: {fileID: 1900478230479772731}
   - component: {fileID: 2334771759081966053}
   - component: {fileID: 1719703946742183588}
-  - component: {fileID: 346306972092444803}
   - component: {fileID: 787324119947676909}
   - component: {fileID: 648950109570231482}
   - component: {fileID: 6156504901935551989}
@@ -1772,6 +1772,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &346306972092444803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8342106431650556681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2480244875
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &1360847812824135549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1846,27 +1867,6 @@ MonoBehaviour:
   frequency: 10
   cam: {fileID: 571068440561274272}
   camHolder: {fileID: 1087775277056914291}
---- !u!114 &346306972092444803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8342106431650556681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 557541952
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &787324119947676909
 MonoBehaviour:
   m_ObjectHideFlags: 0
