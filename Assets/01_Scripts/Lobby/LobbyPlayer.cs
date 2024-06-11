@@ -10,7 +10,7 @@ using UnityEngine;
 public class LobbyPlayer : NetworkBehaviour
 {
     [SerializeField]
-    private TextMeshPro playerNameText;
+    private TextMeshProUGUI playerNameText;
 
     private NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>();
 
@@ -32,6 +32,9 @@ public class LobbyPlayer : NetworkBehaviour
             // Le serveur initialise son propre pseudo
             string steamName = Steamworks.SteamClient.Name;
             playerName.Value = new FixedString32Bytes(steamName);
+
+            // Envoyer les informations du joueur à tous les clients
+            SetPlayerNameClientRpc(steamName);
         }
     }
 
@@ -51,7 +54,7 @@ public class LobbyPlayer : NetworkBehaviour
         playerName.Value = new FixedString32Bytes(name);
 
         // Rediffuser le pseudo à tous les clients
-        SetPlayerNameClientRpc(name, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { rpcParams.Receive.SenderClientId } } });
+        SetPlayerNameClientRpc(name);
     }
 
     [ClientRpc]
@@ -59,4 +62,5 @@ public class LobbyPlayer : NetworkBehaviour
     {
         playerName.Value = new FixedString32Bytes(name);
     }
+    
 }
