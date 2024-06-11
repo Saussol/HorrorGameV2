@@ -43,6 +43,7 @@ public class CharacterMovement : MonoBehaviour
     private float crouchTransitionSpeed = .1f;
 
     private bool canMove = true;
+    private bool isStopped;
 
     private PlayerState _playerState = PlayerState.NORMAL;
 
@@ -64,6 +65,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
+        if (isStopped) return;
+
 		switch (_playerState)
 		{
 			case PlayerState.NORMAL:
@@ -230,6 +233,14 @@ public class CharacterMovement : MonoBehaviour
         }
         playerCamera.fieldOfView = baseFOV;
         childCam.fieldOfView = playerCamera.fieldOfView;
+    }
+
+    public void StopPlayer()
+	{
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        isStopped = true;
     }
 
     [ContextMenu("Rat Transformation")]
