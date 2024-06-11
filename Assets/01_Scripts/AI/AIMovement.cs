@@ -23,7 +23,10 @@ public class AIMovement : MonoBehaviour
 
 	[SerializeField] private Transform centerPoint;
 
+	[Title("Respawn logic")]
+
 	[SerializeField] private Transform playerRespawnPoint;
+	[SerializeField] private EndGameTrigger endGame;
 
 	[Title("State Control")]
 	[SerializeField] private MonsterState _monsterState;
@@ -179,11 +182,15 @@ public class AIMovement : MonoBehaviour
 		//TO DO change to killing animation instead of just waiting
 		yield return new WaitForSeconds(2f);
 
-		chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position);
 		players.Remove(chasingPlayer);
 
-		//TO DO change this to tp to spawn point
-		//chasingPlayer.transform.position = Vector3.zero;
+		if (players.Count <= 0)
+		{
+			chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, true);
+			endGame.LooseGame();
+		}
+		else
+			chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, false);
 
 		_monsterState = MonsterState.WANDER;
 		chasingPlayer = null;
@@ -191,6 +198,8 @@ public class AIMovement : MonoBehaviour
 		agent.speed = wanderSpeed;
 		StartCoroutine(StateTimer());
 		chaseEnd = false;
+
+
 	}
 
 	private bool RandomPoint(Vector3 center, float range, out Vector3 result)

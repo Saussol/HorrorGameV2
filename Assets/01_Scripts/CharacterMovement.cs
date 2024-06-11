@@ -250,15 +250,18 @@ public class CharacterMovement : MonoBehaviour
     }
 
     [ContextMenu("Rat Transformation")]
-    public void RatTransformation(Vector3 respawnPosition)
+    public void RatTransformation(Vector3 respawnPosition, bool endGame)
 	{
         _playerState = PlayerState.RAT;
         _onRatTransformation.Invoke();
         characterController.height = crouchingHeight;
         transform.localScale = new Vector3(1, .5f, 1);
 
-        StartCoroutine(TeleportPlayer(respawnPosition));
-	}
+        if(!endGame)
+            StartCoroutine(TeleportPlayer(respawnPosition));
+        else
+            transform.position = respawnPosition;
+    }
 
     IEnumerator TeleportPlayer(Vector3 teleportPosition)
 	{

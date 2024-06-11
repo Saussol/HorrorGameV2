@@ -9,11 +9,21 @@ public class EndGameTrigger : MonoBehaviour
 
 	bool endGame;
 
-	[SerializeField] private GameObject winPanel;
+	[SerializeField] private GameObject winPanel, loosePanel;
 
 	private void Start()
 	{
 		maxPlayer = FindObjectsOfType<CharacterMovement>().Length;
+	}
+
+	public void LooseGame()
+	{
+		loosePanel.SetActive(true);
+		CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
+		foreach (CharacterMovement player in players)
+		{
+			player.StopPlayer();
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)
