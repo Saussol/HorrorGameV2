@@ -1,14 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class LobbyPlayer : MonoBehaviour
+public class LobbyPlayer : NetworkBehaviour
 {
-    public TextMeshProUGUI playerNameText;
+    [SerializeField]
+    private TextMeshPro playerNameText;
 
-    public void Initialize(string playerName)
+    private NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>();
+
+    public override void OnNetworkSpawn()
     {
-        playerNameText.text = playerName;
+        if (IsClient)
+        {
+            playerName.OnValueChanged += OnPlayerNameChanged;
+        }
+
+        if (IsServer)
+        {
+            string steamName = Steamworks.SteamClient.Name;
+            playerName.Value = new FixedString32Bytes(steamName);
+        }
+    }
+
+    private void OnPlayerNameChanged(FixedString32Bytes oldName, FixedString32Bytes newName)
+    {
+        playerNameText.text = newName.ToString();
+    }
+
+    public void Initialize(string name)
+    {
+        if (IsServer)
+        {
+            playerName.Value = new FixedString32Bytes(name);
+        }
     }
 }

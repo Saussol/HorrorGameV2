@@ -139,7 +139,7 @@ public class SteamManager : MonoBehaviour
 
     private void AddPlayerToLobby(SteamId steamId)
     {
-        Debug.Log("Un de plus " );
+        Debug.Log("Un de plus " + steamId);
         /*//var playerInstance = Instantiate(playerPrefab);
         playerprefTag[0].SetActive(true); // Activer le prefab
 
