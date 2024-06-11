@@ -46,6 +46,10 @@ public class CharacterMovement : MonoBehaviour
     private bool isStopped;
 
     private PlayerState _playerState = PlayerState.NORMAL;
+    public PlayerState CheckPlayerState()
+	{
+        return _playerState;
+	}
 
     [HideInInspector] public UnityEvent _onRatTransformation;
 
