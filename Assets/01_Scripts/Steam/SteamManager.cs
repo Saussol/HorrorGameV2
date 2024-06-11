@@ -60,8 +60,8 @@ public class SteamManager : MonoBehaviour
         // Attendre que les informations des joueurs soient récupérées
         foreach (var member in lobby.Members)
         {
-            SteamId steamId = member.Id;            
-            string playerName = Steamworks.SteamClient.Name;
+            SteamId steamId = member.Id;
+            string playerName = member.Name;
             Debug.Log("Player " + playerName + " joined the lobby.");
         }
 
