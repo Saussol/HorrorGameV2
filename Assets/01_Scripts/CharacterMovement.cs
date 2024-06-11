@@ -12,7 +12,7 @@ public enum PlayerState
 }
 
 [RequireComponent(typeof(CharacterController))]
-public class CharacterMovement : NetworkBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     [Title("Camera Control")]
     [SerializeField] private float minPitch;
