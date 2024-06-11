@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerSeter : MonoBehaviour
+public class PlayerSeter : NetworkBehaviour
 {
     public GameObject playerCamera;
     public GameObject playerCanvas;
@@ -34,17 +35,17 @@ public class PlayerSeter : MonoBehaviour
 
     public void ReSetPlayerComponents()
     {
-        if (playerCamera != null)
+        if (playerCamera != null && IsLocalPlayer)
         {
             playerCamera.SetActive(true);
         }
 
-        if (playerCanvas != null)
+        if (playerCanvas != null && IsLocalPlayer)
         {
             playerCanvas.SetActive(true);
         }
 
-        if (playerControls != null)
+        if (playerControls != null && IsLocalPlayer)
         {
             playerControls.enabled = true;
         }
