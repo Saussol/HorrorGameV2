@@ -58,12 +58,7 @@ public class CharacterMovement : NetworkBehaviour
 	{
         if (_onRatTransformation == null) _onRatTransformation = new UnityEvent();
 	}
-    public override void OnNetworkSpawn()
-    {
-        if (playerCamera == null) playerCamera = GetComponentInChildren<Camera>();
-        playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
-        playerCamera.enabled = IsLocalPlayer;
-    }
+    
 
     private void Start()
     {
