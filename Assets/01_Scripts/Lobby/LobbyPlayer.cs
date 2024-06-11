@@ -19,10 +19,17 @@ public class LobbyPlayer : NetworkBehaviour
         if (IsClient)
         {
             playerName.OnValueChanged += OnPlayerNameChanged;
+
+            if (IsOwner)
+            {
+                // Envoi du pseudo au serveur lorsqu'on se connecte
+                SendPlayerNameToServer(Steamworks.SteamClient.Name);
+            }
         }
 
         if (IsServer)
         {
+            // Le serveur initialise son propre pseudo
             string steamName = Steamworks.SteamClient.Name;
             playerName.Value = new FixedString32Bytes(steamName);
         }
@@ -33,26 +40,22 @@ public class LobbyPlayer : NetworkBehaviour
         playerNameText.text = newName.ToString();
     }
 
-    [ClientRpc]
-    public void SetPlayerNameClientRpc(string name, ClientRpcParams clientRpcParams = default)
+    private void SendPlayerNameToServer(string name)
     {
-        playerName.Value = new FixedString32Bytes(name);
-    }
-
-    public void Initialize(string name)
-    {
-        if (IsServer)
-        {
-            playerName.Value = new FixedString32Bytes(name);
-        }
-        else
-        {
-            SetPlayerNameServerRpc(name);
-        }
+        SetPlayerNameServerRpc(name);
     }
 
     [ServerRpc]
-    private void SetPlayerNameServerRpc(string name)
+    private void SetPlayerNameServerRpc(string name, ServerRpcParams rpcParams = default)
+    {
+        playerName.Value = new FixedString32Bytes(name);
+
+        // Rediffuser le pseudo à tous les clients
+        SetPlayerNameClientRpc(name, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { rpcParams.Receive.SenderClientId } } });
+    }
+
+    [ClientRpc]
+    private void SetPlayerNameClientRpc(string name, ClientRpcParams clientRpcParams = default)
     {
         playerName.Value = new FixedString32Bytes(name);
     }
