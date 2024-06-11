@@ -39,28 +39,19 @@ public class PlayerSeter : NetworkBehaviour
         {
             playerCamera.SetActive(true);
         }
-        else
-        {
-            playerCamera.SetActive(false);
-        }
+        
 
         if (playerCanvas != null && IsOwner)
         {
             playerCanvas.SetActive(true);
         }
-        else
-        {
-            playerCanvas.SetActive(false);
-        }
+        
 
         if (playerControls != null && IsOwner)
         {
             playerControls.enabled = true;
         }
-        else
-        {
-            playerControls.enabled = false;
-        }
+        
 
         //playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
         //playerCamera.SetActive(IsLocalPlayer);
