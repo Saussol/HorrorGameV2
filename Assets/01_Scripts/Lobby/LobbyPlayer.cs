@@ -33,11 +33,27 @@ public class LobbyPlayer : NetworkBehaviour
         playerNameText.text = newName.ToString();
     }
 
+    [ClientRpc]
+    public void SetPlayerNameClientRpc(string name, ClientRpcParams clientRpcParams = default)
+    {
+        playerName.Value = new FixedString32Bytes(name);
+    }
+
     public void Initialize(string name)
     {
         if (IsServer)
         {
             playerName.Value = new FixedString32Bytes(name);
         }
+        else
+        {
+            SetPlayerNameServerRpc(name);
+        }
+    }
+
+    [ServerRpc]
+    private void SetPlayerNameServerRpc(string name)
+    {
+        playerName.Value = new FixedString32Bytes(name);
     }
 }

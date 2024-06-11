@@ -3498,7 +3498,7 @@ PrefabInstance:
     - target: {fileID: 6847143103609112737, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: playerNameText
       value: 
-      objectReference: {fileID: 277422523}
+      objectReference: {fileID: 0}
     - target: {fileID: 8634025787569288463, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.135028
@@ -4372,7 +4372,7 @@ PrefabInstance:
     - target: {fileID: 6847143103609112737, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: playerNameText
       value: 
-      objectReference: {fileID: 762675654}
+      objectReference: {fileID: 0}
     - target: {fileID: 8634025787569288463, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.6605864
@@ -4637,9 +4637,9 @@ RectTransform:
   - {fileID: 488173307}
   m_Father: {fileID: 2125992072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.70001, y: -352.76288}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &639455633
@@ -5541,9 +5541,9 @@ RectTransform:
   - {fileID: 569356149}
   m_Father: {fileID: 2125992072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.70001, y: -296.35144}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &733810230
@@ -6165,9 +6165,9 @@ RectTransform:
   - {fileID: 1148790270}
   m_Father: {fileID: 1495130588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.70001, y: -172.45502}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &769615436
@@ -8741,9 +8741,9 @@ RectTransform:
   - {fileID: 421743500}
   m_Father: {fileID: 2125992072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.70001, y: -239.94002}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1041294316
@@ -10253,9 +10253,9 @@ RectTransform:
   - {fileID: 68904832}
   m_Father: {fileID: 1495130588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.70001, y: -287.42502}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246964049
@@ -12017,7 +12017,7 @@ PrefabInstance:
     - target: {fileID: 6847143103609112737, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: playerNameText
       value: 
-      objectReference: {fileID: 1005749239}
+      objectReference: {fileID: 0}
     - target: {fileID: 8634025787569288463, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7
@@ -12180,9 +12180,9 @@ RectTransform:
   - {fileID: 1901347953}
   m_Father: {fileID: 1495130588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.70001, y: -402.39505}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1471221765
@@ -12409,7 +12409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1495130588
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13549,9 +13549,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2125992072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.70001, y: -173.52858}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1550810988
@@ -13685,9 +13685,9 @@ RectTransform:
   - {fileID: 925789397}
   m_Father: {fileID: 2125992072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.70001, y: -35.705715}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1553821127
@@ -13737,18 +13737,6 @@ MonoBehaviour:
       - m_Target: {fileID: 700384909}
         m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
         m_MethodName: HostLobby
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 700384909}
-        m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
-        m_MethodName: StartGameServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14279,9 +14267,9 @@ RectTransform:
   - {fileID: 1152954118}
   m_Father: {fileID: 1495130588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 241.70001, y: -57.485004}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1606218521
@@ -15228,9 +15216,9 @@ RectTransform:
   - {fileID: 658322432}
   m_Father: {fileID: 2125992072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.70001, y: -424.17432}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1742833453
@@ -17054,7 +17042,7 @@ PrefabInstance:
     - target: {fileID: 6847143103609112737, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: playerNameText
       value: 
-      objectReference: {fileID: 1361264753}
+      objectReference: {fileID: 0}
     - target: {fileID: 8634025787569288463, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5156524
@@ -17910,9 +17898,9 @@ RectTransform:
   - {fileID: 1904898465}
   m_Father: {fileID: 2125992072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.70001, y: -107.11714}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2034375370
@@ -17962,18 +17950,6 @@ MonoBehaviour:
       - m_Target: {fileID: 700384909}
         m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
         m_MethodName: JoinLobbyWithID
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 700384909}
-        m_TargetAssemblyTypeName: SteamManager, Assembly-CSharp
-        m_MethodName: StartGameServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18325,7 +18301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2125992072
 RectTransform:
   m_ObjectHideFlags: 0
