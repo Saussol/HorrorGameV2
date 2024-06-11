@@ -1668,6 +1668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8634025787569288463}
   - component: {fileID: 2457144792445643155}
+  - component: {fileID: 6847143103609112737}
   m_Layer: 0
   m_Name: Character_Pirate_Captain_01 (1)
   m_TagString: Untagged
@@ -1713,6 +1714,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6847143103609112737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4588491581300859210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1300d2f33958449afa3993b5bbbb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: {fileID: 0}
 --- !u!1 &4843104294435868851
 GameObject:
   m_ObjectHideFlags: 0
