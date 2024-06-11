@@ -23,6 +23,8 @@ public class AIMovement : MonoBehaviour
 
 	[SerializeField] private Transform centerPoint;
 
+	[SerializeField] private Transform playerRespawnPoint;
+
 	[Title("State Control")]
 	[SerializeField] private MonsterState _monsterState;
 
@@ -177,11 +179,11 @@ public class AIMovement : MonoBehaviour
 		//TO DO change to killing animation instead of just waiting
 		yield return new WaitForSeconds(2f);
 
-		chasingPlayer.GetComponent<CharacterMovement>().RatTransformation();
+		chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position);
 		players.Remove(chasingPlayer);
 
 		//TO DO change this to tp to spawn point
-		chasingPlayer.transform.position = Vector3.zero;
+		//chasingPlayer.transform.position = Vector3.zero;
 
 		_monsterState = MonsterState.WANDER;
 		chasingPlayer = null;

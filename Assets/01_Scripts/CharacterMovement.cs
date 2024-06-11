@@ -58,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
 	{
         if (_onRatTransformation == null) _onRatTransformation = new UnityEvent();
 	}
-    
+
 
     private void Start()
     {
@@ -250,11 +250,22 @@ public class CharacterMovement : MonoBehaviour
     }
 
     [ContextMenu("Rat Transformation")]
-    public void RatTransformation()
+    public void RatTransformation(Vector3 respawnPosition)
 	{
         _playerState = PlayerState.RAT;
         _onRatTransformation.Invoke();
         characterController.height = crouchingHeight;
         transform.localScale = new Vector3(1, .5f, 1);
+
+        StartCoroutine(TeleportPlayer(respawnPosition));
 	}
+
+    IEnumerator TeleportPlayer(Vector3 teleportPosition)
+	{
+        isStopped = true;
+        yield return new WaitForSeconds(.1f);
+        transform.position = teleportPosition;
+        yield return new WaitForSeconds(.1f);
+        isStopped = false;
+    }
 }
