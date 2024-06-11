@@ -18,7 +18,7 @@ public class QuestSpawner : MonoBehaviour
     [SerializeField] private Transform questUIParent;
     public Color questDoneColor;
 
-    private int questDone = 0;
+    public bool allQuestEnded;
 
     [HideInInspector] public UnityEvent _pickUpFire;
 
@@ -102,7 +102,7 @@ public class QuestSpawner : MonoBehaviour
 
 		if (allDone)
 		{
-            Debug.Log("<color=green>YOU WIN</color>");
+            allQuestEnded = true;
             //TO DO end game with victory status
 		}
 	}
