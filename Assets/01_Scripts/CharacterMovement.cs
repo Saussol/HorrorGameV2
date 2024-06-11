@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
+using Unity.Netcode;
 
 public enum PlayerState
 {
@@ -11,7 +12,7 @@ public enum PlayerState
 }
 
 [RequireComponent(typeof(CharacterController))]
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovement : NetworkBehaviour
 {
     [Title("Camera Control")]
     [SerializeField] private float minPitch;
@@ -57,8 +58,13 @@ public class CharacterMovement : MonoBehaviour
 	{
         if (_onRatTransformation == null) _onRatTransformation = new UnityEvent();
 	}
+    public override void OnNetworkSpawn()
+    {
+        playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
+        playerCamera.enabled = IsLocalPlayer;
+    }
 
-	private void Start()
+    private void Start()
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();

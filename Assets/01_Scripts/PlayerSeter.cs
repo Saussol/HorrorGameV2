@@ -50,8 +50,8 @@ public class PlayerSeter : NetworkBehaviour
             playerControls.enabled = true;
         }
 
-        playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
-        playerCamera.SetActive(IsLocalPlayer);
+        //playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
+        //playerCamera.SetActive(IsLocalPlayer);
 
     }
 
