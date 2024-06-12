@@ -32,6 +32,7 @@ public class QuestGestion : NetworkBehaviour
     [ServerRpc]
     private void ChangeVariableServerRpc()
 	{
+        Debug.Log($"Hello server, from {OwnerClientId}");
         m_Variable.Value += 1;
     }
 }
