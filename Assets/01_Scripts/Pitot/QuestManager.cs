@@ -61,10 +61,15 @@ public class QuestSpawner : MonoBehaviour
             int randomIndex = Random.Range(0, availableSpawnIndices.Count);
             int spawnIndex = availableSpawnIndices[randomIndex];
 
-            GameObject questObject = Instantiate(quest.questPrefab, questsSpawnPoints[spawnIndex].position, questsSpawnPoints[spawnIndex].rotation);
+            if (quest.questPrefab != null)
+            {
+                GameObject questObject = Instantiate(quest.questPrefab, questsSpawnPoints[spawnIndex].position, questsSpawnPoints[spawnIndex].rotation);
+                questObject.GetComponent<QuestInteractable>().linkedQuest = quest;
+            }
+            //GameObject questObject = Instantiate(quest.questPrefab, questsSpawnPoints[spawnIndex].position, questsSpawnPoints[spawnIndex].rotation);
             GameObject questUI = Instantiate(questUIPrefab, questUIParent);
 
-            questObject.GetComponent<QuestInteractable>().linkedQuest = quest;
+            //questObject.GetComponent<QuestInteractable>().linkedQuest = quest;
             quest.questUI = questUI;
 
             questUI.transform.GetChild(0).GetComponent<TMP_Text>().text = quest.questName;
@@ -186,4 +191,23 @@ public class Quest
             QuestSpawner.Instance.CheckQuest();
 		}
 	}
+    public void CheckQuest(int currentValue)
+    {
+        if (questValidated) return;
+
+        questCurrentStatus = currentValue;
+
+        if (questLength > 1)
+        {
+            questUI.transform.GetChild(1).GetComponent<Slider>().value = (float)questCurrentStatus / (float)questLength;
+        }
+
+        if (questCurrentStatus >= questLength)
+        {
+            questUI.transform.GetChild(0).GetComponent<TMP_Text>().color = QuestSpawner.Instance.questDoneColor;
+            questUI.transform.GetChild(1).GetComponent<Slider>().value = 1;
+            questValidated = true;
+            QuestSpawner.Instance.CheckQuest();
+        }
+    }
 }
