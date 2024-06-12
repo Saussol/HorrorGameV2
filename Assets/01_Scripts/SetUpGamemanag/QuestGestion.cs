@@ -20,7 +20,7 @@ public class QuestGestion : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) return;
+        //if (!IsOwner) return;
 
 
         if (Input.GetKeyDown(KeyCode.T))
