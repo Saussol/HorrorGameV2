@@ -18,7 +18,7 @@ public class CamPlayer : NetworkBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "SampleScene")
+        if (scene.name == "MultiOffline")
         {
             if (this.IsLocalPlayer)
             {
@@ -75,7 +75,7 @@ public class CamPlayer : NetworkBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
 
-        if (scene.name == "SampleScene")
+        if (scene.name == "MultiOffline")
         {
             if (this.IsLocalPlayer)
             {
