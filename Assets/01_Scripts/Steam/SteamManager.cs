@@ -104,7 +104,7 @@ public class SteamManager : MonoBehaviour
 
             Debug.Log("Joining Lobby 1/4 - Parsed lobby Id");
 
-            Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
+            Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(4).RequestAsync();
 
             Debug.Log("Joining Lobby 2/4 - Found lobby list");
 
