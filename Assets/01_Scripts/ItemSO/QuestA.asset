@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116dfe54100cb8b41973f8d09280c83b, type: 3}
   m_Name: QuestA
   m_EditorClassIdentifier: 
-  itemName: TRUC
-  itemTag: item.QuestA
+  itemName: Plank
+  itemTag: item.plank
   itemType: 1
   itemSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1255204382866367115, guid: 08edb22f3e74de94b8e74bd0d25861ab, type: 3}
