@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class QuestGestion : NetworkBehaviour
 {
-    private NetworkVariable<int> m_Variable = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<int> m_Variable = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
 
     public override void OnNetworkSpawn()
@@ -20,14 +20,18 @@ public class QuestGestion : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsLocalPlayer) return;
+        if (!IsOwner) return;
 
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            m_Variable.Value += 1;           
+            ChangeVariableServerRpc();
         }
+    }
 
-
+    [ServerRpc]
+    private void ChangeVariableServerRpc()
+	{
+        m_Variable.Value += 1;
     }
 }
