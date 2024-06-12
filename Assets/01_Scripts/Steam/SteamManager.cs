@@ -96,20 +96,33 @@ public class SteamManager : MonoBehaviour
         Debug.Log("try joining lobby");
 		try
 		{
+            Debug.Log("Joining Lobby 0/5 - Starting");
+
             ulong ID;
             if (!ulong.TryParse(LobbyIDInputField.text, out ID))
                 return;
 
+            Debug.Log("Joining Lobby 1/4 - Parsed lobby Id");
+
             Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithSlotsAvailable(1).RequestAsync();
+
+            Debug.Log("Joining Lobby 2/4 - Found lobby list");
 
             foreach (Lobby lobby in lobbies)
             {
                 if (lobby.Id == ID)
                 {
+                    Debug.Log("Joining Lobby 3/4 - Found lobby, start joining");
+
                     await lobby.Join();
+
+                    Debug.Log("Joining Lobby 4/4 - Joined successfully");
+
                     return;
                 }
             }
+
+            Debug.Log("Joining Lobby ERROR - Fail to found lobby");
         }
 		catch (Exception err)
 		{
