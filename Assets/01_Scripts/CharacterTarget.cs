@@ -59,11 +59,15 @@ public class CharacterTarget : MonoBehaviour
 				}
 			}
 			else
-				hUDManager.HideIndication();
+			{
+				if(hUDManager != null)
+					hUDManager.HideIndication();
+			}
 		}
 		else
 		{
-			hUDManager.HideIndication();
+			if (hUDManager != null)
+				hUDManager.HideIndication();
 
 			if (currentQuestInteraction != null && currentQuestInteraction.needToHold)
 			{
