@@ -20,27 +20,12 @@ public class QuestGestion : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner)
-		{
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                ChangeVariableServerRpc();
-            }
-        }
-		else
-		{
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                ChangeVariable2ServerRpc();
-            }
-        }
-    }
+        if (IsOwner) return;
 
-    [ServerRpc]
-    private void ChangeVariableServerRpc()
-	{
-        Debug.Log($"Hello server, from {OwnerClientId}");
-        m_Variable.Value += 1;
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ChangeVariable2ServerRpc();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
