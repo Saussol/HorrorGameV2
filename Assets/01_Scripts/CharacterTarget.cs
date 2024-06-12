@@ -11,6 +11,7 @@ public class CharacterTarget : MonoBehaviour
 	private PlayerInventory playerInventory;
 	private CharacterMovement characterMovement;
 	[SerializeField] private int playerReach;
+	private HUDManager hUDManager;
 
 	private QuestInteractable currentQuestInteraction;
 
@@ -19,6 +20,7 @@ public class CharacterTarget : MonoBehaviour
 		playerCamera = GetComponentInChildren<Camera>().transform;
 		playerInventory = GetComponentInChildren<PlayerInventory>();
 		characterMovement = GetComponent<CharacterMovement>();
+		hUDManager = GetComponentInChildren<HUDManager>();
 	}
 
 	private void Update()
@@ -31,7 +33,7 @@ public class CharacterTarget : MonoBehaviour
 		{
 			if (hit.transform.GetComponent<ItemObject>())
 			{
-				HUDManager.Instance.DiplayIndication($"pick up {hit.transform.GetComponent<ItemObject>().itemDescription.itemName}");
+				hUDManager.DiplayIndication($"pick up {hit.transform.GetComponent<ItemObject>().itemDescription.itemName}");
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
@@ -46,7 +48,7 @@ public class CharacterTarget : MonoBehaviour
 			else if (hit.transform.GetComponent<QuestInteractable>() && hit.transform.GetComponent<QuestInteractable>().canInteract)
 			{
 				currentQuestInteraction = hit.transform.GetComponent<QuestInteractable>();
-				HUDManager.Instance.DiplayIndication(currentQuestInteraction.interactText);
+				hUDManager.DiplayIndication(currentQuestInteraction.interactText);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					currentQuestInteraction.Interact();
@@ -57,11 +59,11 @@ public class CharacterTarget : MonoBehaviour
 				}
 			}
 			else
-				HUDManager.Instance.HideIndication();
+				hUDManager.HideIndication();
 		}
 		else
 		{
-			HUDManager.Instance.HideIndication();
+			hUDManager.HideIndication();
 
 			if (currentQuestInteraction != null && currentQuestInteraction.needToHold)
 			{
