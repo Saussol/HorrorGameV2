@@ -29,7 +29,7 @@ public class QuestGestion : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ChangeVariableServerRpc()
 	{
         Debug.Log($"Hello server, from {OwnerClientId}");
