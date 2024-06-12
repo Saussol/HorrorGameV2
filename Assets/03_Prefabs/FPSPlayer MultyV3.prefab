@@ -1662,6 +1662,7 @@ GameObject:
   - component: {fileID: 787324119947676909}
   - component: {fileID: 648950109570231482}
   - component: {fileID: 6156504901935551989}
+  - component: {fileID: -4694713938790225705}
   - component: {fileID: 3057021807993898889}
   m_Layer: 0
   m_Name: FPSPlayer MultyV3
@@ -1915,6 +1916,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95b720c6db8f06449affaf8b6a6b5405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4694713938790225705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8342106431650556681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d196d332ad9ecfe4dbdfd01dfeff667f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3057021807993898889
