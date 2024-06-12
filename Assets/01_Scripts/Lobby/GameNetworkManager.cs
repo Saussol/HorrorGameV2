@@ -13,6 +13,8 @@ public class GameNetworkManager : MonoBehaviour
 
 	private FacepunchTransport transport = null;
 
+	[SerializeField] MainMenuUI mainMenuUI;
+
 	private void Awake()
 	{
 		if (Instance == null)
@@ -75,7 +77,10 @@ public class GameNetworkManager : MonoBehaviour
 		transport.targetSteamId = id;
 
 		if (NetworkManager.Singleton.StartClient())
+		{
 			Debug.Log("Client has joined", this);
+			mainMenuUI.JoinGame();
+		}
 	}
 
 	public void Disconnect()
@@ -133,6 +138,8 @@ public class GameNetworkManager : MonoBehaviour
 		lobby.SetFriendsOnly();
 		lobby.SetData("name", "Cool Lobby");
 		lobby.SetJoinable(true);
+
+		SteamFriends.OpenOverlay("friends");
 
 		Debug.Log("Lobby has been created!", this);
 	}

@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 187173134}
   - component: {fileID: 187173133}
   - component: {fileID: 187173132}
+  - component: {fileID: 187173136}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -425,6 +426,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &187173136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187173131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ae9b75ea98491458d42d470a3909d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostPanel: {fileID: 2011732654}
 --- !u!1 &625934211
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6294f3edd41b4ba4fba658f54dd6735f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuUI: {fileID: 187173136}
 --- !u!1 &1735969722
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,10 +915,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1718919745}
-        m_TargetAssemblyTypeName: GameNetworkManager, Assembly-CSharp
-        m_MethodName: StartHost
-        m_Mode: 3
+      - m_Target: {fileID: 187173136}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: HostGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
