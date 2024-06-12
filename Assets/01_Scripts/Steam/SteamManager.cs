@@ -141,7 +141,7 @@ public class SteamManager : MonoBehaviour
         {
 
 
-            NetworkManager.Singleton.SceneManager.LoadScene("MultiScene", LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         }
     }
 

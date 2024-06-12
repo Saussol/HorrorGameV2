@@ -1604,6 +1604,7 @@ MonoBehaviour:
   LobbyID: {fileID: 1138389304}
   MainMenu: {fileID: 1755160290}
   InLobbyMenu: {fileID: 795745145}
+  playerprefTag: []
 --- !u!4 &880800324
 Transform:
   m_ObjectHideFlags: 0
