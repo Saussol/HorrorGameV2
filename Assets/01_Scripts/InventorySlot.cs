@@ -58,7 +58,11 @@ public class InventorySlot : NetworkBehaviour
 		Vector3 throwDirection = usingPlayer.GetComponentInChildren<Camera>().transform.forward * 12 + Vector3.up * 3;
 		Vector3 velocity = usingPlayer.transform.GetComponent<CharacterController>().velocity;
 
-		SpawnObjectServerRpc(instantiatePos, instantiateRot, throwDirection, velocity);
+		GameObject item = Instantiate(itemDescription.itemPrefab, instantiatePos, instantiateRot);
+		item.GetComponent<NetworkObject>().Spawn(true);
+		item.GetComponent<ItemObject>().Use(throwDirection, velocity);
+
+		//SpawnObjectServerRpc(instantiatePos, instantiateRot, throwDirection, velocity);
 
 		//if (isLocalPlayer)
 		//{
@@ -73,12 +77,11 @@ public class InventorySlot : NetworkBehaviour
 		AddItemNumber(-1);
 	}
 
-	[ServerRpc(RequireOwnership = false)]
+	[ServerRpc]
 	private void SpawnObjectServerRpc(Vector3 instantiatePos, Quaternion instantiateRot, Vector3 throwDirection, Vector3 velocity)
 	{
-		GameObject item = Instantiate(itemDescription.itemPrefab, instantiatePos, instantiateRot);
-		item.GetComponent<NetworkObject>().Spawn(true);
-		item.GetComponent<ItemObject>().Use(throwDirection, velocity);
+		Debug.Log("spawn object");
+
 	}
 
 	//[Command]
