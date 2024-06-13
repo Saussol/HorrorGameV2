@@ -45,7 +45,7 @@ public class QuestSpawner : NetworkBehaviour
 
 	public override void OnNetworkSpawn()
 	{
-        if (!IsOwner) return;
+        if (!IsHost) return;
 
         SpawnQuests();
         SpawnQuestObjects();
