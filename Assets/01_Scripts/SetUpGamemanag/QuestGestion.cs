@@ -9,6 +9,7 @@ public class QuestGestion : NetworkBehaviour
     private NetworkVariable<int> m_Variable = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     [SerializeField] private GameObject m_SpawnGameObject;
+    private GameObject SpawnObject;
 
     public override void OnNetworkSpawn()
     {
@@ -25,11 +26,16 @@ public class QuestGestion : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            GameObject transformSpawnObject = Instantiate(m_SpawnGameObject);
-            transformSpawnObject.GetComponent<NetworkObject>().Spawn(true);
+            SpawnObject = Instantiate(m_SpawnGameObject);
+            SpawnObject.GetComponent<NetworkObject>().Spawn(true);
 
             Debug.Log("spawn");
             //ChangeVariable2ServerRpc();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Destroy(SpawnObject);
         }
     }
 
