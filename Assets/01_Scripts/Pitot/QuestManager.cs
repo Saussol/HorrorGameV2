@@ -43,9 +43,9 @@ public class QuestSpawner : NetworkBehaviour
         if (_pickUpFire == null) _pickUpFire = new UnityEvent();
     }
 
-	public override void OnNetworkSpawn()
+	private void Start()
 	{
-        if (!IsHost) return;
+        if (!IsServer) return;
 
         SpawnQuests();
         SpawnQuestObjects();
