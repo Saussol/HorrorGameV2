@@ -37,7 +37,7 @@ public class QuestGestion : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            Destroy(SpawnObject);
+            RequestDestroyObjectServerRpc(SpawnObject.GetComponent<NetworkObject>().NetworkObjectId);
         }
     }
 
@@ -56,6 +56,16 @@ public class QuestGestion : NetworkBehaviour
 
         // If you want to make sure each client can only spawn one object at a time, you might need to handle this logic.
         // This could include keeping a dictionary of client IDs to spawned objects and ensuring only one per client.
+    }
+
+    [ServerRpc]
+    private void RequestDestroyObjectServerRpc(ulong networkObjectId, ServerRpcParams rpcParams = default)
+    {
+        NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId];
+        if (networkObject != null)
+        {
+            networkObject.Despawn(true);
+        }
     }
 
     /*[ServerRpc(RequireOwnership = false)]
