@@ -8,8 +8,7 @@ public class QuestGestion : NetworkBehaviour
 {
     //private NetworkVariable<int> m_Variable = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    [SerializeField] private GameObject m_SpawnGameObject;
-    private GameObject SpawnObject;
+
 
     /*public override void OnNetworkSpawn()
     {
@@ -20,24 +19,25 @@ public class QuestGestion : NetworkBehaviour
     }*/
 
     // Update is called once per frame
+    [SerializeField] private GameObject m_SpawnGameObject;
+    private NetworkObject spawnedNetworkObject;
+
+    // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            //SpawnObject = Instantiate(m_SpawnGameObject);
-            //SpawnObject.GetComponent<NetworkObject>().Spawn(true);
-
             RequestSpawnObjectServerRpc();
-
-            Debug.Log("spawn");
-            //ChangeVariable2ServerRpc();
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            RequestDestroyObjectServerRpc(SpawnObject.GetComponent<NetworkObject>().NetworkObjectId);
+            if (spawnedNetworkObject != null)
+            {
+                RequestDestroyObjectServerRpc(spawnedNetworkObject.NetworkObjectId);
+            }
         }
     }
 
@@ -45,17 +45,12 @@ public class QuestGestion : NetworkBehaviour
     private void RequestSpawnObjectServerRpc(ServerRpcParams rpcParams = default)
     {
         GameObject newSpawnedObject = Instantiate(m_SpawnGameObject);
-        NetworkObject networkObject = newSpawnedObject.GetComponent<NetworkObject>();
-        networkObject.Spawn(true);
-
-        SpawnObject = newSpawnedObject;
+        spawnedNetworkObject = newSpawnedObject.GetComponent<NetworkObject>();
+        spawnedNetworkObject.Spawn(true);
 
         // Optionally, you can keep track of which object was spawned by which player
         ulong clientId = rpcParams.Receive.SenderClientId;
         Debug.Log($"Object spawned by client {clientId}");
-
-        // If you want to make sure each client can only spawn one object at a time, you might need to handle this logic.
-        // This could include keeping a dictionary of client IDs to spawned objects and ensuring only one per client.
     }
 
     [ServerRpc]
