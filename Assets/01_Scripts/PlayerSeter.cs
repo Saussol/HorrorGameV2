@@ -10,6 +10,7 @@ using System;
 public class PlayerSeter : NetworkBehaviour
 {
     public Camera playerCamera;
+    public Camera playerHandCamera;
     public Canvas playerCanvas;
     public CharacterMovement playerControls; // Par exemple, un GameObject qui contient le script de contrôle du joueur
 
@@ -45,6 +46,11 @@ public class PlayerSeter : NetworkBehaviour
             playerCamera.enabled = false;
         }
 
+        if (playerHandCamera != null)
+        {
+            playerHandCamera.enabled = false;
+        }
+
         if (playerCanvas != null)
         {
             playerCanvas.enabled = false;
@@ -64,6 +70,12 @@ public class PlayerSeter : NetworkBehaviour
 		if (playerCamera != null && IsOwner)
         {
             playerCamera.enabled = true;
+        }
+
+
+        if (playerHandCamera != null && IsOwner)
+        {
+            playerHandCamera.enabled = true;
         }
 
 
