@@ -73,9 +73,10 @@ public class InventorySlot : NetworkBehaviour
 		AddItemNumber(-1);
 	}
 
-	[ServerRpc(RequireOwnership = false)]
+	[ServerRpc]
 	private void SpawnObjectServerRpc(Vector3 instantiatePos, Quaternion instantiateRot, Vector3 throwDirection, Vector3 velocity)
 	{
+		Debug.Log("spawn object");
 		GameObject item = Instantiate(itemDescription.itemPrefab, instantiatePos, instantiateRot);
 		item.GetComponent<NetworkObject>().Spawn(true);
 		item.GetComponent<ItemObject>().Use(throwDirection, velocity);
