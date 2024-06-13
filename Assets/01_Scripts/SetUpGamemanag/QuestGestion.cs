@@ -22,6 +22,7 @@ public class QuestGestion : NetworkBehaviour
         {
             //RequestSpawnObjectServerRpc();
             RequestQuestEndServerRpc();
+            QuestLeader.instance.textMeshProUGUIA.text = "Pitot TA GRAND MERE !!!";
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
