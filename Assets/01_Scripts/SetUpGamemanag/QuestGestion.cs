@@ -8,6 +8,7 @@ public class QuestGestion : NetworkBehaviour
 {
     private NetworkVariable<int> m_Variable = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+    [SerializeField] private GameObject m_SpawnGameObject;
 
     public override void OnNetworkSpawn()
     {
@@ -20,11 +21,15 @@ public class QuestGestion : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsOwner) return;
+        if (!IsOwner) return;
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            ChangeVariable2ServerRpc();
+            GameObject transformSpawnObject = Instantiate(m_SpawnGameObject);
+            transformSpawnObject.GetComponent<NetworkObject>().Spawn(true);
+
+            Debug.Log("spawn");
+            //ChangeVariable2ServerRpc();
         }
     }
 
