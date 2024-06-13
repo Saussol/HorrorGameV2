@@ -13,7 +13,7 @@ public class ItemObject : NetworkBehaviour
 
 	}
 
-	[ServerRpc]
+	[ServerRpc(RequireOwnership = false)]
 	public void DestroyObjectServerRpc()
 	{
 		GetComponent<NetworkObject>().Despawn(true);

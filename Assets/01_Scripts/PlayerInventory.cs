@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
+using Unity.Netcode;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : NetworkBehaviour
 {
 	[SerializeField] private Transform inventoryPanel;
 	[SerializeField] private Color selected, unselected;
@@ -30,6 +31,7 @@ public class PlayerInventory : MonoBehaviour
 
 	private void Update()
 	{
+		if (!IsOwner) return;
 		if (characterMovement.GetPlayerState() == PlayerState.RAT) return;
 
 		if (Input.GetAxis("Mouse ScrollWheel") > 0f)
