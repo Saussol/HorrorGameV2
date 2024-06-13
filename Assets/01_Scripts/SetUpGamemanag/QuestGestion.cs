@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -7,16 +8,6 @@ using UnityEngine;
 public class QuestGestion : NetworkBehaviour
 {
     //private NetworkVariable<int> m_Variable = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
-
-
-    /*public override void OnNetworkSpawn()
-    {
-        m_Variable.OnValueChanged += (int previousValue, int newValue) =>
-        {
-            Debug.Log(OwnerClientId + " mon num " + m_Variable.Value);
-        };
-    }*/
 
     // Update is called once per frame
     [SerializeField] private GameObject m_SpawnGameObject;
@@ -29,14 +20,24 @@ public class QuestGestion : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            RequestSpawnObjectServerRpc();
+            //RequestSpawnObjectServerRpc();
+            RequestQuestEndServerRpc();
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            RequestDestroyObjectServerRpc();
+            //RequestDestroyObjectServerRpc();
+            
         }
     }
+
+
+    [ServerRpc]
+    private void RequestQuestEndServerRpc(ServerRpcParams rpcParams = default)
+    {
+        QuestLeader.instance.textMeshProUGUIA.text = "Pitot TA GRAND MERE !!!";
+    }
+
 
     [ServerRpc]
     private void RequestSpawnObjectServerRpc(ServerRpcParams rpcParams = default)
@@ -56,10 +57,5 @@ public class QuestGestion : NetworkBehaviour
         Destroy(spawnObject);
     }
 
-    /*[ServerRpc(RequireOwnership = false)]
-    private void ChangeVariable2ServerRpc()
-	{
-        Debug.Log($"Hello server, from {OwnerClientId}");
-        m_Variable.Value += 1;
-    }*/
+    
 }
