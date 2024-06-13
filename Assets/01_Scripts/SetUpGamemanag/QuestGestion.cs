@@ -20,7 +20,7 @@ public class QuestGestion : NetworkBehaviour
 
     // Update is called once per frame
     [SerializeField] private GameObject m_SpawnGameObject;
-    private NetworkObject spawnedNetworkObject;
+    private GameObject spawnObject;
 
     // Update is called once per frame
     void Update()
@@ -34,10 +34,7 @@ public class QuestGestion : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            if (spawnedNetworkObject != null)
-            {
-                RequestDestroyObjectServerRpc(spawnedNetworkObject.NetworkObjectId);
-            }
+            RequestDestroyObjectServerRpc();
         }
     }
 
@@ -45,22 +42,18 @@ public class QuestGestion : NetworkBehaviour
     private void RequestSpawnObjectServerRpc(ServerRpcParams rpcParams = default)
     {
         GameObject newSpawnedObject = Instantiate(m_SpawnGameObject);
-        spawnedNetworkObject = newSpawnedObject.GetComponent<NetworkObject>();
-        spawnedNetworkObject.Spawn(true);
+        newSpawnedObject.GetComponent<NetworkObject>().Spawn(true); 
 
+        spawnObject = newSpawnedObject;
         // Optionally, you can keep track of which object was spawned by which player
         ulong clientId = rpcParams.Receive.SenderClientId;
         Debug.Log($"Object spawned by client {clientId}");
     }
 
     [ServerRpc]
-    private void RequestDestroyObjectServerRpc(ulong networkObjectId, ServerRpcParams rpcParams = default)
+    private void RequestDestroyObjectServerRpc(ServerRpcParams rpcParams = default)
     {
-        NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId];
-        if (networkObject != null)
-        {
-            networkObject.Despawn(true);
-        }
+        Destroy(spawnObject);
     }
 
     /*[ServerRpc(RequireOwnership = false)]
