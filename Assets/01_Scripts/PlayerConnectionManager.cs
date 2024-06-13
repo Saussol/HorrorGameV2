@@ -37,7 +37,7 @@ public class PlayerConnectionManager : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public void PlayerLoadedSceneServerRpc(ServerRpcParams rpcParams = default)
     {
         playersReady.Value++;
