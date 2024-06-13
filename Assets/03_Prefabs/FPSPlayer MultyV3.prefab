@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 1
-  amplitude: 0.005
+  amplitude: 0.002
   frequency: 10
   cam: {fileID: 571068440561274272}
   camHolder: {fileID: 1087775277056914291}

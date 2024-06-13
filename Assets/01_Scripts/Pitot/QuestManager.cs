@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class QuestSpawner : MonoBehaviour
+public class QuestSpawner : NetworkBehaviour
 {
     public List<Transform> questsSpawnPoints;
     //public List<GameObject> questPrefabs;
@@ -42,8 +43,10 @@ public class QuestSpawner : MonoBehaviour
         if (_pickUpFire == null) _pickUpFire = new UnityEvent();
     }
 
-    void Start()
-    {
+	public override void OnNetworkSpawn()
+	{
+        if (!IsOwner) return;
+
         SpawnQuests();
         SpawnQuestObjects();
     }
@@ -64,19 +67,14 @@ public class QuestSpawner : MonoBehaviour
             if (quest.questPrefab != null)
             {
                 GameObject questObject = Instantiate(quest.questPrefab, questsSpawnPoints[spawnIndex].position, questsSpawnPoints[spawnIndex].rotation);
+                questObject.GetComponent<NetworkObject>().Spawn(true);
                 questObject.GetComponent<QuestInteractable>().linkedQuest = quest;
             }
             //GameObject questObject = Instantiate(quest.questPrefab, questsSpawnPoints[spawnIndex].position, questsSpawnPoints[spawnIndex].rotation);
-            GameObject questUI = Instantiate(questUIPrefab, questUIParent);
+
+            SpawnQuestUIClientRpc(quest.questName);
 
             //questObject.GetComponent<QuestInteractable>().linkedQuest = quest;
-            quest.questUI = questUI;
-
-            questUI.transform.GetChild(0).GetComponent<TMP_Text>().text = quest.questName;
-            if(quest.questLength > 1)
-                questUI.transform.GetChild(1).gameObject.SetActive(true);
-			else
-                questUI.transform.GetChild(1).gameObject.SetActive(false);
 
             if (quest.questObjects.Count > 0)
 			{
@@ -104,12 +102,14 @@ public class QuestSpawner : MonoBehaviour
 		{
             Transform spawnPos = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
             GameObject material = Instantiate(materialPrefab, spawnPos.position, Quaternion.identity);
+            material.GetComponent<NetworkObject>().Spawn(true);
             availableSpawnPoints.Remove(spawnPos);
 		}
 		for (int i = 0; i < bottleNumber; i++)
 		{
             Transform spawnPos = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
             GameObject bottle = Instantiate(bottlePrefabs[Random.Range(0, bottlePrefabs.Length)], spawnPos.position, Quaternion.identity);
+            bottle.GetComponent<NetworkObject>().Spawn(true);
             availableSpawnPoints.Remove(spawnPos);
         }
     }
@@ -135,30 +135,53 @@ public class QuestSpawner : MonoBehaviour
 		}
 	}
 
-/*private void Bottles()
-    {
-        if (botlleSpawnPoints.Count < questPrefabs.Count)
+    [ClientRpc]
+    private void SpawnQuestUIClientRpc(string questName)
+	{
+        GameObject questUI = Instantiate(questUIPrefab, questUIParent);
+
+        Quest quest = null;
+		foreach (var q in quests)
+		{
+            if(q.questName == questName)
+			{
+                quest = q;
+			}
+		}
+
+        quest.questUI = questUI;
+
+        questUI.transform.GetChild(0).GetComponent<TMP_Text>().text = quest.questName;
+        if (quest.questLength > 1)
+            questUI.transform.GetChild(1).gameObject.SetActive(true);
+        else
+            questUI.transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    /*private void Bottles()
         {
-            Debug.LogError("Il n'y a pas assez de points de spawn pour toutes les quêtes !");
-            return;
-        }
+            if (botlleSpawnPoints.Count < questPrefabs.Count)
+            {
+                Debug.LogError("Il n'y a pas assez de points de spawn pour toutes les quêtes !");
+                return;
+            }
 
-        List<int> availableSpawnIndices = new List<int>();
-        for (int i = 0; i < botlleSpawnPoints.Count; i++)
-        {
-            availableSpawnIndices.Add(i);
-        }
+            List<int> availableSpawnIndices = new List<int>();
+            for (int i = 0; i < botlleSpawnPoints.Count; i++)
+            {
+                availableSpawnIndices.Add(i);
+            }
 
-        foreach (var questPrefab in questPrefabs)
-        {
-            int randomIndex = Random.Range(0, availableSpawnIndices.Count);
-            int spawnIndex = availableSpawnIndices[randomIndex];
+            foreach (var questPrefab in questPrefabs)
+            {
+                int randomIndex = Random.Range(0, availableSpawnIndices.Count);
+                int spawnIndex = availableSpawnIndices[randomIndex];
 
-            Instantiate(questPrefab, botlleSpawnPoints[spawnIndex].position, botlleSpawnPoints[spawnIndex].rotation);
+                Instantiate(questPrefab, botlleSpawnPoints[spawnIndex].position, botlleSpawnPoints[spawnIndex].rotation);
 
-            availableSpawnIndices.RemoveAt(randomIndex);
-        }
-    }*/
+                availableSpawnIndices.RemoveAt(randomIndex);
+            }
+        }*/
 }
 
 [System.Serializable]
