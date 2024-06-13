@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class ItemObject : MonoBehaviour
+public class ItemObject : NetworkBehaviour
 {
 	public ItemScriptable itemDescription;
 
@@ -10,5 +11,11 @@ public class ItemObject : MonoBehaviour
 	public virtual void Use(CharacterTarget usingPlayer)
 	{
 
+	}
+
+	[ServerRpc]
+	public void DestroyObjectServerRpc()
+	{
+		GetComponent<NetworkObject>().Despawn(true);
 	}
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 using Unity.Burst.CompilerServices;
+using Unity.Netcode;
 
-public class CharacterTarget : MonoBehaviour
+public class CharacterTarget : NetworkBehaviour
 {
 	private Transform playerCamera;
 	private PlayerInventory playerInventory;
@@ -25,6 +26,7 @@ public class CharacterTarget : MonoBehaviour
 
 	private void Update()
 	{
+		if (!IsOwner) return;
 		if (characterMovement.GetPlayerState() == PlayerState.RAT) return;
 
 		RaycastHit hit;
@@ -38,7 +40,8 @@ public class CharacterTarget : MonoBehaviour
 				{
 					if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
 					{
-                        Destroy(hit.transform.gameObject);
+						hit.transform.GetComponent<ItemObject>().DestroyObjectServerRpc();
+						//Destroy(hit.transform.gameObject);
 
 						//CmdDestoy(hit.transform.gameObject);
                     }
@@ -76,7 +79,6 @@ public class CharacterTarget : MonoBehaviour
 			}
 		}
 	}
-
 
 	//[Command]
  //   private void CmdDestoy(GameObject obj)
