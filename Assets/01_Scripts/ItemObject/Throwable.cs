@@ -12,10 +12,9 @@ public class Throwable : ItemObject
 		rb = GetComponent<Rigidbody>();
 	}
 
-	public override void Use(CharacterTarget usingPlayer)
+	public override void Use(Vector3 throwDirection, Vector3 velocity)
 	{
-		Vector3 throwDirection = usingPlayer.GetComponentInChildren<Camera>().transform.forward * 12 + Vector3.up * 3;
-		rb.AddForce(throwDirection + usingPlayer.transform.GetComponent<CharacterController>().velocity * .75f, ForceMode.Impulse);
+		rb.AddForce(throwDirection + velocity * .75f, ForceMode.Impulse);
 		thrown = true;
 	}
 

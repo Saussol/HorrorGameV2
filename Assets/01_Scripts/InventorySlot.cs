@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Unity.Netcode;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : NetworkBehaviour
 {
 	private Image itemImage;
 	private TMP_Text itemNumberText;
@@ -30,6 +31,8 @@ public class InventorySlot : MonoBehaviour
 
 	public void SetItem(ItemScriptable itemScriptable)
 	{
+		if (!IsOwner) return;
+
 		itemDescription = itemScriptable;
 		itemImage.gameObject.SetActive(true);
 		itemImage.sprite = itemDescription.itemSprite;
@@ -46,12 +49,16 @@ public class InventorySlot : MonoBehaviour
 
 	public void UseItem()
 	{
+		if (!IsOwner) return;
 		if (itemDescription == null) return;
 
 		Vector3 instantiatePos = Camera.main.transform.position + Camera.main.transform.forward;
 		Quaternion instantiateRot = Camera.main.transform.parent.transform.rotation;
-		GameObject item = Instantiate(itemDescription.itemPrefab, instantiatePos, instantiateRot);
-		item.GetComponent<ItemObject>().Use(FindObjectOfType<CharacterTarget>());
+		CharacterTarget usingPlayer = FindObjectOfType<CharacterTarget>();
+		Vector3 throwDirection = usingPlayer.GetComponentInChildren<Camera>().transform.forward * 12 + Vector3.up * 3;
+		Vector3 velocity = usingPlayer.transform.GetComponent<CharacterController>().velocity;
+
+		SpawnObjectServerRpc(instantiatePos, instantiateRot, throwDirection, velocity);
 
 		//if (isLocalPlayer)
 		//{
@@ -64,6 +71,14 @@ public class InventorySlot : MonoBehaviour
 		//}
 
 		AddItemNumber(-1);
+	}
+
+	[ServerRpc(RequireOwnership = false)]
+	private void SpawnObjectServerRpc(Vector3 instantiatePos, Quaternion instantiateRot, Vector3 throwDirection, Vector3 velocity)
+	{
+		GameObject item = Instantiate(itemDescription.itemPrefab, instantiatePos, instantiateRot);
+		item.GetComponent<NetworkObject>().Spawn(true);
+		item.GetComponent<ItemObject>().Use(throwDirection, velocity);
 	}
 
 	//[Command]

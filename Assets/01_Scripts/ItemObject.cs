@@ -8,7 +8,7 @@ public class ItemObject : NetworkBehaviour
 	public ItemScriptable itemDescription;
 
 	//Launch when object in inventory is used
-	public virtual void Use(CharacterTarget usingPlayer)
+	public virtual void Use(Vector3 throwDirection, Vector3 velocity)
 	{
 
 	}
