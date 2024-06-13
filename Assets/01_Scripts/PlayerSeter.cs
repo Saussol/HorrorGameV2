@@ -1,30 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
+using Netcode;
+using System;
 
 public class PlayerSeter : NetworkBehaviour
 {
-    public GameObject playerCamera;
-    public GameObject playerCanvas;
+    public Camera playerCamera;
+    public Canvas playerCanvas;
     public CharacterMovement playerControls; // Par exemple, un GameObject qui contient le script de contrôle du joueur
 
-    public void Start()
+    private void Start()
     {
-        //DisablePlayerComponents();
-        //Debug.Log("tesssssssst");
+        DisablePlayerComponents();
     }
 
-    public void DisablePlayerComponents()
+    private void OnEnable()
+    {
+        NetworkManager.Singleton.SceneManager.OnLoad += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        NetworkManager.Singleton.SceneManager.OnLoad -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(ulong clientId, string sceneName, LoadSceneMode loadSceneMode, AsyncOperation asyncOperation)
+	{
+        Debug.Log($"Scene {sceneName} loaded for client {clientId}");
+        if (sceneName == "MultiScene 2")
+        {
+            // Call your custom function here
+            ReSetPlayerComponents();
+        }
+    }
+
+	public void DisablePlayerComponents()
     {
         if (playerCamera != null)
         {
-            playerCamera.SetActive(false);
+            playerCamera.enabled = false;
         }
 
         if (playerCanvas != null)
         {
-            playerCanvas.SetActive(false);
+            playerCanvas.enabled = false;
         }
 
         if (playerControls != null)
@@ -37,27 +60,27 @@ public class PlayerSeter : NetworkBehaviour
     {
         if (playerCamera != null && IsOwner)
         {
-            playerCamera.SetActive(true);
+            playerCamera.enabled = true;
         }
-        
+
 
         if (playerCanvas != null && IsOwner)
         {
-            playerCanvas.SetActive(true);
+            playerCanvas.enabled = true;
         }
-        
+
 
         if (playerControls != null && IsOwner)
         {
             playerControls.enabled = true;
         }
-        
+
 
         //playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
         //playerCamera.SetActive(IsLocalPlayer);
 
     }
 
-    
+
 
 }
