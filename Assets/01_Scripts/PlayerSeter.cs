@@ -20,16 +20,16 @@ public class PlayerSeter : NetworkBehaviour
 
     private void OnEnable()
     {
-        NetworkManager.Singleton.SceneManager.OnLoad += OnSceneLoaded;
+        NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSceneLoadCompleted;
     }
 
-    private void OnDisable()
+	private void OnDisable()
     {
-        NetworkManager.Singleton.SceneManager.OnLoad -= OnSceneLoaded;
+        NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnSceneLoadCompleted;
     }
 
-    private void OnSceneLoaded(ulong clientId, string sceneName, LoadSceneMode loadSceneMode, AsyncOperation asyncOperation)
-	{
+    private void OnSceneLoadCompleted(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
+    {
         Debug.Log($"Scene {sceneName} loaded for client {clientId}");
         if (sceneName == "MultiScene 2")
         {
@@ -38,7 +38,7 @@ public class PlayerSeter : NetworkBehaviour
         }
     }
 
-	public void DisablePlayerComponents()
+    public void DisablePlayerComponents()
     {
         if (playerCamera != null)
         {
@@ -58,7 +58,10 @@ public class PlayerSeter : NetworkBehaviour
 
     public void ReSetPlayerComponents()
     {
-        if (playerCamera != null && IsOwner)
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+
+		if (playerCamera != null && IsOwner)
         {
             playerCamera.enabled = true;
         }
@@ -75,10 +78,24 @@ public class PlayerSeter : NetworkBehaviour
             playerControls.enabled = true;
         }
 
+        if (IsOwner)
+        {
+            // Find the SpawnManager in the scene
+            SpawnManager spawnManager = FindObjectOfType<SpawnManager>();
 
-        //playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
-        //playerCamera.SetActive(IsLocalPlayer);
+            if (spawnManager != null)
+            {
+                Transform spawnPoint = spawnManager.GetSpawnPoint();
+                if (spawnPoint != null)
+                    StartCoroutine(playerControls.TeleportPlayer(spawnPoint.position));
+                else
+                    Debug.LogError("No valid spawn point found!");
+            }
+            else
+                Debug.LogError("SpawnManager not found in the scene!");
+        }
 
+        playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
     }
 
 

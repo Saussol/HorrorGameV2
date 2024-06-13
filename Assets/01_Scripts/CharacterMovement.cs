@@ -263,7 +263,7 @@ public class CharacterMovement : MonoBehaviour
             transform.position = respawnPosition;
     }
 
-    IEnumerator TeleportPlayer(Vector3 teleportPosition)
+    public IEnumerator TeleportPlayer(Vector3 teleportPosition)
 	{
         isStopped = true;
         yield return new WaitForSeconds(.1f);
