@@ -43,7 +43,7 @@ public class QuestSpawner : NetworkBehaviour
         if (_pickUpFire == null) _pickUpFire = new UnityEvent();
     }
 
-	private void Start()
+	public void SpawnAll()
 	{
         if (!IsServer) return;
 
