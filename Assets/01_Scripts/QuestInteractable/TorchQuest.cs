@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class TorchQuest : QuestInteractable
 {
@@ -24,12 +25,13 @@ public class TorchQuest : QuestInteractable
 		if (CanFire)
 		{
 			GameObject vfxInstance = Instantiate(fireVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
+			vfxInstance.GetComponent<NetworkObject>().Spawn(true);
 			vfxInstance.transform.Rotate(90, 0, 0);
             CanFire = false;
         }
 
-
-        linkedQuest.CheckQuest();
+		QuestSpawner.Instance.CheckQuestClientRpc(linkedQuest.questName);
+        //linkedQuest.CheckQuest();
 
 		canInteract = false;
     }
