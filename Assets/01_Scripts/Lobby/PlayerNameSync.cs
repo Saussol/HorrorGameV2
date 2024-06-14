@@ -32,6 +32,12 @@ public class PlayerNameSync : NetworkBehaviour
             // Informer le nouveau client des pseudonymes des joueurs déjà connectés
             UpdateAllClientsServerRpc();
         }
+
+        for (int i = 0; i < LobbyPlayers.Instance.playersObj.Count; i++)
+        {
+            LobbyPlayers.Instance.playersName[i].text = LobbyPlayers.Instance.playersObj[i].GetComponent<PlayerNameSync>().name;
+        }
+        
     }
 
     [ServerRpc]
