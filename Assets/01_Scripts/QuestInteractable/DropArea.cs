@@ -41,8 +41,7 @@ public class DropArea : QuestInteractable
         if (currentObject != previousObject)
         {
             previousObject = currentObject;
-            if(IsServer)
-                linkedQuest.CheckQuestClientRpc(currentObject);
+            linkedQuest.CheckQuestClientRpc(currentObject);
             if (linkedQuest.questValidated)
             {
 				if (!plankDeactivated)
