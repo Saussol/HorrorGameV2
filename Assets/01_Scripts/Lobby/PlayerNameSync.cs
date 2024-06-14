@@ -1,4 +1,5 @@
 using Steamworks;
+using System;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
@@ -6,7 +7,8 @@ using UnityEngine;
 
 public class PlayerNameSync : NetworkBehaviour
 {
-    public NetworkVariable<FixedString32Bytes> displayName = new NetworkVariable<FixedString32Bytes>();
+    public NetworkVariable<string> PlayerName = new NetworkVariable<string>();
+    //public NetworkVariable<FixedString32Bytes> displayName = new NetworkVariable<FixedString32Bytes>();
     public TextMeshPro textName;
     public string name;
 
@@ -22,10 +24,11 @@ public class PlayerNameSync : NetworkBehaviour
         }
 
         // Mettre à jour l'affichage du pseudonyme lorsque la variable change
-        displayName.OnValueChanged += OnDisplayNameChanged;
+        PlayerName.OnValueChanged += OnDisplayNameChanged;
+
 
         // Mettre à jour l'affichage initial
-        OnDisplayNameChanged(default, displayName.Value);
+        OnDisplayNameChanged(default, PlayerName.Value);
 
         if (IsServer)
         {
@@ -37,10 +40,19 @@ public class PlayerNameSync : NetworkBehaviour
         
     }
 
+    private void OnDisplayNameChanged(string previousValue, string newValue)
+    {
+        Debug.Log("Display Name Changed: " + newValue);
+        textName.text = newValue.ToString();
+        name = newValue;
+    }
+
+   
+
     [ServerRpc]
     private void UpdateDisplayNameServerRpc(string newName, ServerRpcParams rpcParams = default)
     {
-        displayName.Value = newName;
+        PlayerName.Value = newName;
         name = newName;
         UpdateDisplayNameClientRpc(newName);
     }
@@ -48,17 +60,13 @@ public class PlayerNameSync : NetworkBehaviour
     [ClientRpc]
     private void UpdateDisplayNameClientRpc(string newName)
     {
-        displayName.Value = newName; // Cette ligne peut encore causer l'erreur si elle est exécutée sur le client
+        PlayerName.Value = newName; // Cette ligne peut encore causer l'erreur si elle est exécutée sur le client
         name = newName;
         textName.text = newName;
         LobbyPlayers.Instance.RefontName();
     }
 
-    private void OnDisplayNameChanged(FixedString32Bytes oldName, FixedString32Bytes newName)
-    {
-        Debug.Log("Display Name Changed: " + newName);
-        textName.text = newName.ToString();
-    }
+   
 
     [ServerRpc]
     private void UpdateAllClientsServerRpc(ServerRpcParams rpcParams = default)
@@ -67,7 +75,7 @@ public class PlayerNameSync : NetworkBehaviour
         {
             if (player != this)
             {
-                UpdateSingleClientClientRpc(player.displayName.Value.ToString());
+                UpdateSingleClientClientRpc(player.PlayerName.ToString());
                 
             }
         }
@@ -79,7 +87,7 @@ public class PlayerNameSync : NetworkBehaviour
         // Mettre à jour le pseudo des joueurs déjà connectés pour le nouveau client
         if (!IsOwner) // Ajoutez cette vérification pour éviter que le propriétaire ne réécrive sa propre variable
         {
-            displayName.Value = playerName;
+            PlayerName.Value = playerName;
         }
         textName.text = playerName;
         name = playerName;
@@ -94,7 +102,7 @@ public class PlayerNameSync : NetworkBehaviour
         // ...
 
         // Mettre à jour le pseudonyme sur le serveur
-        displayName.Value = newName;
+        PlayerName.Value = newName;
         name = newName;
         UpdateDisplayNameClientRpc(newName);
     }
