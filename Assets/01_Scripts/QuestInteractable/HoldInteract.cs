@@ -9,6 +9,7 @@ public class HoldInteract : QuestInteractable
 
     private NetworkVariable<bool> isFilling = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private bool questEnded = false;
+    public bool iAmFilling = false;
 
     public bool GetFillState()
 	{
@@ -20,16 +21,18 @@ public class HoldInteract : QuestInteractable
         canInteract = true;
     }
 
-    public override void Interact()
+	public override void Interact()
 	{
 		base.Interact();
+        iAmFilling = true;
         ChangeIsFillingServerRpc(true);
-        //isFilling.Value = true;
+		//isFilling.Value = true;
 	}
 
 	public override void StopInteract()
 	{
 		base.StopInteract();
+        iAmFilling = false;
         ChangeIsFillingServerRpc(false);
         //isFilling.Value = false;
 

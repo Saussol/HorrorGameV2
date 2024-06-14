@@ -49,17 +49,16 @@ public class CharacterTarget : NetworkBehaviour
 			{
 				currentQuestInteraction = hit.transform.GetComponent<QuestInteractable>();
 
-				if (currentQuestInteraction.needToHold && Input.GetKeyUp(KeyCode.E))
-				{
-					currentQuestInteraction.StopInteract();
-				}
-
-				if (hit.transform.GetComponent<HoldInteract>() && hit.transform.GetComponent<HoldInteract>().GetFillState()) return;
+				if (hit.transform.GetComponent<HoldInteract>() && !hit.transform.GetComponent<HoldInteract>().iAmFilling && hit.transform.GetComponent<HoldInteract>().GetFillState()) return;
 
 				hUDManager.DiplayIndication(currentQuestInteraction.interactText);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					currentQuestInteraction.Interact();
+				}
+				if (currentQuestInteraction.needToHold && Input.GetKeyUp(KeyCode.E))
+				{
+					currentQuestInteraction.StopInteract();
 				}
 			}
 			else
@@ -72,6 +71,9 @@ public class CharacterTarget : NetworkBehaviour
 		{
 			if (hUDManager != null)
 				hUDManager.HideIndication();
+
+			if (currentQuestInteraction != null && currentQuestInteraction.GetComponent<HoldInteract>() &&
+				currentQuestInteraction.GetComponent<HoldInteract>().GetFillState() && !currentQuestInteraction.GetComponent<HoldInteract>().iAmFilling) return;
 
 			if (currentQuestInteraction != null && currentQuestInteraction.needToHold)
 			{
