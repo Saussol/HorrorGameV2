@@ -1,13 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 public class HoldInteract : QuestInteractable
 {
     public Slider progressBar; // Référence au Slider UI
     public float fillSpeed = 0.5f; // Vitesse de remplissage de la barre
 
-    private bool isFilling = false;
+    private NetworkVariable<bool> isFilling = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool questEnded = false;
+
+    public bool GetFillState()
+	{
+        return isFilling.Value;
+	}
 
     private void Awake()
     {
@@ -17,13 +23,13 @@ public class HoldInteract : QuestInteractable
     public override void Interact()
 	{
 		base.Interact();
-        isFilling = true;
+        isFilling.Value = true;
 	}
 
 	public override void StopInteract()
 	{
 		base.StopInteract();
-        isFilling = false;
+        isFilling.Value = false;
 
         if(!questEnded)
             progressBar.value = 0;
@@ -33,7 +39,7 @@ public class HoldInteract : QuestInteractable
     {
         if (questEnded) return;
 
-        if (isFilling)
+        if (isFilling.Value)
         {
             progressBar.value += fillSpeed * Time.deltaTime;
         }
@@ -47,7 +53,7 @@ public class HoldInteract : QuestInteractable
             Debug.Log("Quest completed !");
         }
 
-        if (!isFilling && !questEnded)
+        if (!isFilling.Value && !questEnded)
         {
             progressBar.value = 0;
         }
