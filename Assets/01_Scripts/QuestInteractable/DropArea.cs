@@ -6,13 +6,24 @@ public class DropArea : QuestInteractable
 {
     int currentObject;
     int previousObject;
+    bool plankDeactivated;
 
     private void Update()
     {
-        if (!IsOwner) return;
-
         if (linkedQuest.questValidated)
         {
+            if (!plankDeactivated)
+            {
+                Collider[] sphere = Physics.OverlapSphere(transform.position, 5f);
+                foreach (Collider collider in sphere)
+                {
+                    if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
+                    {
+                        Destroy(collider.GetComponent<Throwable>());
+                    }
+                }
+                plankDeactivated = true;
+            }
             return;
         }
 
@@ -30,15 +41,20 @@ public class DropArea : QuestInteractable
         if (currentObject != previousObject)
         {
             previousObject = currentObject;
-            linkedQuest.CheckQuestClientRpc(currentObject);
+            if(IsServer)
+                linkedQuest.CheckQuestClientRpc(currentObject);
             if (linkedQuest.questValidated)
             {
-                foreach (Collider collider in sphereDrop)
-                {
-                    if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
+				if (!plankDeactivated)
+				{
+                    foreach (Collider collider in sphereDrop)
                     {
-                        Destroy(collider.GetComponent<Throwable>());
+                        if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
+                        {
+                            Destroy(collider.GetComponent<Throwable>());
+                        }
                     }
+                    plankDeactivated = true;
                 }
             }
         }
