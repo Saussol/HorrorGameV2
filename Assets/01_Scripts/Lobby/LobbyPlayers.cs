@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -37,9 +36,7 @@ public class LobbyPlayers : MonoBehaviour
         for (int i = 0; i < playersObj.Count; i++)
         {
             players[i].SetActive(true);
-            //playersName[i].GetComponent<PlayerNameSync>().NewPlayerRedy();
             playersName[i].text = playersObj[i].GetComponent<PlayerNameSync>().name;
-
         }
     }
 }

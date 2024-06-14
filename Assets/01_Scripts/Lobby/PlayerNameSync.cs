@@ -1,7 +1,4 @@
 using Steamworks;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
@@ -23,11 +20,9 @@ public class PlayerNameSync : NetworkBehaviour
             // Mettre à jour le pseudonyme sur le serveur
             UpdateDisplayNameServerRpc(steamName);
         }
-        else
-        {
-            // Mettre à jour l'affichage du pseudonyme lorsque le joueur rejoint la partie
-            displayName.OnValueChanged += OnDisplayNameChanged;
-        }
+
+        // Mettre à jour l'affichage du pseudonyme lorsque le joueur rejoint la partie
+        displayName.OnValueChanged += OnDisplayNameChanged;
 
         // Mettre à jour l'affichage initial
         OnDisplayNameChanged(default, displayName.Value);
@@ -35,33 +30,7 @@ public class PlayerNameSync : NetworkBehaviour
         if (IsServer)
         {
             // Informer le nouveau client des pseudonymes des joueurs déjà connectés
-            UpdateNewClientServerRpc(displayName.Value.ToString());
-        }
-    }
-
-    public void NewPlayerRedy()
-    {
-        if (IsOwner)
-        {
-            string steamName = SteamClient.Name;
-            name = SteamClient.Name;
-
-            // Mettre à jour le pseudonyme sur le serveur
-            UpdateDisplayNameServerRpc(steamName);
-        }
-        else
-        {
-            // Mettre à jour l'affichage du pseudonyme lorsque le joueur rejoint la partie
-            displayName.OnValueChanged += OnDisplayNameChanged;
-        }
-
-        // Mettre à jour l'affichage initial
-        OnDisplayNameChanged(default, displayName.Value);
-
-        if (IsServer)
-        {
-            // Informer le nouveau client des pseudonymes des joueurs déjà connectés
-            UpdateNewClientServerRpc(displayName.Value.ToString());
+            UpdateAllClientsServerRpc();
         }
     }
 
@@ -100,13 +69,19 @@ public class PlayerNameSync : NetworkBehaviour
     }
 
     [ServerRpc]
-    private void UpdateNewClientServerRpc(string playerName, ServerRpcParams rpcParams = default)
+    private void UpdateAllClientsServerRpc(ServerRpcParams rpcParams = default)
     {
-        UpdateNewClientClientRpc(playerName);
+        foreach (var player in FindObjectsOfType<PlayerNameSync>())
+        {
+            if (player != this)
+            {
+                UpdateSingleClientClientRpc(player.displayName.Value.ToString());
+            }
+        }
     }
 
     [ClientRpc]
-    private void UpdateNewClientClientRpc(string playerName)
+    private void UpdateSingleClientClientRpc(string playerName)
     {
         // Mettre à jour le pseudo des joueurs déjà connectés pour le nouveau client
         displayName.Value = playerName;
