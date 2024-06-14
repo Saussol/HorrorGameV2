@@ -15,7 +15,28 @@ public class PlayerNameSync : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        NewPlayerRedy();
+        if (IsOwner)
+        {
+            string steamName = SteamClient.Name;
+            name = SteamClient.Name;
+
+            // Mettre à jour le pseudonyme sur le serveur
+            UpdateDisplayNameServerRpc(steamName);
+        }
+        else
+        {
+            // Mettre à jour l'affichage du pseudonyme lorsque le joueur rejoint la partie
+            displayName.OnValueChanged += OnDisplayNameChanged;
+        }
+
+        // Mettre à jour l'affichage initial
+        OnDisplayNameChanged(default, displayName.Value);
+
+        if (IsServer)
+        {
+            // Informer le nouveau client des pseudonymes des joueurs déjà connectés
+            UpdateNewClientServerRpc(displayName.Value.ToString());
+        }
     }
 
     public void NewPlayerRedy()
