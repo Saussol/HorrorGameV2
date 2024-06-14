@@ -39,6 +39,7 @@ public class PlayerNameSync : NetworkBehaviour
     private void UpdateDisplayNameServerRpc(string newName, ServerRpcParams rpcParams = default)
     {
         displayName.Value = newName;
+        name = newName;
         UpdateDisplayNameClientRpc(newName);
     }
 
@@ -46,6 +47,7 @@ public class PlayerNameSync : NetworkBehaviour
     private void UpdateDisplayNameClientRpc(string newName)
     {
         displayName.Value = newName;
+        name = newName;
         textName.text = newName;
     }
 
@@ -63,6 +65,7 @@ public class PlayerNameSync : NetworkBehaviour
 
         // Mettre à jour le pseudonyme sur le serveur
         displayName.Value = newName;
+        name = newName;
         UpdateDisplayNameClientRpc(newName);
     }
 }
