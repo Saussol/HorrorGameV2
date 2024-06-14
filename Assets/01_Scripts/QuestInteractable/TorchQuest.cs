@@ -24,9 +24,7 @@ public class TorchQuest : QuestInteractable
 
 		if (CanFire)
 		{
-			GameObject vfxInstance = Instantiate(fireVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
-			vfxInstance.GetComponent<NetworkObject>().Spawn(true);
-			vfxInstance.transform.Rotate(90, 0, 0);
+			SpawnFireServerRpc();
             CanFire = false;
         }
 
@@ -35,4 +33,12 @@ public class TorchQuest : QuestInteractable
 
 		canInteract = false;
     }
+
+	[ServerRpc(RequireOwnership = false)]
+	private void SpawnFireServerRpc()
+	{
+		GameObject vfxInstance = Instantiate(fireVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
+		vfxInstance.GetComponent<NetworkObject>().Spawn(true);
+		vfxInstance.transform.Rotate(90, 0, 0);
+	}
 }
