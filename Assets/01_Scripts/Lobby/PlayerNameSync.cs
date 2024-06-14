@@ -33,10 +33,7 @@ public class PlayerNameSync : NetworkBehaviour
             UpdateAllClientsServerRpc();
         }
 
-        for (int i = 0; i < LobbyPlayers.Instance.playersObj.Count; i++)
-        {
-            LobbyPlayers.Instance.playersName[i].text = LobbyPlayers.Instance.playersObj[i].GetComponent<PlayerNameSync>().name;
-        }
+        
         
     }
 

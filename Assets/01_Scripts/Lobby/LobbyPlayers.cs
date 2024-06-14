@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class LobbyPlayers : MonoBehaviour
+public class LobbyPlayers : NetworkBehaviour
 {
     public static LobbyPlayers Instance;
 
