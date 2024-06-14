@@ -165,6 +165,10 @@ public class QuestSpawner : NetworkBehaviour
 		}
 
         quest.questUI = questUI;
+		foreach (var qObject in quest.questObjects)
+		{
+            quest._validateQuest.AddListener(() => { qObject.ValidateQuest(); });
+        }
 
         questUI.transform.GetChild(0).GetComponent<TMP_Text>().text = quest.questName;
         if (quest.questLength > 1)
@@ -210,6 +214,8 @@ public class Quest
     public List<QuestInteractable> questObjects = new List<QuestInteractable>();
     public GameObject questUI;
 
+    [HideInInspector] public UnityEvent _validateQuest = new UnityEvent();
+
     public void CheckQuest()
 	{
         if (questValidated) return;
@@ -247,6 +253,7 @@ public class Quest
             questUI.transform.GetChild(0).GetComponent<TMP_Text>().color = QuestSpawner.Instance.questDoneColor;
             questUI.transform.GetChild(1).GetComponent<Slider>().value = 1;
             questValidated = true;
+            _validateQuest.Invoke();
             QuestSpawner.Instance.CheckAllQuest();
         }
     }

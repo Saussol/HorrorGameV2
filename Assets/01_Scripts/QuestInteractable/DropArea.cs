@@ -13,7 +13,6 @@ public class DropArea : QuestInteractable
     {
         if (linkedQuest.questValidated)
         {
-            RemoveThrowableClientRpc();
             return;
         }
 
@@ -35,27 +34,19 @@ public class DropArea : QuestInteractable
 			if (IsServer)
 			{
                 QuestSpawner.Instance.CheckQuestClientRpc(linkedQuest.questName, currentObject);
-                RemoveThrowableClientRpc();
             }
         }
     }
 
-    [ClientRpc]
-	private void RemoveThrowableClientRpc()
+	public override void ValidateQuest()
 	{
+		base.ValidateQuest();
         Collider[] sphereDrop = Physics.OverlapSphere(transform.position, 5f);
-        if (linkedQuest.questValidated)
+        foreach (Collider collider in sphereDrop)
         {
-            if (!plankDeactivated)
+            if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
             {
-                foreach (Collider collider in sphereDrop)
-                {
-                    if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
-                    {
-                        Destroy(collider.GetComponent<Throwable>());
-                    }
-                }
-                plankDeactivated = true;
+                Destroy(collider.GetComponent<Throwable>());
             }
         }
     }

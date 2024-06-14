@@ -22,4 +22,9 @@ public class QuestInteractable : NetworkBehaviour
 	{
 		Debug.Log($"Stopped interacting with {gameObject.name}");
 	}
+
+	public virtual void ValidateQuest()
+	{
+		Debug.Log($"Quest validated {linkedQuest.questName}");
+	}
 }
