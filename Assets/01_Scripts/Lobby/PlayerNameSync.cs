@@ -7,7 +7,9 @@ using UnityEngine;
 public class PlayerNameSync : NetworkBehaviour
 {
     public NetworkVariable<FixedString32Bytes> displayName = new NetworkVariable<FixedString32Bytes>();
+    public NetworkVariable<FixedString32Bytes> sharedText = new NetworkVariable<FixedString32Bytes>(); // Variable pour le texte partagé
     public TextMeshPro textName;
+    public TextMeshPro sharedTextDisplay; // UI element to display the shared text
     public string name;
 
     public override void OnNetworkSpawn()
@@ -31,10 +33,16 @@ public class PlayerNameSync : NetworkBehaviour
         {
             // Informer le nouveau client des pseudonymes des joueurs déjà connectés
             UpdateAllClientsServerRpc();
+
+            // Envoyer le texte partagé au nouveau client
+            UpdateSharedTextServerRpc(sharedText.Value.ToString());
         }
 
-        
-        
+        // Mettre à jour l'affichage du texte partagé lorsque la variable change
+        sharedText.OnValueChanged += OnSharedTextChanged;
+
+        // Mettre à jour l'affichage initial du texte partagé
+        OnSharedTextChanged(default, sharedText.Value);
     }
 
     [ServerRpc]
@@ -48,8 +56,7 @@ public class PlayerNameSync : NetworkBehaviour
     [ClientRpc]
     private void UpdateDisplayNameClientRpc(string newName)
     {
-        displayName.Value = newName; // Cette ligne peut encore causer l'erreur si elle est exécutée sur le client
-        name = newName;
+        if (IsOwner) return; // Ne pas essayer de modifier la NetworkVariable côté client
         textName.text = newName;
     }
 
@@ -74,23 +81,33 @@ public class PlayerNameSync : NetworkBehaviour
     [ClientRpc]
     private void UpdateSingleClientClientRpc(string playerName)
     {
-        // Mettre à jour le pseudo des joueurs déjà connectés pour le nouveau client
-        if (!IsOwner) // Ajoutez cette vérification pour éviter que le propriétaire ne réécrive sa propre variable
-        {
-            displayName.Value = playerName;
-        }
         textName.text = playerName;
     }
 
     [ServerRpc]
     public void ChangeDisplayNameServerRpc(string newName)
     {
-        // Vérifier si le joueur a les droits nécessaires pour changer de pseudonyme (à implémenter)
-        // ...
-
-        // Mettre à jour le pseudonyme sur le serveur
         displayName.Value = newName;
         name = newName;
         UpdateDisplayNameClientRpc(newName);
+    }
+
+    [ServerRpc]
+    public void UpdateSharedTextServerRpc(string newText, ServerRpcParams rpcParams = default)
+    {
+        sharedText.Value = newText;
+        UpdateSharedTextClientRpc(newText);
+    }
+
+    [ClientRpc]
+    public void UpdateSharedTextClientRpc(string newText)
+    {
+        if (IsOwner) return; // Ne pas essayer de modifier la NetworkVariable côté client
+        sharedTextDisplay.text = newText;
+    }
+
+    private void OnSharedTextChanged(FixedString32Bytes oldText, FixedString32Bytes newText)
+    {
+        sharedTextDisplay.text = newText.ToString();
     }
 }
