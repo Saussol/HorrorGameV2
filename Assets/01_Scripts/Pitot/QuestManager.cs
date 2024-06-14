@@ -215,7 +215,7 @@ public class Quest
 		}
 	}
     [ClientRpc]
-    public void CheckQuestClientRpc(int currentValue)
+    public void CheckQuest(int currentValue)
     {
         Debug.Log("count new plank");
 
