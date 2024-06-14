@@ -37,7 +37,7 @@ public class HoldInteract : QuestInteractable
             progressBar.value = 0;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ChangeIsFillingServerRpc(bool filling)
 	{
         isFilling.Value = filling;
