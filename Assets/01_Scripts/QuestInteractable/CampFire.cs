@@ -5,8 +5,6 @@ using Unity.Netcode;
 
 public class CampFire : QuestInteractable
 {
-	public NetworkVariable<bool> fireTaken = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
 	private void Awake()
 	{
 		canInteract = true;
@@ -19,13 +17,17 @@ public class CampFire : QuestInteractable
         QuestSpawner.Instance._pickUpFire.Invoke();
 
 		TakeFireServerRpc();
-
-        canInteract = false;
     }
 
 	[ServerRpc(RequireOwnership = false)]
 	private void TakeFireServerRpc()
 	{
-		fireTaken.Value = true;
+		TakeFireClientRpc();
+	}
+
+	[ClientRpc]
+	private void TakeFireClientRpc()
+	{
+		canInteract = false;
 	}
 }
