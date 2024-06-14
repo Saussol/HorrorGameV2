@@ -40,4 +40,13 @@ public class LobbyPlayers : NetworkBehaviour
             playersName[i].text = playersObj[i].GetComponent<PlayerNameSync>().name;
         }
     }
+
+    public void RefontName()
+    {
+        for (int i = 0; i < playersObj.Count; i++)
+        {
+            players[i].SetActive(true);
+            playersName[i].text = playersObj[i].GetComponent<PlayerNameSync>().name;
+        }
+    }
 }
