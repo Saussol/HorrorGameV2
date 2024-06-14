@@ -42,7 +42,8 @@ public class DropArea : QuestInteractable
         {
             previousObject = currentObject;
             Debug.Log("new plank added");
-            linkedQuest.CheckQuest(currentObject);
+            if(IsServer)
+                QuestSpawner.Instance.CheckQuestClientRpc(linkedQuest.questName, currentObject);
             if (linkedQuest.questValidated)
             {
 				if (!plankDeactivated)
