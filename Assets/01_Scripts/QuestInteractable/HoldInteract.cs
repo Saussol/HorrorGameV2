@@ -58,7 +58,8 @@ public class HoldInteract : QuestInteractable
         if (progressBar.value >= progressBar.maxValue)
         {
             questEnded = true;
-            linkedQuest.CheckQuest();
+            QuestSpawner.Instance.CheckQuestClientRpc(linkedQuest.questName);
+            //linkedQuest.CheckQuest();
             progressBar.value = progressBar.maxValue;
             canInteract = false;
             Debug.Log("Quest completed !");

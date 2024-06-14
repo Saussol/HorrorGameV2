@@ -136,6 +136,20 @@ public class QuestSpawner : NetworkBehaviour
 	}
 
     [ClientRpc]
+    public void CheckQuestClientRpc(string questName)
+    {
+        Quest quest = null;
+        foreach (var q in quests)
+        {
+            if (q.questName == questName)
+            {
+                quest = q;
+            }
+        }
+
+        quest.CheckQuest();
+    }
+    [ClientRpc]
     public void CheckQuestClientRpc(string questName, int currentValue)
 	{
         Quest quest = null;
