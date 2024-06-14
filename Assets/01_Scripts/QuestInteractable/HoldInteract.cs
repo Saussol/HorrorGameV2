@@ -7,7 +7,7 @@ public class HoldInteract : QuestInteractable
     public Slider progressBar; // Référence au Slider UI
     public float fillSpeed = 0.5f; // Vitesse de remplissage de la barre
 
-    private NetworkVariable<bool> isFilling = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private NetworkVariable<bool> isFilling = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private bool questEnded = false;
 
     public bool GetFillState()
@@ -23,17 +23,25 @@ public class HoldInteract : QuestInteractable
     public override void Interact()
 	{
 		base.Interact();
-        isFilling.Value = true;
+        ChangeIsFillingServerRpc(true);
+        //isFilling.Value = true;
 	}
 
 	public override void StopInteract()
 	{
 		base.StopInteract();
-        isFilling.Value = false;
+        ChangeIsFillingServerRpc(false);
+        //isFilling.Value = false;
 
         if(!questEnded)
             progressBar.value = 0;
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ChangeIsFillingServerRpc(bool filling)
+	{
+        isFilling.Value = filling;
+	}
 
     void Update()
     {
