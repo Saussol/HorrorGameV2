@@ -26,12 +26,12 @@ public class TorchQuest : QuestInteractable
 		{
 			SpawnFireServerRpc();
             CanFire = false;
-        }
 
-		QuestSpawner.Instance.CheckQuestClientRpc(linkedQuest.questName);
-        //linkedQuest.CheckQuest();
+			QuestSpawner.Instance.CheckQuestClientRpc(linkedQuest.questName);
+			//linkedQuest.CheckQuest();
 
-		canInteract = false;
+			canInteract = false;
+		}
     }
 
 	[ServerRpc(RequireOwnership = false)]
