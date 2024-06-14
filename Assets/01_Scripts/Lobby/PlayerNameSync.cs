@@ -103,11 +103,25 @@ public class PlayerNameSync : NetworkBehaviour
     public void UpdateSharedTextClientRpc(string newText)
     {
         if (IsOwner) return; // Ne pas essayer de modifier la NetworkVariable côté client
-        sharedTextDisplay.text = newText;
+        if (sharedTextDisplay != null)
+        {
+            sharedTextDisplay.text = newText;
+        }
+        else
+        {
+            Debug.LogWarning("sharedTextDisplay is not assigned.");
+        }
     }
 
     private void OnSharedTextChanged(FixedString32Bytes oldText, FixedString32Bytes newText)
     {
-        sharedTextDisplay.text = newText.ToString();
+        if (sharedTextDisplay != null)
+        {
+            sharedTextDisplay.text = newText.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("sharedTextDisplay is not assigned.");
+        }
     }
 }
