@@ -15,6 +15,11 @@ public class PlayerNameSync : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        NewPlayerRedy();
+    }
+
+    public void NewPlayerRedy()
+    {
         if (IsOwner)
         {
             string steamName = SteamClient.Name;
