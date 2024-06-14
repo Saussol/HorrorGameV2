@@ -41,12 +41,12 @@ public class DropArea : QuestInteractable
 	public override void ValidateQuest()
 	{
 		base.ValidateQuest();
-        Collider[] sphereDrop = Physics.OverlapSphere(transform.position, 5f);
-        foreach (Collider collider in sphereDrop)
+        Throwable[] throwables = FindObjectsOfType<Throwable>();
+        foreach (Throwable t in throwables)
         {
-            if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
+            if (t.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
             {
-                Destroy(collider.GetComponent<Throwable>());
+                Destroy(t.GetComponent<Throwable>());
             }
         }
     }
