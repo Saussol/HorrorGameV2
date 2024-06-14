@@ -52,17 +52,13 @@ public class InventorySlot : NetworkBehaviour
 		if (!IsOwner) return;
 		if (itemDescription == null) return;
 
-		Vector3 instantiatePos = Camera.main.transform.position + Camera.main.transform.forward;
+		Vector3 instantiatePos = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
 		Quaternion instantiateRot = Camera.main.transform.parent.transform.rotation;
-		CharacterTarget usingPlayer = FindObjectOfType<CharacterTarget>();
+		CharacterTarget usingPlayer = GetComponentInParent<CharacterTarget>();
 		Vector3 throwDirection = usingPlayer.GetComponentInChildren<Camera>().transform.forward * 12 + Vector3.up * 3;
 		Vector3 velocity = usingPlayer.transform.GetComponent<CharacterController>().velocity;
 
-		GameObject item = Instantiate(itemDescription.itemPrefab, instantiatePos, instantiateRot);
-		item.GetComponent<NetworkObject>().Spawn(true);
-		item.GetComponent<ItemObject>().Use(throwDirection, velocity);
-
-		//SpawnObjectServerRpc(instantiatePos, instantiateRot, throwDirection, velocity);
+		SpawnObjectServerRpc(instantiatePos, instantiateRot, throwDirection, velocity, itemDescription.itemTag);
 
 		//if (isLocalPlayer)
 		//{
@@ -78,10 +74,11 @@ public class InventorySlot : NetworkBehaviour
 	}
 
 	[ServerRpc]
-	private void SpawnObjectServerRpc(Vector3 instantiatePos, Quaternion instantiateRot, Vector3 throwDirection, Vector3 velocity)
+	private void SpawnObjectServerRpc(Vector3 instantiatePos, Quaternion instantiateRot, Vector3 throwDirection, Vector3 velocity, string prefabTag)
 	{
-		Debug.Log("spawn object");
-
+		GameObject item = Instantiate(PrefabManager.Instance.GetPrefabByTag(prefabTag), instantiatePos, instantiateRot);
+		item.GetComponent<NetworkObject>().Spawn(true);
+		item.GetComponent<ItemObject>().Use(throwDirection, velocity);
 	}
 
 	//[Command]
