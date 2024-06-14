@@ -214,7 +214,8 @@ public class Quest
             QuestSpawner.Instance.CheckQuest();
 		}
 	}
-    public void CheckQuest(int currentValue)
+    [ClientRpc]
+    public void CheckQuestClientRpc(int currentValue)
     {
         if (questValidated) return;
 
