@@ -9,6 +9,8 @@ public class DropArea : QuestInteractable
 
     private void Update()
     {
+        if (!IsOwner) return;
+
         if (linkedQuest.questValidated)
         {
             return;
@@ -28,7 +30,7 @@ public class DropArea : QuestInteractable
         if (currentObject != previousObject)
         {
             previousObject = currentObject;
-            linkedQuest.CheckQuest(currentObject);
+            linkedQuest.CheckQuestClientRpc(currentObject);
             if (linkedQuest.questValidated)
             {
                 foreach (Collider collider in sphereDrop)

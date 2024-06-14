@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class QuestInteractable : MonoBehaviour
+public class QuestInteractable : NetworkBehaviour
 {
 	[HideInInspector] public bool canInteract;
 	public bool needToHold;
