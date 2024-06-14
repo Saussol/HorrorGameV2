@@ -76,14 +76,6 @@ public class QuestSpawner : NetworkBehaviour
 
             //questObject.GetComponent<QuestInteractable>().linkedQuest = quest;
 
-            if (quest.questObjects.Count > 0)
-			{
-				foreach (QuestInteractable obj in quest.questObjects)
-				{
-                    obj.linkedQuest = quest;
-				}
-			}
-
             availableSpawnIndices.RemoveAt(randomIndex);
         }
     }
@@ -189,6 +181,14 @@ public class QuestSpawner : NetworkBehaviour
             questUI.transform.GetChild(1).gameObject.SetActive(true);
         else
             questUI.transform.GetChild(1).gameObject.SetActive(false);
+
+        if (quest.questObjects.Count > 0)
+        {
+            foreach (QuestInteractable obj in quest.questObjects)
+            {
+                obj.linkedQuest = quest;
+            }
+        }
     }
 
     /*private void Bottles()
