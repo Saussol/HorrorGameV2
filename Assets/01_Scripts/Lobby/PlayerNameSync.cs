@@ -15,13 +15,13 @@ public class PlayerNameSync : NetworkBehaviour
         if (IsOwner)
         {
             string steamName = SteamClient.Name;
-            name = SteamClient.Name;
+            name = steamName;
 
             // Mettre à jour le pseudonyme sur le serveur
             UpdateDisplayNameServerRpc(steamName);
         }
 
-        // Mettre à jour l'affichage du pseudonyme lorsque le joueur rejoint la partie
+        // Mettre à jour l'affichage du pseudonyme lorsque la variable change
         displayName.OnValueChanged += OnDisplayNameChanged;
 
         // Mettre à jour l'affichage initial
@@ -45,7 +45,7 @@ public class PlayerNameSync : NetworkBehaviour
     [ClientRpc]
     private void UpdateDisplayNameClientRpc(string newName)
     {
-        displayName.Value = newName;
+        displayName.Value = newName; // Cette ligne peut encore causer l'erreur si elle est exécutée sur le client
         name = newName;
         textName.text = newName;
     }
@@ -54,18 +54,6 @@ public class PlayerNameSync : NetworkBehaviour
     {
         Debug.Log("Display Name Changed: " + newName);
         textName.text = newName.ToString();
-    }
-
-    [ServerRpc]
-    public void ChangeDisplayNameServerRpc(string newName)
-    {
-        // Vérifier si le joueur a les droits nécessaires pour changer de pseudonyme (à implémenter)
-        // ...
-
-        // Mettre à jour le pseudonyme sur le serveur
-        displayName.Value = newName;
-        name = newName;
-        UpdateDisplayNameClientRpc(newName);
     }
 
     [ServerRpc]
@@ -84,7 +72,22 @@ public class PlayerNameSync : NetworkBehaviour
     private void UpdateSingleClientClientRpc(string playerName)
     {
         // Mettre à jour le pseudo des joueurs déjà connectés pour le nouveau client
-        displayName.Value = playerName;
+        if (!IsOwner) // Ajoutez cette vérification pour éviter que le propriétaire ne réécrive sa propre variable
+        {
+            displayName.Value = playerName;
+        }
         textName.text = playerName;
+    }
+
+    [ServerRpc]
+    public void ChangeDisplayNameServerRpc(string newName)
+    {
+        // Vérifier si le joueur a les droits nécessaires pour changer de pseudonyme (à implémenter)
+        // ...
+
+        // Mettre à jour le pseudonyme sur le serveur
+        displayName.Value = newName;
+        name = newName;
+        UpdateDisplayNameClientRpc(newName);
     }
 }
