@@ -217,6 +217,8 @@ public class Quest
     [ClientRpc]
     public void CheckQuestClientRpc(int currentValue)
     {
+        Debug.Log("count new plank");
+
         if (questValidated) return;
 
         questCurrentStatus = currentValue;
