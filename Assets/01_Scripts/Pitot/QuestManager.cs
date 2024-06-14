@@ -150,6 +150,7 @@ public class QuestSpawner : NetworkBehaviour
 		}
 
         quest.questUI = questUI;
+        quest.questSpawner = this;
 
         questUI.transform.GetChild(0).GetComponent<TMP_Text>().text = quest.questName;
         if (quest.questLength > 1)
@@ -194,6 +195,7 @@ public class Quest
     public bool questValidated;
     public List<QuestInteractable> questObjects = new List<QuestInteractable>();
     public GameObject questUI;
+    public QuestSpawner questSpawner;
 
     public void CheckQuest()
 	{
@@ -208,10 +210,10 @@ public class Quest
 
         if(questCurrentStatus >= questLength)
 		{
-            questUI.transform.GetChild(0).GetComponent<TMP_Text>().color = QuestSpawner.Instance.questDoneColor;
+            questUI.transform.GetChild(0).GetComponent<TMP_Text>().color = questSpawner.questDoneColor;
             questUI.transform.GetChild(1).GetComponent<Slider>().value = 1;
             questValidated = true;
-            QuestSpawner.Instance.CheckQuest();
+            questSpawner.CheckQuest();
 		}
 	}
     [ClientRpc]
@@ -230,10 +232,10 @@ public class Quest
 
         if (questCurrentStatus >= questLength)
         {
-            questUI.transform.GetChild(0).GetComponent<TMP_Text>().color = QuestSpawner.Instance.questDoneColor;
+            questUI.transform.GetChild(0).GetComponent<TMP_Text>().color = questSpawner.questDoneColor;
             questUI.transform.GetChild(1).GetComponent<Slider>().value = 1;
             questValidated = true;
-            QuestSpawner.Instance.CheckQuest();
+            questSpawner.CheckQuest();
         }
     }
 }
