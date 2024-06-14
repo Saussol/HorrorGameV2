@@ -25,7 +25,7 @@ public class LobbyPlayers : MonoBehaviour
         // Récupérer tous les objets avec le tag "Player"
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
-        // Ajouter les objets récupérés dans le HashSet
+        // Ajouter les objets récupérés dans la liste
         foreach (GameObject playerObject in playerObjects)
         {
             if (!playersObj.Contains(playerObject))

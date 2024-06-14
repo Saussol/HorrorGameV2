@@ -10,7 +10,6 @@ using UnityEngine;
 public class PlayerNameSync : NetworkBehaviour
 {
     public NetworkVariable<FixedString32Bytes> displayName = new NetworkVariable<FixedString32Bytes>();
-    //private CSteamID steamID;
     public TextMeshPro textName;
     public string name;
 
@@ -18,7 +17,6 @@ public class PlayerNameSync : NetworkBehaviour
     {
         if (IsOwner)
         {
-            //steamID = SteamUser.();
             string steamName = SteamClient.Name;
             name = SteamClient.Name;
 
@@ -33,6 +31,12 @@ public class PlayerNameSync : NetworkBehaviour
 
         // Mettre à jour l'affichage initial
         OnDisplayNameChanged(default, displayName.Value);
+
+        if (IsServer)
+        {
+            // Informer le nouveau client des pseudonymes des joueurs déjà connectés
+            UpdateNewClientServerRpc(displayName.Value.ToString());
+        }
     }
 
     [ServerRpc]
@@ -67,5 +71,19 @@ public class PlayerNameSync : NetworkBehaviour
         displayName.Value = newName;
         name = newName;
         UpdateDisplayNameClientRpc(newName);
+    }
+
+    [ServerRpc]
+    private void UpdateNewClientServerRpc(string playerName, ServerRpcParams rpcParams = default)
+    {
+        UpdateNewClientClientRpc(playerName);
+    }
+
+    [ClientRpc]
+    private void UpdateNewClientClientRpc(string playerName)
+    {
+        // Mettre à jour le pseudo des joueurs déjà connectés pour le nouveau client
+        displayName.Value = playerName;
+        textName.text = playerName;
     }
 }
