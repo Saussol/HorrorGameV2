@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class DropArea : QuestInteractable
 {
@@ -12,18 +13,7 @@ public class DropArea : QuestInteractable
     {
         if (linkedQuest.questValidated)
         {
-            if (!plankDeactivated)
-            {
-                Collider[] sphere = Physics.OverlapSphere(transform.position, 5f);
-                foreach (Collider collider in sphere)
-                {
-                    if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
-                    {
-                        Destroy(collider.GetComponent<Throwable>());
-                    }
-                }
-                plankDeactivated = true;
-            }
+            RemoveThrowableClientRpc();
             return;
         }
 
@@ -42,21 +32,30 @@ public class DropArea : QuestInteractable
         {
             previousObject = currentObject;
             Debug.Log("new plank added");
-            if(IsServer)
+			if (IsServer)
+			{
                 QuestSpawner.Instance.CheckQuestClientRpc(linkedQuest.questName, currentObject);
-            if (linkedQuest.questValidated)
+                RemoveThrowableClientRpc();
+            }
+        }
+    }
+
+    [ClientRpc]
+	private void RemoveThrowableClientRpc()
+	{
+        Collider[] sphereDrop = Physics.OverlapSphere(transform.position, 5f);
+        if (linkedQuest.questValidated)
+        {
+            if (!plankDeactivated)
             {
-				if (!plankDeactivated)
-				{
-                    foreach (Collider collider in sphereDrop)
+                foreach (Collider collider in sphereDrop)
+                {
+                    if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
                     {
-                        if (collider.GetComponent<Throwable>() && collider.GetComponent<Throwable>().itemDescription.itemTag == "item.plank")
-                        {
-                            Destroy(collider.GetComponent<Throwable>());
-                        }
+                        Destroy(collider.GetComponent<Throwable>());
                     }
-                    plankDeactivated = true;
                 }
+                plankDeactivated = true;
             }
         }
     }
