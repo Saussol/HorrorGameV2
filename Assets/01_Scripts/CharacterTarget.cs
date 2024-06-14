@@ -41,9 +41,6 @@ public class CharacterTarget : NetworkBehaviour
 					if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
 					{
 						hit.transform.GetComponent<ItemObject>().DestroyObjectServerRpc();
-						//Destroy(hit.transform.gameObject);
-
-						//CmdDestoy(hit.transform.gameObject);
                     }
 
 				}
@@ -51,14 +48,18 @@ public class CharacterTarget : NetworkBehaviour
 			else if (hit.transform.GetComponent<QuestInteractable>() && hit.transform.GetComponent<QuestInteractable>().canInteract)
 			{
 				currentQuestInteraction = hit.transform.GetComponent<QuestInteractable>();
+
+				if (currentQuestInteraction.needToHold && Input.GetKeyUp(KeyCode.E))
+				{
+					currentQuestInteraction.StopInteract();
+				}
+
+				if (hit.transform.GetComponent<HoldInteract>() && hit.transform.GetComponent<HoldInteract>().GetFillState()) return;
+
 				hUDManager.DiplayIndication(currentQuestInteraction.interactText);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					currentQuestInteraction.Interact();
-				}
-				if (currentQuestInteraction.needToHold && Input.GetKeyUp(KeyCode.E))
-				{
-					currentQuestInteraction.StopInteract();
 				}
 			}
 			else
