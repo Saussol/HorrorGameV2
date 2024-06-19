@@ -217,7 +217,7 @@ public class AIMovement : NetworkBehaviour
 	[ClientRpc]
 	private void KillPlayerClientRpc(bool endGame, ClientRpcParams clientRpcParams)
 	{
-		chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, endGame);
+		FindObjectOfType<CharacterMovement>().RatTransformation(playerRespawnPoint.position, endGame);
 	}
 
 	[ClientRpc]
