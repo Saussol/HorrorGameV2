@@ -33,6 +33,15 @@ public class PlayerConnectionManager : NetworkBehaviour
         {
             if (IsClient)
             {
+                CharacterController[] characters = FindObjectsOfType<CharacterController>();
+                foreach (var c in characters)
+                {
+                    if (c.GetComponent<NetworkObject>().OwnerClientId == OwnerClientId)
+                    {
+                        c.GetComponent<PlayerSeter>().SetWaitingPlayers();
+                        break;
+                    }
+                }
                 PlayerLoadedSceneServerRpc();
             }
         }
@@ -51,6 +60,11 @@ public class PlayerConnectionManager : NetworkBehaviour
         {
             Debug.Log("All players have joined the scene!");
             // Perform actions when all players are ready, e.g., start the game
+            PlayerSeter[] seters = FindObjectsOfType<PlayerSeter>();
+            foreach (var s in seters)
+            {
+                s.ReSetPlayerComponentsClientRpc();
+            }
             QuestSpawner.Instance.SpawnAll();
             aIMovement.StartAI();
         }

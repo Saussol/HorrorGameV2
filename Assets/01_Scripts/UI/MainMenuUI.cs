@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-	[SerializeField] private GameObject hostPanel, startPanel;
+	[SerializeField] private GameObject hostPanel, startPanel, loadingPanel;
 
     public void HostGame()
 	{
@@ -24,7 +24,16 @@ public class MainMenuUI : MonoBehaviour
 	{
 		if (NetworkManager.Singleton.IsHost)
 		{
+			SetLoadingScreenClientRpc();
 			NetworkManager.Singleton.SceneManager.LoadScene("MultiScene 2", LoadSceneMode.Single);
 		}
+	}
+
+	[ClientRpc]
+	private void SetLoadingScreenClientRpc()
+	{
+		hostPanel.SetActive(false);
+		startPanel.SetActive(false);
+		loadingPanel.SetActive(true);
 	}
 }

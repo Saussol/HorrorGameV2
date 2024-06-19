@@ -12,6 +12,7 @@ public class PlayerSeter : NetworkBehaviour
     public Camera playerCamera;
     public Camera playerHandCamera;
     public Canvas playerCanvas;
+    public GameObject hudPanel, loadingPanel;
     public CharacterMovement playerControls; // Par exemple, un GameObject qui contient le script de contrôle du joueur
 
     private void Start()
@@ -19,25 +20,25 @@ public class PlayerSeter : NetworkBehaviour
         DisablePlayerComponents();
     }
 
-    private void OnEnable()
-    {
-        NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSceneLoadCompleted;
-    }
+ //   private void OnEnable()
+ //   {
+ //       NetworkManager.Singleton.SceneManager.OnLoadComplete += OnSceneLoadCompleted;
+ //   }
 
-	private void OnDisable()
-    {
-        NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnSceneLoadCompleted;
-    }
+	//private void OnDisable()
+ //   {
+ //       NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnSceneLoadCompleted;
+ //   }
 
-    private void OnSceneLoadCompleted(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
-    {
-        Debug.Log($"Scene {sceneName} loaded for client {clientId}");
-        if (sceneName == "MultiScene 2")
-        {
-            // Call your custom function here
-            ReSetPlayerComponents();
-        }
-    }
+    //private void OnSceneLoadCompleted(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
+    //{
+    //    Debug.Log($"Scene {sceneName} loaded for client {clientId}");
+    //    if (sceneName == "MultiScene 2")
+    //    {
+    //        // Call your custom function here
+    //        ReSetPlayerComponents();
+    //    }
+    //}
 
     public void DisablePlayerComponents()
     {
@@ -62,7 +63,18 @@ public class PlayerSeter : NetworkBehaviour
         }
     }
 
-    public void ReSetPlayerComponents()
+    public void SetWaitingPlayers()
+	{
+        if (playerCanvas != null && IsOwner)
+        {
+            playerCanvas.enabled = true;
+            hudPanel.SetActive(false);
+            loadingPanel.SetActive(true);
+        }
+    }
+
+    [ClientRpc]
+    public void ReSetPlayerComponentsClientRpc()
     {
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
@@ -79,13 +91,15 @@ public class PlayerSeter : NetworkBehaviour
         }
 
 
-        if (playerCanvas != null && IsOwner)
-        {
-            playerCanvas.enabled = true;
+		if (playerCanvas != null && IsOwner)
+		{
+			playerCanvas.enabled = true;
+            hudPanel.SetActive(true);
+            loadingPanel.SetActive(false);
         }
 
 
-        if (playerControls != null && IsOwner)
+		if (playerControls != null && IsOwner)
         {
             playerControls.enabled = true;
         }
