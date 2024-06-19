@@ -208,7 +208,10 @@ public class AIMovement : NetworkBehaviour
 			EndGameClientRpc();
 		}
 		else
+		{
+			Debug.Log(chasingPlayer.GetComponent<NetworkObject>().OwnerClientId);
 			KillPlayerClientRpc(false, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
+		}
 
 		_monsterState = MonsterState.WANDER;
 		chasingPlayer = null;
@@ -222,12 +225,14 @@ public class AIMovement : NetworkBehaviour
 	[ClientRpc]
 	private void StartScreamerClientRpc(ClientRpcParams clientRpcParams)
 	{
+		Debug.Log("Start screamer");
 		FindObjectOfType<CharacterMovement>().StartScreamer();
 	}
 
 	[ClientRpc]
 	private void KillPlayerClientRpc(bool endGame, ClientRpcParams clientRpcParams)
 	{
+		Debug.Log("I'm dead");
 		FindObjectOfType<CharacterMovement>().RatTransformation(playerRespawnPoint.position, endGame);
 	}
 
