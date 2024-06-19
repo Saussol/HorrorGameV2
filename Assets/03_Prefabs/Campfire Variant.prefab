@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 32dc102acccaf4e40b03d2fa18a96c7c, type: 3}
-  m_Color: {r: 1, g: 0.31569973, b: 0, a: 1}
+  m_Color: {r: 0.745283, g: 0.52815026, b: 0.024608415, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,13 +156,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8122567488484394291}
+    - targetCorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6066461976279662336}
     - targetCorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5003629252454218504}
-    - targetCorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8122567488484394291}
     - targetCorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8878676695282501243}
@@ -177,6 +177,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
   m_PrefabInstance: {fileID: 2564284112854346141}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8122567488484394291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700631323233240494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3165184386
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &6066461976279662336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +220,9 @@ MonoBehaviour:
     questValidated: 0
     questObjects: []
     questUI: {fileID: 0}
+    _validateQuest:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!135 &5003629252454218504
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -220,27 +244,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8122567488484394291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3700631323233240494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &8878676695282501243
 MonoBehaviour:
   m_ObjectHideFlags: 0

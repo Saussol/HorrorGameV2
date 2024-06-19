@@ -189,8 +189,8 @@ GameObject:
   - component: {fileID: 7707005457550194416}
   - component: {fileID: 5274623883379916525}
   - component: {fileID: 25849625320358357}
-  - component: {fileID: 3926030048994565747}
   - component: {fileID: 3923407274189267551}
+  - component: {fileID: 3926030048994565747}
   - component: {fileID: 1431478256195131700}
   m_Layer: 0
   m_Name: QueteBook
@@ -288,6 +288,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3923407274189267551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2559286697108459623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3009436087
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &3926030048994565747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,29 +331,12 @@ MonoBehaviour:
     questValidated: 0
     questObjects: []
     questUI: {fileID: 0}
+    _validateQuest:
+      m_PersistentCalls:
+        m_Calls: []
   progressBar: {fileID: 5247551405725466179}
   fillSpeed: 0.075
---- !u!114 &3923407274189267551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2559286697108459623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1039977415
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  iAmFilling: 0
 --- !u!114 &1431478256195131700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +517,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 32dc102acccaf4e40b03d2fa18a96c7c, type: 3}
-  m_Color: {r: 1, g: 0.31569973, b: 0, a: 1}
+  m_Color: {r: 0.7372549, g: 0.0627451, b: 0.019607844, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
