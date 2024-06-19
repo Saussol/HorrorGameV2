@@ -46,6 +46,8 @@ public class AIMovement : NetworkBehaviour
 	bool scareEnd;
 	bool chaseEnd;
 
+	bool aiStarted;
+
 	public void StartAI()
 	{
 		if (!IsOwner) return;
@@ -54,11 +56,13 @@ public class AIMovement : NetworkBehaviour
 		StartCoroutine(StateTimer());
 		players = new List<CharacterController>(FindObjectsOfType<CharacterController>());
 		startSearchTimer = searchTimer;
+		aiStarted = true;
 	}
 
 	private void Update()
 	{
 		if (!IsOwner) return;
+		if (!aiStarted) return;
 
 		if (agent.velocity.magnitude > 0)
 		{
@@ -99,7 +103,7 @@ public class AIMovement : NetworkBehaviour
 					Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius);
 					foreach (Collider hit in hitColliders)
 					{
-						if (hit.GetComponent<CharacterMovement>() && hit.GetComponent<CharacterMovement>().CheckPlayerState() != PlayerState.RAT)
+						if (hit.GetComponent<CharacterController>() && players.Contains(hit.GetComponent<CharacterController>()))
 						{
 							StopAllCoroutines();
 							_monsterState = MonsterState.CHASE;
