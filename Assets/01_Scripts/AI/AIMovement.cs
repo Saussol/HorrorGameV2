@@ -195,7 +195,9 @@ public class AIMovement : NetworkBehaviour
 		Debug.Log("KILL PLAYER");
 		players.Remove(chasingPlayer);
 
-		StartScreamerClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
+		ulong victimClientId = chasingPlayer.GetComponent<NetworkObject>().OwnerClientId;
+
+		StartScreamerClientRpc((int)victimClientId, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { victimClientId } } });
 
 		//TO DO change to killing animation instead of just waiting
 		yield return new WaitForSeconds(2f);
@@ -204,13 +206,13 @@ public class AIMovement : NetworkBehaviour
 		{
 			//chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, true);
 			Debug.Log(chasingPlayer.GetComponent<NetworkObject>().OwnerClientId);
-			KillPlayerClientRpc(true , new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
+			KillPlayerClientRpc((int)victimClientId, true, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { victimClientId } } });
 			EndGameClientRpc();
 		}
 		else
 		{
 			Debug.Log(chasingPlayer.GetComponent<NetworkObject>().OwnerClientId);
-			KillPlayerClientRpc(false, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
+			KillPlayerClientRpc((int)victimClientId, false, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { victimClientId } } });
 		}
 
 		_monsterState = MonsterState.WANDER;
@@ -223,17 +225,33 @@ public class AIMovement : NetworkBehaviour
 	}
 
 	[ClientRpc]
-	private void StartScreamerClientRpc(ClientRpcParams clientRpcParams)
+	private void StartScreamerClientRpc(int clienId, ClientRpcParams clientRpcParams)
 	{
 		Debug.Log("Start screamer");
-		FindObjectOfType<CharacterMovement>().StartScreamer();
+		CharacterController[] characters = FindObjectsOfType<CharacterController>();
+		foreach (var c in characters)
+		{
+			if((int)c.GetComponent<NetworkObject>().OwnerClientId == clienId)
+			{
+				c.GetComponent<CharacterMovement>().StartScreamer();
+				break;
+			}
+		}
 	}
 
 	[ClientRpc]
-	private void KillPlayerClientRpc(bool endGame, ClientRpcParams clientRpcParams)
+	private void KillPlayerClientRpc(int clienId, bool endGame, ClientRpcParams clientRpcParams)
 	{
 		Debug.Log("I'm dead");
-		FindObjectOfType<CharacterMovement>().RatTransformation(playerRespawnPoint.position, endGame);
+		CharacterController[] characters = FindObjectsOfType<CharacterController>();
+		foreach (var c in characters)
+		{
+			if ((int)c.GetComponent<NetworkObject>().OwnerClientId == clienId)
+			{
+				c.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, endGame);
+				break;
+			}
+		}
 	}
 
 	[ClientRpc]
