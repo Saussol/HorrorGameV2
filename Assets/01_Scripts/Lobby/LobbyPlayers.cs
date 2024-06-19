@@ -14,6 +14,15 @@ public class LobbyPlayers : NetworkBehaviour
 
     public void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         for (int i = 0; i < players.Length; i++)
         {
             players[i].SetActive(false);
