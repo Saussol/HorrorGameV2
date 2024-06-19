@@ -24,9 +24,15 @@ public class MainMenuUI : NetworkBehaviour
 	{
 		if (NetworkManager.Singleton.IsHost)
 		{
-			SetLoadingScreenClientRpc();
-			NetworkManager.Singleton.SceneManager.LoadScene("MultiScene 2", LoadSceneMode.Single);
+			StartCoroutine(StartWithLoading());
 		}
+	}
+
+	private IEnumerator StartWithLoading()
+	{
+		SetLoadingScreenClientRpc();
+		yield return new WaitForSeconds(.5f);
+		NetworkManager.Singleton.SceneManager.LoadScene("MultiScene 2", LoadSceneMode.Single);
 	}
 
 	[ClientRpc]
