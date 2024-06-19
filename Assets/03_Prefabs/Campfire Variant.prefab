@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2658894127430577720}
@@ -92,6 +92,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 536034800398714789, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 536034800398714789, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 536034800398714789, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 536034800398714789, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.65
@@ -166,6 +178,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8878676695282501243}
+    - targetCorrespondingSourceObject: {fileID: 1210731920839420979, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -9005354205705156765}
   m_SourcePrefab: {fileID: 100100000, guid: 268f642bf3b2cf047acbc70006879194, type: 3}
 --- !u!4 &2658894127430577720 stripped
 Transform:
@@ -212,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canInteract: 0
   needToHold: 0
+  customInteractText: 0
   interactText: pick up fire
   linkedQuest:
     questName: 
@@ -275,6 +291,24 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-9005354205705156765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700631323233240494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.74509805, g: 0.5294118, b: 0.023529414, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &4030342817759202288
 PrefabInstance:
   m_ObjectHideFlags: 0
