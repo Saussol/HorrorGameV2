@@ -2143,7 +2143,7 @@ GameObject:
   - component: {fileID: 3914747902203224538}
   - component: {fileID: 6818341881672697629}
   - component: {fileID: 1586573173869164609}
-  - component: {fileID: 8933270573661484454}
+  - component: {fileID: 1101296819052991479}
   m_Layer: 0
   m_Name: FPSPlayer MultyV3
   m_TagString: Player
@@ -2521,7 +2521,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8933270573661484454
+--- !u!114 &1101296819052991479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2530,7 +2530,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8342106431650556681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
