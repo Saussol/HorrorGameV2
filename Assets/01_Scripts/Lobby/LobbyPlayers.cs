@@ -37,7 +37,7 @@ public class LobbyPlayers : NetworkBehaviour
         for (int i = 0; i < playersObj.Count; i++)
         {
             players[i].SetActive(true);
-            playersName[i].text = playersObj[i].GetComponent<PlayerNameSync>().name;
+            playersName[i].text = playersObj[i].GetComponent<PlayerNameSync>().displayName.ToString();
         }
     }
 
@@ -46,7 +46,7 @@ public class LobbyPlayers : NetworkBehaviour
         for (int i = 0; i < playersObj.Count; i++)
         {
             players[i].SetActive(true);
-            playersName[i].text = playersObj[i].GetComponent<PlayerNameSync>().name;
+            playersName[i].text = playersObj[i].GetComponent<PlayerNameSync>().displayName.ToString();
         }
     }
 }
