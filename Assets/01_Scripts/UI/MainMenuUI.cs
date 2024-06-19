@@ -4,7 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuUI : MonoBehaviour
+public class MainMenuUI : NetworkBehaviour
 {
 	[SerializeField] private GameObject hostPanel, startPanel, loadingPanel;
 
