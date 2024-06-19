@@ -46,10 +46,13 @@ public class PlayerNameSync : NetworkBehaviour
     [ClientRpc]
     private void UpdateDisplayNameClientRpc(string newName)
     {
-        displayName.Value = newName;
-        name = newName;
-        textName.text = newName;
-        LobbyPlayers.Instance.RefontName();
+        if (!IsOwner)
+        {
+            displayName.Value = newName; // Cette ligne peut encore causer l'erreur si elle est exécutée sur le client
+            name = newName;
+            textName.text = newName;
+            LobbyPlayers.Instance.RefontName();
+        }
     }
 
     private void OnDisplayNameChanged(FixedString32Bytes oldName, FixedString32Bytes newName)
