@@ -9,6 +9,11 @@ public class DropArea : QuestInteractable
     int previousObject;
     bool plankDeactivated;
 
+    private void Awake()
+    {
+        canInteract = true;
+    }
+
     private void Update()
     {
         if (linkedQuest.questValidated)

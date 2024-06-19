@@ -35,7 +35,7 @@ public class CharacterTarget : NetworkBehaviour
 		{
 			if (hit.transform.GetComponent<ItemObject>())
 			{
-				hUDManager.DiplayIndication($"pick up {hit.transform.GetComponent<ItemObject>().itemDescription.itemName}");
+				hUDManager.DiplayIndication($"pick up {hit.transform.GetComponent<ItemObject>().itemDescription.itemName}", false);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					if (playerInventory.AddItem(hit.transform.GetComponent<ItemObject>().itemDescription))
@@ -51,7 +51,7 @@ public class CharacterTarget : NetworkBehaviour
 
 				if (hit.transform.GetComponent<HoldInteract>() && !hit.transform.GetComponent<HoldInteract>().iAmFilling && hit.transform.GetComponent<HoldInteract>().GetFillState()) return;
 
-				hUDManager.DiplayIndication(currentQuestInteraction.interactText);
+				hUDManager.DiplayIndication(currentQuestInteraction.interactText, currentQuestInteraction.customInteractText);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
 					currentQuestInteraction.Interact();

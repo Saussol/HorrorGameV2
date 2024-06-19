@@ -7,6 +7,7 @@ public class QuestInteractable : NetworkBehaviour
 {
 	[HideInInspector] public bool canInteract;
 	public bool needToHold;
+	public bool customInteractText;
 	public string interactText;
 
 	public Quest linkedQuest;

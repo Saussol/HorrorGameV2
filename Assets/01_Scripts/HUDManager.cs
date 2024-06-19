@@ -14,12 +14,23 @@ public class HUDManager : MonoBehaviour
 		HideIndication();
 	}
 
-	public void DiplayIndication(string action)
+	public void DiplayIndication(string action, bool customDisplay)
 	{
-		if (indicationText.text != $"Press E to {action}")
+		if (customDisplay)
 		{
-			indication.SetActive(true);
-			indicationText.text = $"Press E to {action}";
+			if(indicationText.text != action)
+			{
+				indication.SetActive(true);
+				indicationText.text = action;
+			}
+		}
+		else
+		{
+			if (indicationText.text != $"Press E to {action}")
+			{
+				indication.SetActive(true);
+				indicationText.text = $"Press E to {action}";
+			}
 		}
 	}
 
