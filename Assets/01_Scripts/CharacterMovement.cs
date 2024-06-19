@@ -122,16 +122,16 @@ public class CharacterMovement : MonoBehaviour
         switch (_playerState)
 		{
 			case PlayerState.NORMAL:
-                currentSpeed = isStun ? stunSpeed : isCrouching ? crouchSpeed : Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed; 
-                //Anim 
-                
+                currentSpeed = isStun ? stunSpeed : isCrouching ? crouchSpeed : Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
+                //Anim
+
                 break;
 			case PlayerState.RAT:
                 currentSpeed = sprintSpeed;
-                
+
                 break;
 		}
-        
+
         float horizontal = Input.GetAxis("Horizontal") * currentSpeed;
         float vertical = Input.GetAxis("Vertical") * currentSpeed;
 
@@ -282,6 +282,12 @@ public class CharacterMovement : MonoBehaviour
     [ContextMenu("Rat Transformation")]
     public void RatTransformation(Vector3 respawnPosition, bool endGame)
 	{
+		if (QuestSpawner.Instance.firePickedUp)
+		{
+            QuestSpawner.Instance.firePickedUp = false;
+            QuestSpawner.Instance._restoreFire.Invoke();
+        }
+
         isStopped = false;
 
         _playerState = PlayerState.RAT;

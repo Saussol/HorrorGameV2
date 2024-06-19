@@ -10,11 +10,20 @@ public class CampFire : QuestInteractable
 		canInteract = true;
 	}
 
+	private void Start()
+	{
+		QuestSpawner.Instance._restoreFire.AddListener(() =>
+		{
+			RestoreFireServerRpc();
+		});
+	}
+
 	public override void Interact()
 	{
 		base.Interact();
 
         QuestSpawner.Instance._pickUpFire.Invoke();
+		QuestSpawner.Instance.firePickedUp = true;
 
 		TakeFireServerRpc();
     }
@@ -29,5 +38,17 @@ public class CampFire : QuestInteractable
 	private void TakeFireClientRpc()
 	{
 		canInteract = false;
+	}
+
+	[ServerRpc(RequireOwnership = false)]
+	private void RestoreFireServerRpc()
+	{
+		RestoreFireClientRpc();
+	}
+
+	[ClientRpc]
+	private void RestoreFireClientRpc()
+	{
+		canInteract = true;
 	}
 }

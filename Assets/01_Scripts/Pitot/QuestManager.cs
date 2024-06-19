@@ -25,6 +25,8 @@ public class QuestSpawner : NetworkBehaviour
     public bool allQuestEnded;
 
     [HideInInspector] public UnityEvent _pickUpFire;
+    [HideInInspector] public UnityEvent _restoreFire;
+    [HideInInspector] public bool firePickedUp;
 
     //Singleton
     public static QuestSpawner Instance { get; private set; }
@@ -41,6 +43,7 @@ public class QuestSpawner : NetworkBehaviour
         }
 
         if (_pickUpFire == null) _pickUpFire = new UnityEvent();
+        if (_restoreFire == null) _restoreFire = new UnityEvent();
     }
 
 	public void SpawnAll()
