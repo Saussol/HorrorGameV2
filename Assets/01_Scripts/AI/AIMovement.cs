@@ -189,13 +189,12 @@ public class AIMovement : NetworkBehaviour
 	private IEnumerator KillPlayer()
 	{
 		Debug.Log("KILL PLAYER");
+		players.Remove(chasingPlayer);
 
-		//StartScreamerClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
+		StartScreamerClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
 
 		//TO DO change to killing animation instead of just waiting
 		yield return new WaitForSeconds(2f);
-
-		players.Remove(chasingPlayer);
 
 		if (players.Count <= 0)
 		{
@@ -302,6 +301,10 @@ public class AIMovement : NetworkBehaviour
 		{
 			state = (MonsterState)states.GetValue(Random.Range(0, states.Length));
 		}
+
+		//Deactivate scare state
+		if (_monsterState == MonsterState.SCARE)
+			return MonsterState.WANDER;
 
 		return state;
 	}
