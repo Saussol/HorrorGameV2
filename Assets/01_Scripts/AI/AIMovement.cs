@@ -190,6 +190,8 @@ public class AIMovement : NetworkBehaviour
 	{
 		Debug.Log("KILL PLAYER");
 
+		StartScreamerClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
+
 		//TO DO change to killing animation instead of just waiting
 		yield return new WaitForSeconds(2f);
 
@@ -212,6 +214,12 @@ public class AIMovement : NetworkBehaviour
 		currentSpeed.Value = wanderSpeed;
 		StartCoroutine(StateTimer());
 		chaseEnd = false;
+	}
+
+	[ClientRpc]
+	private void StartScreamerClientRpc(ClientRpcParams clientRpcParams)
+	{
+		FindObjectOfType<CharacterMovement>().StartScreamer();
 	}
 
 	[ClientRpc]

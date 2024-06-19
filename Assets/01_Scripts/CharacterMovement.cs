@@ -249,9 +249,16 @@ public class CharacterMovement : MonoBehaviour
         isStopped = true;
     }
 
+    public void StartScreamer()
+	{
+        isStopped = true;
+	}
+
     [ContextMenu("Rat Transformation")]
     public void RatTransformation(Vector3 respawnPosition, bool endGame)
 	{
+        isStopped = false;
+
         _playerState = PlayerState.RAT;
         _onRatTransformation.Invoke();
         characterController.height = crouchingHeight;
