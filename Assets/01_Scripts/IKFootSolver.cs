@@ -57,7 +57,7 @@ public class IKFootSolver : MonoBehaviour
 
 			currentPosition = footPosition;
 			if(spiderMovement != null && spiderMovement.enabled)
-				lerp += Time.deltaTime * (speed * (spiderMovement.agent.speed / 5));
+				lerp += Time.deltaTime * (speed * (spiderMovement.currentSpeed.Value / 5));
 			else
 				lerp += Time.deltaTime * speed;
 		}

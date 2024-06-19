@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Sirenix.OdinInspector;
+using Unity.Netcode;
 
 public enum MonsterState
 {
@@ -11,7 +12,7 @@ public enum MonsterState
 	SCARE
 }
 
-public class AIMovement : MonoBehaviour
+public class AIMovement : NetworkBehaviour
 {
 	[Title("AI Control")]
 	[SerializeField] public NavMeshAgent agent;
@@ -34,6 +35,7 @@ public class AIMovement : MonoBehaviour
 	[SerializeField] private float minTime, maxTime;
 
 	[SerializeField] private float wanderSpeed, chaseSpeed, scareSpeed;
+	public NetworkVariable<float> currentSpeed = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
 	float startSearchTimer;
 	[SerializeField] float searchTimer;
@@ -46,6 +48,8 @@ public class AIMovement : MonoBehaviour
 
 	private void Start()
 	{
+		if (!IsOwner) return;
+
 		agent = GetComponent<NavMeshAgent>();
 		StartCoroutine(StateTimer());
 		players = new List<CharacterController>(FindObjectsOfType<CharacterController>());
@@ -54,7 +58,9 @@ public class AIMovement : MonoBehaviour
 
 	private void Update()
 	{
-		if(agent.velocity.magnitude > 0)
+		if (!IsOwner) return;
+
+		if (agent.velocity.magnitude > 0)
 		{
 			Vector3 direction = agent.velocity.normalized;
 			direction.y = 0;
@@ -78,7 +84,10 @@ public class AIMovement : MonoBehaviour
 					if (RandomPoint(centerPoint.position, range, out point))
 					{
 						if(agent.speed != wanderSpeed)
+						{
 							agent.speed = wanderSpeed;
+							currentSpeed.Value = wanderSpeed;
+						}
 
 						Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
 						agent.SetDestination(point);
@@ -96,6 +105,7 @@ public class AIMovement : MonoBehaviour
 							_monsterState = MonsterState.CHASE;
 							chasingPlayer = hit.GetComponent<CharacterController>();
 							agent.speed = chaseSpeed;
+							currentSpeed.Value = chaseSpeed;
 							StartCoroutine(StateTimer());
 						}
 					}
@@ -159,6 +169,7 @@ public class AIMovement : MonoBehaviour
 		}
 
 		agent.speed = chaseSpeed;
+		currentSpeed.Value = chaseSpeed;
 		center = (centerPoint.position - playerPos).normalized * (range + 10);
 		Vector3 point;
 		while (!RandomPoint(center, range, out point))
@@ -196,6 +207,7 @@ public class AIMovement : MonoBehaviour
 		chasingPlayer = null;
 		startSearchTimer = searchTimer;
 		agent.speed = wanderSpeed;
+		currentSpeed.Value = wanderSpeed;
 		StartCoroutine(StateTimer());
 		chaseEnd = false;
 
@@ -230,6 +242,7 @@ public class AIMovement : MonoBehaviour
 				chasingPlayer = null;
 				startSearchTimer = searchTimer;
 				agent.speed = wanderSpeed;
+				currentSpeed.Value = wanderSpeed;
 				break;
 			case MonsterState.CHASE:
 				CharacterController closestPlayer = null;
@@ -245,10 +258,11 @@ public class AIMovement : MonoBehaviour
 				}
 				chasingPlayer = closestPlayer;
 				agent.speed = chaseSpeed;
+				currentSpeed.Value = chaseSpeed;
 				break;
 			case MonsterState.SCARE:
 				chasingPlayer = players[Random.Range(0, players.Count)];
-				agent.speed = scareSpeed;
+				currentSpeed.Value = scareSpeed;
 				break;
 		}
 		Debug.Log($"new state: {_monsterState}");
