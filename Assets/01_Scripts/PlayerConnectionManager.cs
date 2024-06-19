@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerConnectionManager : NetworkBehaviour
 {
     private NetworkVariable<int> playersReady = new NetworkVariable<int>(0);
+    [SerializeField] private AIMovement aIMovement;
 
     public override void OnNetworkSpawn()
     {
@@ -51,6 +52,7 @@ public class PlayerConnectionManager : NetworkBehaviour
             Debug.Log("All players have joined the scene!");
             // Perform actions when all players are ready, e.g., start the game
             QuestSpawner.Instance.SpawnAll();
+            aIMovement.StartAI();
         }
     }
 }

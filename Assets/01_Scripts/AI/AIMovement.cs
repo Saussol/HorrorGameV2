@@ -9,7 +9,7 @@ public enum MonsterState
 {
 	WANDER,
 	CHASE,
-	SCARE
+	//SCARE
 }
 
 public class AIMovement : NetworkBehaviour
@@ -46,7 +46,7 @@ public class AIMovement : NetworkBehaviour
 	bool scareEnd;
 	bool chaseEnd;
 
-	private void Start()
+	public void StartAI()
 	{
 		if (!IsOwner) return;
 
@@ -134,29 +134,29 @@ public class AIMovement : NetworkBehaviour
 				if (chasingPlayer != null)
 					agent.SetDestination(chasingPlayer.transform.position);
 				break;
-			case MonsterState.SCARE:
+			//case MonsterState.SCARE:
 
-				if (Vector3.Distance(transform.position, chasingPlayer.transform.position) <= detectionRadius)
-				{
-					Debug.Log("near player");
+			//	if (Vector3.Distance(transform.position, chasingPlayer.transform.position) <= detectionRadius)
+			//	{
+			//		Debug.Log("near player");
 
-					if (!scareEnd)
-					{
-						Debug.Log("change scare destination");
-						scareEnd = true;
-						//TO DO make some scary shit
-						StopAllCoroutines();
-						agent.SetDestination(transform.position + transform.forward * detectionRadius / 1.5f);
-						StartCoroutine(SetScareDestination(chasingPlayer.transform.position));
-					}
+			//		if (!scareEnd)
+			//		{
+			//			Debug.Log("change scare destination");
+			//			scareEnd = true;
+			//			//TO DO make some scary shit
+			//			StopAllCoroutines();
+			//			agent.SetDestination(transform.position + transform.forward * detectionRadius / 1.5f);
+			//			StartCoroutine(SetScareDestination(chasingPlayer.transform.position));
+			//		}
 
-					break;
-				}
+			//		break;
+			//	}
 
-				if (chasingPlayer != null)
-					agent.SetDestination(chasingPlayer.transform.position);
+			//	if (chasingPlayer != null)
+			//		agent.SetDestination(chasingPlayer.transform.position);
 
-				break;
+			//	break;
 		}
 	}
 
@@ -279,10 +279,10 @@ public class AIMovement : NetworkBehaviour
 				agent.speed = chaseSpeed;
 				currentSpeed.Value = chaseSpeed;
 				break;
-			case MonsterState.SCARE:
-				chasingPlayer = players[Random.Range(0, players.Count)];
-				currentSpeed.Value = scareSpeed;
-				break;
+			//case MonsterState.SCARE:
+			//	chasingPlayer = players[Random.Range(0, players.Count)];
+			//	currentSpeed.Value = scareSpeed;
+			//	break;
 		}
 		Debug.Log($"new state: {_monsterState}");
 
@@ -293,18 +293,14 @@ public class AIMovement : NetworkBehaviour
 	{
 		System.Array states = System.Enum.GetValues(typeof(MonsterState));
 
-		if (_monsterState == MonsterState.SCARE)
-			return MonsterState.WANDER;
+		//if (_monsterState == MonsterState.SCARE)
+		//	return MonsterState.WANDER;
 
 		MonsterState state = (MonsterState)states.GetValue(Random.Range(0, states.Length));
 		while(state == _monsterState)
 		{
 			state = (MonsterState)states.GetValue(Random.Range(0, states.Length));
 		}
-
-		//Deactivate scare state
-		if (_monsterState == MonsterState.SCARE)
-			return MonsterState.WANDER;
 
 		return state;
 	}
