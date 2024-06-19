@@ -1,4 +1,5 @@
 using Steamworks;
+using System.Linq;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
@@ -6,7 +7,6 @@ using UnityEngine;
 
 public class PlayerNameSync : NetworkBehaviour
 {
-    
     public NetworkVariable<FixedString32Bytes> displayName = new NetworkVariable<FixedString32Bytes>();
     public TextMeshPro textName;
     public string name;
@@ -33,9 +33,6 @@ public class PlayerNameSync : NetworkBehaviour
             // Informer le nouveau client des pseudonymes des joueurs déjà connectés
             UpdateAllClientsServerRpc();
         }
-
-        
-        
     }
 
     [ServerRpc]
@@ -49,7 +46,7 @@ public class PlayerNameSync : NetworkBehaviour
     [ClientRpc]
     private void UpdateDisplayNameClientRpc(string newName)
     {
-        displayName.Value = newName; // Cette ligne peut encore causer l'erreur si elle est exécutée sur le client
+        displayName.Value = newName;
         name = newName;
         textName.text = newName;
         LobbyPlayers.Instance.RefontName();
@@ -68,24 +65,22 @@ public class PlayerNameSync : NetworkBehaviour
         {
             if (player != this)
             {
-                UpdateSingleClientClientRpc(player.displayName.Value.ToString());
-                
+                UpdateSingleClientClientRpc(player.NetworkObjectId, player.displayName.Value.ToString());
             }
         }
     }
 
     [ClientRpc]
-    private void UpdateSingleClientClientRpc(string playerName)
+    private void UpdateSingleClientClientRpc(ulong playerId, string playerName)
     {
-        // Mettre à jour le pseudo des joueurs déjà connectés pour le nouveau client
-        if (!IsOwner) // Ajoutez cette vérification pour éviter que le propriétaire ne réécrive sa propre variable
+        var player = FindObjectsOfType<PlayerNameSync>().FirstOrDefault(p => p.NetworkObjectId == playerId);
+        if (player != null && !player.IsOwner)
         {
-            displayName.Value = playerName;
+            player.displayName.Value = playerName;
+            player.name = playerName;
+            player.textName.text = playerName;
+            LobbyPlayers.Instance.RefontName();
         }
-        textName.text = playerName;
-        name = playerName;
-
-        LobbyPlayers.Instance.RefontName();
     }
 
     [ServerRpc]
