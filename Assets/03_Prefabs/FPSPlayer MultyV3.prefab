@@ -2142,6 +2142,8 @@ GameObject:
   - component: {fileID: -2362608407207241308}
   - component: {fileID: 3914747902203224538}
   - component: {fileID: 6818341881672697629}
+  - component: {fileID: 1586573173869164609}
+  - component: {fileID: 8933270573661484454}
   m_Layer: 0
   m_Name: FPSPlayer MultyV3
   m_TagString: Player
@@ -2498,6 +2500,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnGameObject: {fileID: 637153794013117401, guid: 527482756adc96e4f91c4b04fb0c178f, type: 3}
+--- !u!95 &1586573173869164609
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8342106431650556681}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8933270573661484454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8342106431650556681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 6413070909546382974}
 --- !u!1 &8690847106272721590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,7 +2546,6 @@ GameObject:
   - component: {fileID: 571068440561274272}
   - component: {fileID: 1020143624784532481}
   - component: {fileID: 2745236767418296677}
-  - component: {fileID: 8861031934551260935}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2592,25 +2628,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8690847106272721590}
   m_Enabled: 1
---- !u!114 &8861031934551260935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8690847106272721590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e950cacae63d61a4e821edb397a8cd95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectionMode: 1
-  OutlineType: 2
-  AlphaMode: 0
-  OutlineColor: {r: 1, g: 0.55, b: 0, a: 1}
-  OccludedColor: {r: 0.5, g: 0.9, b: 0.3, a: 1}
-  OutlineWidth: 0.2
-  OutlineHardness: 0.85
 --- !u!1 &9017293928275557756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2809,10 +2826,7 @@ PrefabInstance:
     - {fileID: 6847143103609112737, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4588491581300859210, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2793283690071379317}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
 --- !u!4 &951524635267701474 stripped
 Transform:
@@ -2824,20 +2838,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4588491581300859210, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
   m_PrefabInstance: {fileID: 8855842855848718317}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2793283690071379317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4993329667668037287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 6413070909546382974}
 --- !u!95 &6413070909546382974 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2457144792445643155, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
