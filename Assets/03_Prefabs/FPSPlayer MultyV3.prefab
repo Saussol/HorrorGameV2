@@ -2385,6 +2385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1020143624784532481}
   playerHandCamera: {fileID: 3172531274912539378}
+  playerMinimapCamera: {fileID: 5092194978829114928}
   playerCanvas: {fileID: 7496758238421945715}
   hudPanel: {fileID: 6529351772111591551}
   loadingPanel: {fileID: 1576768231476835710}

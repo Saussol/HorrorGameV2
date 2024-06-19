@@ -11,6 +11,7 @@ public class PlayerSeter : NetworkBehaviour
 {
     public Camera playerCamera;
     public Camera playerHandCamera;
+    public Camera playerMinimapCamera;
     public Canvas playerCanvas;
     public GameObject hudPanel, loadingPanel;
     public CharacterMovement playerControls; // Par exemple, un GameObject qui contient le script de contrôle du joueur
@@ -52,6 +53,11 @@ public class PlayerSeter : NetworkBehaviour
             playerHandCamera.enabled = false;
         }
 
+        if (playerMinimapCamera != null)
+        {
+            playerMinimapCamera.enabled = false;
+        }
+
         if (playerCanvas != null)
         {
             playerCanvas.enabled = false;
@@ -91,7 +97,13 @@ public class PlayerSeter : NetworkBehaviour
         }
 
 
-		if (playerCanvas != null && IsOwner)
+        if (playerMinimapCamera != null && IsOwner)
+        {
+            playerMinimapCamera.enabled = true;
+        }
+
+
+        if (playerCanvas != null && IsOwner)
 		{
 			playerCanvas.enabled = true;
             hudPanel.SetActive(true);
