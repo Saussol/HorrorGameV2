@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.20001745, g: 0.304294, b: 0.32565457, a: 1}
+  m_IndirectSpecularColor: {r: 0.19975188, g: 0.3043016, b: 0.32548088, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1021,7 +1021,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &187124872
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4694,7 +4694,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.62173253, b: 0, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 2.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4738,7 +4738,7 @@ Light:
   m_BounceIntensity: 10
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 2.7e-44, z: 3.5416e-41, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -5817,7 +5817,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.5242524, g: 0.7796891, b: 0.9339623, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 86.0113
   m_InnerSpotAngle: 44.976982
   m_CookieSize: 10
@@ -10436,7 +10436,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.5242524, g: 0.7796891, b: 0.9339623, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 74.55886
   m_InnerSpotAngle: 46.60341
   m_CookieSize: 10
@@ -11746,7 +11746,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.5242524, g: 0.7796891, b: 0.9339623, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 57.127716
   m_InnerSpotAngle: 35.812664
   m_CookieSize: 10
@@ -13273,7 +13273,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.5242524, g: 0.7796891, b: 0.9339623, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 67.58571
   m_InnerSpotAngle: 53.587685
   m_CookieSize: 10
@@ -14191,7 +14191,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 2e-44, z: 9.43e-42, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 6e-45, z: 2.2449e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -15483,7 +15483,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.5242524, g: 0.7796891, b: 0.9339623, a: 1}
   m_Intensity: 2
-  m_Range: 10
+  m_Range: 5
   m_SpotAngle: 27.381176
   m_InnerSpotAngle: 21.35681
   m_CookieSize: 10
