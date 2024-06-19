@@ -197,11 +197,13 @@ public class AIMovement : NetworkBehaviour
 
 		if (players.Count <= 0)
 		{
-			chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, true);
-			endGame.LooseGame();
+			//chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, true);
+			Debug.Log(chasingPlayer.GetComponent<NetworkObject>().OwnerClientId);
+			KillPlayerClientRpc(true , new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
+			EndGameClientRpc();
 		}
 		else
-			chasingPlayer.GetComponent<CharacterMovement>().RatTransformation(playerRespawnPoint.position, false);
+			KillPlayerClientRpc(false, new ClientRpcParams { Send = new ClientRpcSendParams { TargetClientIds = new List<ulong> { chasingPlayer.GetComponent<NetworkObject>().OwnerClientId } } });
 
 		_monsterState = MonsterState.WANDER;
 		chasingPlayer = null;
@@ -210,8 +212,18 @@ public class AIMovement : NetworkBehaviour
 		currentSpeed.Value = wanderSpeed;
 		StartCoroutine(StateTimer());
 		chaseEnd = false;
+	}
 
+	[ClientRpc]
+	private void KillPlayerClientRpc(bool endGame, ClientRpcParams clientRpcParams)
+	{
+		FindObjectOfType<CharacterMovement>().RatTransformation(playerRespawnPoint.position, endGame);
+	}
 
+	[ClientRpc]
+	private void EndGameClientRpc()
+	{
+		endGame.LooseGame();
 	}
 
 	private bool RandomPoint(Vector3 center, float range, out Vector3 result)
