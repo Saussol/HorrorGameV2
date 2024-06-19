@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
 using Unity.Netcode;
+using System;
 
 public enum PlayerState
 {
@@ -33,6 +34,9 @@ public class CharacterMovement : MonoBehaviour
 
     private CharacterController characterController;
     private Camera playerCamera;
+
+    [SerializeField]
+    private Animator animator;
 
     private float yaw;
     private float pitch;
@@ -86,6 +90,7 @@ public class CharacterMovement : MonoBehaviour
                     return;
                 }
 
+
                 HandleMovement();
                 HandleCrouch();
                 break;
@@ -117,15 +122,35 @@ public class CharacterMovement : MonoBehaviour
         switch (_playerState)
 		{
 			case PlayerState.NORMAL:
-                currentSpeed = isStun ? stunSpeed : isCrouching ? crouchSpeed : Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
+                currentSpeed = isStun ? stunSpeed : isCrouching ? crouchSpeed : Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed; 
+                //Anim 
+                
                 break;
 			case PlayerState.RAT:
                 currentSpeed = sprintSpeed;
-				break;
+                
+                break;
 		}
-
+        
         float horizontal = Input.GetAxis("Horizontal") * currentSpeed;
         float vertical = Input.GetAxis("Vertical") * currentSpeed;
+
+        if (horizontal == 0 && vertical == 0)
+        {
+            animator.Play("Idle");
+        }
+        else if (currentSpeed == moveSpeed)
+        {
+            animator.Play("Walk");
+        }
+        else if (currentSpeed == sprintSpeed)
+        {
+            animator.Play("Run");
+        }
+        else if (currentSpeed == stunSpeed)
+        {
+            animator.Play("Stun");
+        }
 
         Vector3 moveDirection = new Vector3(horizontal, 0.0f, vertical);
         moveDirection = transform.rotation * moveDirection;

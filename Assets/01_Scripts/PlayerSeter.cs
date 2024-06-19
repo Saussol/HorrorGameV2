@@ -15,6 +15,7 @@ public class PlayerSeter : NetworkBehaviour
     public Canvas playerCanvas;
     public GameObject hudPanel, loadingPanel;
     public CharacterMovement playerControls; // Par exemple, un GameObject qui contient le script de contrôle du joueur
+    public GameObject playerBody;
 
     private void Start()
     {
@@ -114,6 +115,11 @@ public class PlayerSeter : NetworkBehaviour
 		if (playerControls != null && IsOwner)
         {
             playerControls.enabled = true;
+        }
+
+        if (playerBody != null && IsOwner)
+        {
+            playerBody.SetActive(false);
         }
 
         if (IsOwner)
