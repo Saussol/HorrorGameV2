@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using Unity.Netcode;
 
 public class InventorySlot : NetworkBehaviour
@@ -44,7 +43,7 @@ public class InventorySlot : NetworkBehaviour
 	{
 		for (int i = 0; i < itemNumber; i++)
 		{
-			Vector3 instantiatePos = Camera.main.transform.position;
+			Vector3 instantiatePos = Camera.main.transform.position + new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 			Quaternion instantiateRot = Camera.main.transform.parent.transform.rotation;
 
 			SpawnObjectServerRpc(instantiatePos, instantiateRot, Vector3.up, Vector3.zero, itemDescription.itemTag);
