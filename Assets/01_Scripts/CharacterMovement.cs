@@ -288,6 +288,12 @@ public class CharacterMovement : MonoBehaviour
             QuestSpawner.Instance._restoreFire.Invoke();
         }
 
+        InventorySlot[] playerInventories = GetComponentsInChildren<InventorySlot>();
+		foreach (var inventory in playerInventories)
+		{
+            inventory.DropAllItem();
+		}
+
         isStopped = false;
 
         _playerState = PlayerState.RAT;

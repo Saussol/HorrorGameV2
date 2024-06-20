@@ -37,14 +37,18 @@ public class InventorySlot : NetworkBehaviour
 		itemImage.gameObject.SetActive(true);
 		itemImage.sprite = itemDescription.itemSprite;
 
-		//foreach (GameObject prefab in playerInventory.prefabs)
-		//{
-		//	if (prefab == itemDescription.itemPrefab)
-		//		currentPrefab = prefab;
-		//}
-		//if (currentPrefab == null) currentPrefab = playerInventory.prefabs[0];
-
 		AddItemNumber(1);
+	}
+
+	public void DropAllItem()
+	{
+		for (int i = 0; i < itemNumber; i++)
+		{
+			Vector3 instantiatePos = Camera.main.transform.position;
+			Quaternion instantiateRot = Camera.main.transform.parent.transform.rotation;
+
+			SpawnObjectServerRpc(instantiatePos, instantiateRot, Vector3.up, Vector3.zero, itemDescription.itemTag);
+		}
 	}
 
 	public void UseItem()
@@ -60,16 +64,6 @@ public class InventorySlot : NetworkBehaviour
 
 		SpawnObjectServerRpc(instantiatePos, instantiateRot, throwDirection, velocity, itemDescription.itemTag);
 
-		//if (isLocalPlayer)
-		//{
-		//	Vector3 instantiatePos = playerCamera.transform.position + playerCamera.transform.forward;
-		//	Quaternion instantiateRot = playerCamera.transform.parent.transform.rotation;
-		//	GameObject item = Instantiate(currentPrefab, instantiatePos, instantiateRot);
-		//	item.GetComponent<ItemObject>().Use(playerCamera.GetComponentInParent<CharacterTarget>());
-
-		//  CmdSpawnCube();
-		//}
-
 		AddItemNumber(-1);
 	}
 
@@ -80,29 +74,6 @@ public class InventorySlot : NetworkBehaviour
 		item.GetComponent<NetworkObject>().Spawn(true);
 		item.GetComponent<ItemObject>().Use(throwDirection, velocity);
 	}
-
-	//[Command]
- //   void CmdSpawnCube()
- //   {
- //       if (!isLocalPlayer)
- //       {
-
- //       }
-
- //       RpcSpawnCube();
- //   }
-
- //   [ClientRpc]
- //   void RpcSpawnCube()
- //   {
- //       if (!isLocalPlayer)
- //       {
- //           Vector3 instantiatePos = playerCamera.transform.position + playerCamera.transform.forward;
- //           Quaternion instantiateRot = playerCamera.transform.parent.transform.rotation;
- //           GameObject item = Instantiate(currentPrefab, instantiatePos, instantiateRot);
- //           item.GetComponent<ItemObject>().Use(playerCamera.GetComponentInParent<CharacterTarget>());
- //       }
- //   }
 
     public void AddItemNumber(int value)
 	{
