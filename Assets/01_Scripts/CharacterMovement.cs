@@ -135,21 +135,24 @@ public class CharacterMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal") * currentSpeed;
         float vertical = Input.GetAxis("Vertical") * currentSpeed;
 
-        if (horizontal == 0 && vertical == 0)
+        if (_playerState == PlayerState.NORMAL)
         {
-            animator.Play("Idle");
-        }
-        else if (currentSpeed == moveSpeed)
-        {
-            animator.Play("Walk");
-        }
-        else if (currentSpeed == sprintSpeed)
-        {
-            animator.Play("Run");
-        }
-        else if (currentSpeed == stunSpeed)
-        {
-            animator.Play("Stun");
+            if (horizontal == 0 && vertical == 0)
+            {
+                animator.Play("Idle");
+            }
+            else if (currentSpeed == moveSpeed)
+            {
+                animator.Play("Walk");
+            }
+            else if (currentSpeed == sprintSpeed)
+            {
+                animator.Play("Run");
+            }
+            else if (currentSpeed == stunSpeed)
+            {
+                animator.Play("Stun");
+            }
         }
 
         Vector3 moveDirection = new Vector3(horizontal, 0.0f, vertical);
@@ -299,7 +302,8 @@ public class CharacterMovement : MonoBehaviour
         _playerState = PlayerState.RAT;
         _onRatTransformation.Invoke();
         characterController.height = crouchingHeight;
-        transform.localScale = new Vector3(1, .5f, 1);
+        GetComponent<PlayerSeter>().SetRatVisual();
+        //transform.localScale = new Vector3(1, .5f, 1);
 
         if(!endGame)
             StartCoroutine(TeleportPlayer(respawnPosition));

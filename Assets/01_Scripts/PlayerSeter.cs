@@ -16,6 +16,7 @@ public class PlayerSeter : NetworkBehaviour
     public GameObject hudPanel, loadingPanel;
     public CharacterMovement playerControls; // Par exemple, un GameObject qui contient le script de contrôle du joueur
     public GameObject playerBody;
+    public GameObject pirateModel, ratModel;
 
     private void Start()
     {
@@ -142,6 +143,37 @@ public class PlayerSeter : NetworkBehaviour
         playerCamera.gameObject.GetComponent<AudioListener>().enabled = IsLocalPlayer;
     }
 
+    public void SetRatVisual()
+	{
+        SetPlayerRatVisualServerRpc(OwnerClientId);
+	}
 
+    [ServerRpc]
+    private void SetPlayerRatVisualServerRpc(ulong playerId)
+	{
+        SetPlayerRatVisualClientRpc(playerId);
+	}
 
+    [ClientRpc]
+    private void SetPlayerRatVisualClientRpc(ulong playerId)
+	{
+        if (OwnerClientId == playerId) return;
+
+        PlayerSeter[] seters = FindObjectsOfType<PlayerSeter>();
+
+		foreach (var s in seters)
+		{
+            if(s.OwnerClientId == playerId)
+			{
+                s.SetPlayerRatVisual();
+                break;
+			}
+		}
+	}
+
+    public void SetPlayerRatVisual()
+	{
+        pirateModel.SetActive(false);
+        ratModel.SetActive(true);
+	}
 }

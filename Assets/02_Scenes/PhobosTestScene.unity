@@ -123,6 +123,92 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &96869107 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+  m_PrefabInstance: {fileID: 147471456}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &96869108
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96869107}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2c5e92142e3939246beff45a225fdc8d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &147471456
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.0976706
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 17.733097
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      propertyPath: m_Name
+      value: AM_spider_animated
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 96869108}
+  m_SourcePrefab: {fileID: 100100000, guid: 23d4d4fb7c0ea4a4a88e08e5ad5179f4, type: 3}
 --- !u!1 &706451110
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +638,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1093848204746208198, guid: 4dab4bad14bb81c428301900bf4d757a, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 775015428
+      objectReference: {fileID: 0}
     - target: {fileID: 3611419048785731072, guid: 4dab4bad14bb81c428301900bf4d757a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -661,6 +751,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8053368852596488788, guid: a111ac07681dba347b83aa130aeaa505, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1394153307
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -674,6 +768,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -624467828946621058, guid: bbd48691fcf0ee040b29b82bcab6eb68, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2032504639
+      objectReference: {fileID: 0}
     - target: {fileID: 2787493528725590215, guid: bbd48691fcf0ee040b29b82bcab6eb68, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -718,6 +816,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AM_spider_test02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3307043131464338045, guid: bbd48691fcf0ee040b29b82bcab6eb68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -735,3 +837,4 @@ SceneRoots:
   - {fileID: 1102007330}
   - {fileID: 1089823099}
   - {fileID: 8340344738746460380}
+  - {fileID: 147471456}
