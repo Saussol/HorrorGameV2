@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeadBobbing : MonoBehaviour
 {
-    [SerializeField] private bool enable = true;
+    [SerializeField] public bool enableBobbing = true;
 
     [SerializeField, Range(0, .1f)] private float amplitude = .015f;
     [SerializeField, Range(0, 30)] private float frequency = 10f;
@@ -50,7 +50,7 @@ public class HeadBobbing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!enable) return;
+        if (!enableBobbing) return;
 
         CheckMotion();
         //cam.LookAt(FocusTarget());

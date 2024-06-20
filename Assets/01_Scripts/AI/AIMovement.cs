@@ -48,6 +48,9 @@ public class AIMovement : NetworkBehaviour
 
 	bool aiStarted;
 
+	[SerializeField] Animator animator;
+	public Transform playerScreamTransform;
+
 	public void StartAI()
 	{
 		if (!IsOwner) return;
@@ -339,5 +342,10 @@ public class AIMovement : NetworkBehaviour
 		Gizmos.DrawWireSphere(center, range);
 		if(agent != null)
 			Gizmos.DrawSphere(agent.destination, 1);
+	}
+
+	public void PlayScreamerAnimation()
+	{
+		animator.Play("Scare");
 	}
 }

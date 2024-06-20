@@ -34,6 +34,7 @@ public class CharacterMovement : MonoBehaviour
 
     private CharacterController characterController;
     private Camera playerCamera;
+    private HeadBobbing headBobbing;
 
     [SerializeField]
     private Animator animator;
@@ -68,6 +69,7 @@ public class CharacterMovement : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
+        headBobbing = GetComponentInChildren<HeadBobbing>();
 
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
@@ -274,13 +276,18 @@ public class CharacterMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        headBobbing.enableBobbing = false;
+
         isStopped = true;
     }
 
     public void StartScreamer()
 	{
-        isStopped = true;
-	}
+        AIMovement monster = FindObjectOfType<AIMovement>();
+
+        StartCoroutine(TeleportPlayer(monster.playerScreamTransform.position, monster.playerScreamTransform.eulerAngles, true));
+        monster.PlayScreamerAnimation();
+    }
 
     [ContextMenu("Rat Transformation")]
     public void RatTransformation(Vector3 respawnPosition, bool endGame)
@@ -306,17 +313,37 @@ public class CharacterMovement : MonoBehaviour
         //transform.localScale = new Vector3(1, .5f, 1);
 
         if(!endGame)
-            StartCoroutine(TeleportPlayer(respawnPosition));
+            StartCoroutine(TeleportPlayer(respawnPosition, false));
         else
             transform.position = respawnPosition;
+
+        headBobbing.enableBobbing = true;
     }
 
-    public IEnumerator TeleportPlayer(Vector3 teleportPosition)
+    public IEnumerator TeleportPlayer(Vector3 teleportPosition, bool keepStopped)
 	{
         isStopped = true;
         yield return new WaitForSeconds(.1f);
         transform.position = teleportPosition;
         yield return new WaitForSeconds(.1f);
-        isStopped = false;
+
+        if(!keepStopped)
+            isStopped = false;
+    }
+    public IEnumerator TeleportPlayer(Vector3 teleportPosition, Vector3 teleportRotation, bool keepStopped)
+    {
+        isStopped = true;
+        headBobbing.enableBobbing = false;
+        yield return new WaitForSeconds(.1f);
+        transform.position = teleportPosition;
+        transform.eulerAngles = teleportRotation;
+        playerCamera.transform.localEulerAngles = Vector3.zero;
+        yield return new WaitForSeconds(.1f);
+
+        if (!keepStopped)
+		{
+            headBobbing.enableBobbing = true;
+            isStopped = false;
+        }
     }
 }

@@ -132,7 +132,7 @@ public class PlayerSeter : NetworkBehaviour
             {
                 Transform spawnPoint = spawnManager.GetSpawnPoint();
                 if (spawnPoint != null)
-                    StartCoroutine(playerControls.TeleportPlayer(spawnPoint.position));
+                    StartCoroutine(playerControls.TeleportPlayer(spawnPoint.position, false));
                 else
                     Debug.LogError("No valid spawn point found!");
             }
