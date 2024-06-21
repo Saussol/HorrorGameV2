@@ -145,19 +145,25 @@ public class PlayerSeter : NetworkBehaviour
 
     public void SetRatVisual()
 	{
+        Debug.Log("Set rat visual from originating client");
         SetPlayerRatVisualServerRpc(OwnerClientId);
 	}
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void SetPlayerRatVisualServerRpc(ulong playerId)
 	{
+        Debug.Log("Set rat visual from server");
         SetPlayerRatVisualClientRpc(playerId);
 	}
 
     [ClientRpc]
     private void SetPlayerRatVisualClientRpc(ulong playerId)
 	{
+        Debug.Log("Set rat visual from all client");
+
         if (OwnerClientId == playerId) return;
+
+        Debug.Log("Set rat visual from other client");
 
         PlayerSeter[] seters = FindObjectsOfType<PlayerSeter>();
 
