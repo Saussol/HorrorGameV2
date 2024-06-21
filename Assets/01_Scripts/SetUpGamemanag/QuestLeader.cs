@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
-using Unity.Netcode.Editor;
+//using Unity.Netcode.Editor;
 using UnityEngine;
 
 public class QuestLeader : NetworkBehaviour
