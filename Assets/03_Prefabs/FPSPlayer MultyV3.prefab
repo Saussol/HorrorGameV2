@@ -2340,7 +2340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f525db9c6d68d9b4f802e2467229cb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enable: 1
+  enableBobbing: 1
   amplitude: 0.002
   frequency: 10
   cam: {fileID: 571068440561274272}
@@ -2513,7 +2513,7 @@ Animator:
   m_GameObject: {fileID: 8342106431650556681}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fad8dee88e0ba214db7a97335e17c099, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2848,6 +2848,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5529568125609801427}
     m_Modifications:
+    - target: {fileID: 2457144792445643155, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2457144792445643155, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: m_Controller
       value: 
