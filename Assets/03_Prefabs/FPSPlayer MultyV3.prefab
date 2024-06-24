@@ -2142,8 +2142,6 @@ GameObject:
   - component: {fileID: -2362608407207241308}
   - component: {fileID: 3914747902203224538}
   - component: {fileID: 6818341881672697629}
-  - component: {fileID: 1586573173869164609}
-  - component: {fileID: 1101296819052991479}
   m_Layer: 0
   m_Name: FPSPlayer MultyV3
   m_TagString: Player
@@ -2503,41 +2501,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnGameObject: {fileID: 637153794013117401, guid: 527482756adc96e4f91c4b04fb0c178f, type: 3}
---- !u!95 &1586573173869164609
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8342106431650556681}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fad8dee88e0ba214db7a97335e17c099, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1101296819052991479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8342106431650556681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 6413070909546382974}
 --- !u!1 &8690847106272721590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,7 +2742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2d9d673f7982ae448cbcbd60084b802, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.8
+      value: -0.759
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2d9d673f7982ae448cbcbd60084b802, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2823,7 +2786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d2d9d673f7982ae448cbcbd60084b802, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2850,7 +2813,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2457144792445643155, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2457144792445643155, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
       propertyPath: m_Controller
@@ -2908,7 +2871,10 @@ PrefabInstance:
     - {fileID: 6847143103609112737, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4588491581300859210, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4133815079864137680}
   m_SourcePrefab: {fileID: 100100000, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
 --- !u!4 &951524635267701474 stripped
 Transform:
@@ -2920,6 +2886,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4588491581300859210, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}
   m_PrefabInstance: {fileID: 8855842855848718317}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4133815079864137680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4993329667668037287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 6413070909546382974}
 --- !u!95 &6413070909546382974 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2457144792445643155, guid: 293f570d22293e846bcb2b540d598f7f, type: 3}

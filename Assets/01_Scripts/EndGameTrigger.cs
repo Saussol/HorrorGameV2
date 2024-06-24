@@ -34,7 +34,7 @@ public class EndGameTrigger : MonoBehaviour
 		{
 			currentPlayer++;
 
-			if(currentPlayer >= maxPlayer)
+			if(currentPlayer >= maxPlayer)// & if - rat
 			{
 				endGame = true;
 				Debug.Log("<color=green>YOU WIN</color>");
