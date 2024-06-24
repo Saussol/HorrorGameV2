@@ -283,7 +283,9 @@ public class CharacterMovement : MonoBehaviour
 
     public void StartScreamer()
 	{
+        Debug.Log("Start screamer on client");
         AIMovement monster = FindObjectOfType<AIMovement>();
+        Debug.Log($"Found client monster: {monster.name} with teleport pos: {monster.playerScreamTransform.position} and rot: {monster.playerScreamTransform.eulerAngles}");
 
         StartCoroutine(TeleportPlayer(monster.playerScreamTransform.position, monster.playerScreamTransform.eulerAngles, true));
         monster.PlayScreamerAnimation();
@@ -338,6 +340,8 @@ public class CharacterMovement : MonoBehaviour
         transform.position = teleportPosition;
         transform.eulerAngles = teleportRotation;
         playerCamera.transform.localEulerAngles = Vector3.zero;
+        Debug.Log($"Teleport player at pos: {transform.position} and rot: {transform.eulerAngles}");
+
         yield return new WaitForSeconds(.1f);
 
         if (!keepStopped)
