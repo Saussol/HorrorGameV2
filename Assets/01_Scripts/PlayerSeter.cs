@@ -161,6 +161,8 @@ public class PlayerSeter : NetworkBehaviour
 	{
         Debug.Log("Set rat visual from all client");
 
+        Debug.Log(OwnerClientId + ":" + playerId);
+
         if (OwnerClientId == playerId) return;
 
         Debug.Log("Set rat visual from other client");
