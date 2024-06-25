@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 557541952
+  GlobalObjectIdHash: 2480244875
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -2284,8 +2284,8 @@ MonoBehaviour:
   maxPitch: 85
   lookSensitivity: 5
   rightHand: {fileID: 6065336226428433948}
-  moveSpeed: 10
-  sprintSpeed: 20
+  moveSpeed: 5
+  sprintSpeed: 10
   crouchSpeed: 2
   stunSpeed: 1
   jumpHeight: 3
