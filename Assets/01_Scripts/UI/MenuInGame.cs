@@ -17,9 +17,9 @@ public class MenuInGame : NetworkBehaviour
         {
             NetworkManager.Singleton.SceneManager.LoadScene("LobbytestScene", LoadSceneMode.Single);
 
-            if (NetworkManager.Singleton == null) return;
+            //if (NetworkManager.Singleton == null) return;
 
-            NetworkManager.Singleton.Shutdown();
+            //NetworkManager.Singleton.Shutdown();
         }
     }
 
