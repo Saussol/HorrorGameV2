@@ -11,11 +11,17 @@ public class MenuInGame : NetworkBehaviour
         Application.Quit();
     }
 
+    public Scene scene;
+
     public void HostGoMainMenu()
     {
         if (NetworkManager.Singleton.IsHost)
         {
+            NetworkManager.Singleton.SceneManager.UnloadScene(scene);
+
             NetworkManager.Singleton.SceneManager.LoadScene("LobbytestScene", LoadSceneMode.Single);
+
+            //NetworkManager.Singleton.SceneManager.UnloadScene(scene);
 
             //if (NetworkManager.Singleton == null) return;
 
