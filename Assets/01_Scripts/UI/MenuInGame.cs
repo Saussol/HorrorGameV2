@@ -32,13 +32,17 @@ public class MenuInGame : NetworkBehaviour
  
     public void ReturnToLobbyButton()
     {
+        //NetworkManager.Singleton.Shutdown();
+
+        //SceneManager.LoadScene("LobbytestScene");
+
         if (NetworkManager.Singleton.IsHost)
         {
-            ReturnToLobby();
+            ReturnToLobby(); 
         }
         else
         {
-            // Pour les clients, simplement charger la scène de lobby
+            // Pour les clients, simplement charger la scène de lobby           
             NetworkManager.Singleton.SceneManager.LoadScene("LobbytestScene", LoadSceneMode.Single);
         }
     }
@@ -50,7 +54,6 @@ public class MenuInGame : NetworkBehaviour
 
     private IEnumerator ReturnWithLoading()
     {
-        //SetLoadingScreenClientRpc();
         yield return new WaitForSeconds(.5f);
         NetworkManager.Singleton.SceneManager.LoadScene("LobbytestScene", LoadSceneMode.Single);
     }
