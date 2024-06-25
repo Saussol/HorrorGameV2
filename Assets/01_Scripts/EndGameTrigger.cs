@@ -21,12 +21,9 @@ public class EndGameTrigger : NetworkBehaviour
 	{
 		loosePanel.SetActive(true);
         endUi.SetActive(true);
+        buttonHost.SetActive(true);
 
-		if (IsHost)
-		{
-            buttonHost.SetActive(true);
-
-        }
+        
 
         CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
 		foreach (CharacterMovement player in players)
@@ -49,12 +46,8 @@ public class EndGameTrigger : NetworkBehaviour
 				Debug.Log("<color=green>YOU WIN</color>");
 				winPanel.SetActive(true);
                 endUi.SetActive(true);
-
-                if (IsHost)
-                {
-                    buttonHost.SetActive(true);
-
-                }
+                buttonHost.SetActive(true);
+                
 
                 CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
 				foreach(CharacterMovement player in players)
