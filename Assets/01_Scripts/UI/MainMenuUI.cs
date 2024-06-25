@@ -61,7 +61,7 @@ public class MainMenuUI : NetworkBehaviour
     {
         SetLoadingScreenClientRpc();
         yield return new WaitForSeconds(.5f);
-        NetworkManager.Singleton.SceneManager.LoadScene("LobbyScene", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("LobbytestScene", LoadSceneMode.Single);
     }
 
     

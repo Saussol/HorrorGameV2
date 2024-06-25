@@ -29,24 +29,17 @@ public class MenuInGame : NetworkBehaviour
         }
     }
 
-    // Méthode RPC pour informer les clients de charger la scène de lobby
-    [ClientRpc]
-    private void SetLoadingScreenForLobbyClientRpc()
-    {
-        
-    }
-
+ 
     public void ReturnToLobbyButton()
     {
         if (NetworkManager.Singleton.IsHost)
         {
-            SetLoadingScreenForLobbyClientRpc();
             ReturnToLobby();
         }
         else
         {
             // Pour les clients, simplement charger la scène de lobby
-            NetworkManager.Singleton.SceneManager.LoadScene("LobbyScene", LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("LobbytestScene", LoadSceneMode.Single);
         }
     }
 
@@ -59,6 +52,6 @@ public class MenuInGame : NetworkBehaviour
     {
         //SetLoadingScreenClientRpc();
         yield return new WaitForSeconds(.5f);
-        NetworkManager.Singleton.SceneManager.LoadScene("LobbyScene", LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene("LobbytestScene", LoadSceneMode.Single);
     }
 }
