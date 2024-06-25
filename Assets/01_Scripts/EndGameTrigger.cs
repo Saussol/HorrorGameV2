@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class EndGameTrigger : MonoBehaviour
+public class EndGameTrigger : NetworkBehaviour
 {
 	int maxPlayer;
 	int currentPlayer;
 
 	bool endGame;
 
-	[SerializeField] private GameObject winPanel, loosePanel;
+	[SerializeField] private GameObject winPanel, loosePanel, endUi, buttonHost;
 
 	private void Start()
 	{
@@ -19,7 +20,15 @@ public class EndGameTrigger : MonoBehaviour
 	public void LooseGame()
 	{
 		loosePanel.SetActive(true);
-		CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
+        endUi.SetActive(true);
+
+		if (IsHost)
+		{
+            buttonHost.SetActive(true);
+
+        }
+
+        CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
 		foreach (CharacterMovement player in players)
 		{
 			player.StopPlayer();
@@ -39,8 +48,15 @@ public class EndGameTrigger : MonoBehaviour
 				endGame = true;
 				Debug.Log("<color=green>YOU WIN</color>");
 				winPanel.SetActive(true);
+                endUi.SetActive(true);
 
-				CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
+                if (IsHost)
+                {
+                    buttonHost.SetActive(true);
+
+                }
+
+                CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
 				foreach(CharacterMovement player in players)
 				{
 					player.StopPlayer();

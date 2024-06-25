@@ -12909,7 +12909,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 187173136}
         m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
-        m_MethodName: HostGame
+        m_MethodName: exitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

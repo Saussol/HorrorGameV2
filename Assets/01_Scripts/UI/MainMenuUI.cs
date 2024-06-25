@@ -42,4 +42,14 @@ public class MainMenuUI : NetworkBehaviour
 		startPanel.SetActive(false);
 		loadingPanel.SetActive(true);
 	}
+
+	public void exitGame()
+	{
+
+		/*if ()
+		{
+
+		}*/
+        Application.Quit();
+    }
 }
