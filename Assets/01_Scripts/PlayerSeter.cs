@@ -17,6 +17,7 @@ public class PlayerSeter : NetworkBehaviour
     public CharacterMovement playerControls; // Par exemple, un GameObject qui contient le script de contrôle du joueur
     public GameObject playerBody;
     public GameObject pirateModel, ratModel;
+    public bool isRat;
 
     private void Start()
     {
@@ -161,7 +162,7 @@ public class PlayerSeter : NetworkBehaviour
 	{
         Debug.Log("Set rat visual from all client");
 
-        
+
 
         //if (OwnerClientId == playerId) return;
 
@@ -184,5 +185,6 @@ public class PlayerSeter : NetworkBehaviour
 	{
         pirateModel.SetActive(false);
         ratModel.SetActive(true);
+        isRat = true;
 	}
 }
