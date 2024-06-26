@@ -23,7 +23,7 @@ public class EndGameTrigger : NetworkBehaviour
         endUi.SetActive(true);
         buttonHost.SetActive(true);
 
-        
+
 
         CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
 		foreach (CharacterMovement player in players)
@@ -40,14 +40,24 @@ public class EndGameTrigger : NetworkBehaviour
 		{
 			currentPlayer++;
 
-			if(currentPlayer >= maxPlayer)// & if - rat
+			PlayerSeter[] players = FindObjectsOfType<PlayerSeter>();
+
+			maxPlayer = 0;
+
+            foreach (var p in players)
+            {
+				if (!p.isRat) maxPlayer++;
+            }
+
+
+			if(currentPlayer >= maxPlayer)
 			{
 				endGame = true;
 				Debug.Log("<color=green>YOU WIN</color>");
 				winPanel.SetActive(true);
                 endUi.SetActive(true);
                 buttonHost.SetActive(true);
-                
+
 
                 CharacterMovement[] players = FindObjectsOfType<CharacterMovement>();
 				foreach(CharacterMovement player in players)
