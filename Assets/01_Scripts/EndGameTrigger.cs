@@ -40,11 +40,11 @@ public class EndGameTrigger : NetworkBehaviour
 		{
 			currentPlayer++;
 
-			PlayerSeter[] players = FindObjectsOfType<PlayerSeter>();
+			PlayerSeter[] seters = FindObjectsOfType<PlayerSeter>();
 
 			maxPlayer = 0;
 
-            foreach (var p in players)
+            foreach (var p in seters)
             {
 				if (!p.isRat) maxPlayer++;
             }
